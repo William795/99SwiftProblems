@@ -16,6 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        listTest.shared.printListLast()
+        listTest.shared.pennultimate()
+        listTest.shared.findSpecifiedIndex()
+        listTest.shared.findNumberOfElementsInList()
+        listTest.shared.reverse()
         return true
     }
 

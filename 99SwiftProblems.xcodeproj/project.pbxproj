@@ -12,7 +12,9 @@
 		92F033F9232304AA00017931 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92F033F7232304AA00017931 /* LaunchScreen.storyboard */; };
 		92F03404232304AA00017931 /* _9SwiftProblemsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F03403232304AA00017931 /* _9SwiftProblemsTests.swift */; };
 		92F0340F232304AA00017931 /* _9SwiftProblemsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F0340E232304AA00017931 /* _9SwiftProblemsUITests.swift */; };
-		92F0341F2323050C00017931 /* FindTheLastElementOfLinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F0341E2323050C00017931 /* FindTheLastElementOfLinkedList.swift */; };
+		92F0341F2323050C00017931 /* ListClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F0341E2323050C00017931 /* ListClass.swift */; };
+		92F0342223230F0C00017931 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92F0342123230F0C00017931 /* Main.storyboard */; };
+		92F0342423230F8700017931 /* ListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F0342323230F8700017931 /* ListTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,7 +46,9 @@
 		92F0340A232304AA00017931 /* 99SwiftProblemsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 99SwiftProblemsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92F0340E232304AA00017931 /* _9SwiftProblemsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _9SwiftProblemsUITests.swift; sourceTree = "<group>"; };
 		92F03410232304AA00017931 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		92F0341E2323050C00017931 /* FindTheLastElementOfLinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindTheLastElementOfLinkedList.swift; sourceTree = "<group>"; };
+		92F0341E2323050C00017931 /* ListClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListClass.swift; sourceTree = "<group>"; };
+		92F0342123230F0C00017931 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		92F0342323230F8700017931 /* ListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +130,7 @@
 				92F033F5232304AA00017931 /* Assets.xcassets */,
 				92F033F7232304AA00017931 /* LaunchScreen.storyboard */,
 				92F033FA232304AA00017931 /* Info.plist */,
+				92F0342123230F0C00017931 /* Main.storyboard */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -141,7 +146,8 @@
 		92F034202323051600017931 /* LinkedList */ = {
 			isa = PBXGroup;
 			children = (
-				92F0341E2323050C00017931 /* FindTheLastElementOfLinkedList.swift */,
+				92F0341E2323050C00017931 /* ListClass.swift */,
+				92F0342323230F8700017931 /* ListTests.swift */,
 			);
 			path = LinkedList;
 			sourceTree = "<group>";
@@ -250,6 +256,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92F0342223230F0C00017931 /* Main.storyboard in Resources */,
 				92F033F9232304AA00017931 /* LaunchScreen.storyboard in Resources */,
 				92F033F6232304AA00017931 /* Assets.xcassets in Resources */,
 			);
@@ -277,7 +284,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				92F033EF232304A600017931 /* AppDelegate.swift in Sources */,
-				92F0341F2323050C00017931 /* FindTheLastElementOfLinkedList.swift in Sources */,
+				92F0341F2323050C00017931 /* ListClass.swift in Sources */,
+				92F0342423230F8700017931 /* ListTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,7 +454,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F93N22S4T4;
-				INFOPLIST_FILE = 99SwiftProblems/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/99SwiftProblems/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -464,7 +472,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F93N22S4T4;
-				INFOPLIST_FILE = 99SwiftProblems/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/99SwiftProblems/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
