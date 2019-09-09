@@ -10,6 +10,8 @@ import Foundation
 
 class listTest {
     var listOne = List(1, 2, 4, 8, 9, 7, 5, 3, 20, 20, 15, 10)
+    var palendrome = List(1, 2, 3, 3, 2, 1)
+    var nestedList = List<Any>(List<Any>(1, 1)!, 2, List<Any>(3, List<Any>(5, 8)!)!)
     
     static let shared = listTest()
     
@@ -42,4 +44,15 @@ class listTest {
         guard let list = listOne?.reverse() else {return}
         print(list[1]!)
     }
+    
+    func isPalindrome() {
+        //P06 (*) Find out whether a linked list is a palindrome.
+        guard let palendrome = palendrome else {return}
+        guard let list = listOne else {return}
+        let isPalendrome = palendrome.isPalindrome()
+        let isNotPalindrome = list.isPalindrome()
+        print(isPalendrome)
+        print(isNotPalindrome)
+    }
+    
 }

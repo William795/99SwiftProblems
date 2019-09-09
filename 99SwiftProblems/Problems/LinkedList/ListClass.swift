@@ -67,3 +67,37 @@ extension List {
         return reversedList!
     }
 }
+
+extension List where T:Equatable {
+    //P06 (*) Find out whether a linked list is a palindrome.
+    func isPalindrome() -> Bool {
+        var currentList = self
+        var reversedList = currentList.reverse()
+        
+        while currentList.nextItem != nil {
+            currentList = currentList.nextItem!
+            reversedList = reversedList.nextItem!
+            if currentList.value != reversedList.value {
+                return false
+            }
+        }
+        return true
+    }
+}
+
+extension List {
+    //P07 (**) Flatten a nested linked list structure.
+    
+}
+
+extension List where T: Equatable {
+    //P08 (**) Eliminate consecutive duplicates of linked list elements.
+    func compress() {
+        var currentList = self
+        var compressedList = List(value)
+        
+        while currentList.nextItem != nil {
+            
+        }
+    }
+}
