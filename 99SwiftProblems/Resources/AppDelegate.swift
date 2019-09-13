@@ -22,7 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         listTest.shared.findNumberOfElementsInList()
         listTest.shared.reverse()
         listTest.shared.isPalindrome()
-        listTest.shared.flattenList()
         return true
     }
 

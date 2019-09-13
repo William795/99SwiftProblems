@@ -17,6 +17,11 @@ class MainViewController: UIViewController {
     }
     
 
+    @IBAction func testButtonPressed(_ sender: Any) {
+        IntExtenstensionTester.shared.isPrime()
+        IntExtenstensionTester.shared.greatestCommonDivisor()
+        IntExtenstensionTester.shared.isCoPrime()
+    }
     /*
     // MARK: - Navigation
 
