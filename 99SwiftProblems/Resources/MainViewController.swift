@@ -21,6 +21,7 @@ class MainViewController: UIViewController {
         IntExtenstensionTester.shared.isPrime()
         IntExtenstensionTester.shared.greatestCommonDivisor()
         IntExtenstensionTester.shared.isCoPrime()
+        IntExtenstensionTester.shared.totient()
     }
     /*
     // MARK: - Navigation

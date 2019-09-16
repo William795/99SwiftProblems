@@ -63,3 +63,18 @@ extension Int {
         return false
     }
 }
+
+extension Int {
+    //P34 (**) Calculate Euler’s totient function phi(m).
+    var totient: Int {
+        var totientAmount = 0
+        
+        for i in 1...self {
+            if i.isCoprimeTo(other: self) {
+                totientAmount += 1
+            }
+        }
+        
+        return totientAmount
+    }
+}
