@@ -39,4 +39,11 @@ class IntExtenstensionTester {
         print(100.totient)
         print(1000.totient)
     }
+    
+    func primeFactors() {
+        //P35 (**) Determine the prime factors of a given positive integer.
+        print(10.primeFactors)
+        print(100.primeFactors)
+    }
+
 }

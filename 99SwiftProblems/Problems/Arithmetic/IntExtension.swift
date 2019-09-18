@@ -74,7 +74,31 @@ extension Int {
                 totientAmount += 1
             }
         }
-        
         return totientAmount
+    }
+}
+
+
+extension Int {
+    //P35 (**) Determine the prime factors of a given positive integer.
+    var primeFactors: [Int] {
+        var mutatableSelf = self
+        var primeCheck = 2
+        var primeArray: [Int] = []
+        
+        if mutatableSelf.isPrime() {
+            return [1, mutatableSelf]
+        }
+
+        while mutatableSelf >= primeCheck {
+            if mutatableSelf % primeCheck == 0 {
+                mutatableSelf = mutatableSelf / primeCheck
+                primeArray.append(primeCheck)
+                primeCheck = 1
+            }
+            primeCheck += 1
+        }
+        
+        return primeArray
     }
 }

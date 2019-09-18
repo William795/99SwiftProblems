@@ -18,10 +18,11 @@ class MainViewController: UIViewController {
     
 
     @IBAction func testButtonPressed(_ sender: Any) {
-        IntExtenstensionTester.shared.isPrime()
-        IntExtenstensionTester.shared.greatestCommonDivisor()
-        IntExtenstensionTester.shared.isCoPrime()
-        IntExtenstensionTester.shared.totient()
+//        IntExtenstensionTester.shared.isPrime()
+//        IntExtenstensionTester.shared.greatestCommonDivisor()
+//        IntExtenstensionTester.shared.isCoPrime()
+//        IntExtenstensionTester.shared.totient()
+        IntExtenstensionTester.shared.primeFactors()
     }
     /*
     // MARK: - Navigation
