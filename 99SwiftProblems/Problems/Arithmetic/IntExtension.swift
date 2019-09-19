@@ -89,7 +89,7 @@ extension Int {
         if mutatableSelf.isPrime() {
             return [1, mutatableSelf]
         }
-
+        
         while mutatableSelf >= primeCheck {
             if mutatableSelf % primeCheck == 0 {
                 mutatableSelf = mutatableSelf / primeCheck
@@ -100,5 +100,39 @@ extension Int {
         }
         
         return primeArray
+    }
+}
+
+extension Int {
+    //P36 (**) Determine the prime factors of a given positive integer - Part 2.
+    var primeFactorMultiplicityDict: Dictionary<Int, Int> {
+        var mutatableSelf = self
+        var primeCheck = 2
+        var primeDict: [Int: Int] = [:]
+        var primeArray: [Int] = []
+        
+        if mutatableSelf.isPrime() {
+            return [mutatableSelf: 1]
+        }
+        
+        while mutatableSelf >= primeCheck {
+            if mutatableSelf % primeCheck == 0 {
+                mutatableSelf = mutatableSelf / primeCheck
+                primeArray.append(primeCheck)
+                primeCheck = 1
+            }
+            primeCheck += 1
+        }
+        // Bleg o(n)^2 come back and fix it
+        for i in primeArray {
+            var numberOfPrime = 0
+            for x in primeArray {
+                if i == x {
+                    numberOfPrime += 1
+                }
+            }
+            primeDict[i] = numberOfPrime
+        }
+        return primeDict
     }
 }

@@ -23,6 +23,7 @@ class MainViewController: UIViewController {
 //        IntExtenstensionTester.shared.isCoPrime()
 //        IntExtenstensionTester.shared.totient()
         IntExtenstensionTester.shared.primeFactors()
+        IntExtenstensionTester.shared.primeFactorMultiplicityDict()
     }
     /*
     // MARK: - Navigation

@@ -45,5 +45,11 @@ class IntExtenstensionTester {
         print(10.primeFactors)
         print(100.primeFactors)
     }
+    
+    func primeFactorMultiplicityDict() {
+        //P36 (**) Determine the prime factors of a given positive integer - Part 2.
+        print(10.primeFactorMultiplicityDict)
+        print(100.primeFactorMultiplicityDict)
+    }
 
 }
