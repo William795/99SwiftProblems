@@ -136,3 +136,26 @@ extension Int {
         return primeDict
     }
 }
+//P37 (**) Calculate Euler’s totient function phi(m) (improved).  Don't really understand how to implement the given equation
+//P38 (*) Compare the two methods of calculating Euler’s totient function.  - just comparing run times of 37 and 34
+//P39 (*) A linked list of prime numbers.  - a problem ive solve mutiple times that I cant be bothered with right now
+
+extension Int {
+    //P40 (**) Goldbach’s conjecture.
+    func goldbach() -> (Int, Int) {
+        var primeArray = [2, 3]
+        for i in 4...self {
+            if i.isPrime() {
+                primeArray.append(i)
+            }
+        }
+        for i in primeArray {
+            for p in primeArray {
+                if i + p == self {
+                    return (i, p)
+                }
+            }
+        }
+        return (0,0)
+    }
+}

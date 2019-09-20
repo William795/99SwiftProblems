@@ -52,4 +52,10 @@ class IntExtenstensionTester {
         print(100.primeFactorMultiplicityDict)
     }
 
+    func goldbachTest() {
+        //P40 (**) Goldbach’s conjecture.
+        print(10.goldbach())
+        print(28.goldbach())
+        print(100.goldbach())
+    }
 }
