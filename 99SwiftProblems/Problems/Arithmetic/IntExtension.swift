@@ -143,6 +143,10 @@ extension Int {
 extension Int {
     //P40 (**) Goldbach’s conjecture.
     func goldbach() -> (Int, Int) {
+        if self % 2 != 0 {
+            return (0,0)
+        }
+        
         var primeArray = [2, 3]
         for i in 4...self {
             if i.isPrime() {
@@ -157,5 +161,20 @@ extension Int {
             }
         }
         return (0,0)
+    }
+}
+
+extension Int {
+    //P41 (**) A list of Goldbach compositions.
+    static func printGoldbachList(range: Range<Int>) {
+        
+        for i in range {
+            let primeArray = i.goldbach()
+            let firstInt = primeArray.0
+            let secondInt = primeArray.1
+            if firstInt != 0 {
+                print("\(i) = \(firstInt) + \(secondInt)")                
+            }
+        }
     }
 }

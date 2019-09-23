@@ -24,7 +24,8 @@ class MainViewController: UIViewController {
 //        IntExtenstensionTester.shared.totient()
 //        IntExtenstensionTester.shared.primeFactors()
 //        IntExtenstensionTester.shared.primeFactorMultiplicityDict()
-        IntExtenstensionTester.shared.goldbachTest()
+//        IntExtenstensionTester.shared.goldbachTest()
+        IntExtenstensionTester.shared.printGoldbachList()
     }
     /*
     // MARK: - Navigation

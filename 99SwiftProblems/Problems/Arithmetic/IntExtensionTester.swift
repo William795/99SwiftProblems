@@ -58,4 +58,9 @@ class IntExtenstensionTester {
         print(28.goldbach())
         print(100.goldbach())
     }
+    
+    func printGoldbachList() {
+        //P41 (**) A list of Goldbach compositions.
+        Int.printGoldbachList(range: 9..<21)
+    }
 }
