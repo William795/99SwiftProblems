@@ -166,7 +166,7 @@ extension Int {
 
 extension Int {
     //P41 (**) A list of Goldbach compositions.
-    static func printGoldbachList(range: Range<Int>) {
+    static func printGoldbachList(_ range: Range<Int>) {
         
         for i in range {
             let primeArray = i.goldbach()
@@ -178,3 +178,22 @@ extension Int {
         }
     }
 }
+
+extension Int {
+    //P41B (**) A list of Goldbach compositions (limited).
+    static func printGoldbachListLimited(_ range: Range<Int>, _ minimum: Int) {
+        
+        for i in range {
+            if i < 4 {
+                continue
+            }
+            let primeArray = i.goldbach()
+            let firstInt = primeArray.0
+            let secondInt = primeArray.1
+            if firstInt >= minimum {
+                print("\(i) = \(firstInt) + \(secondInt)")
+            }
+        }
+    }
+}
+// Well it works......... but its 0(n)^2 (at least)
