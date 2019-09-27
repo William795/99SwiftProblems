@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		92A51600233EAE1000BE249A /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A515FF233EAE1000BE249A /* GlobalFunctions.swift */; };
 		92F033EF232304A600017931 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F033EE232304A600017931 /* AppDelegate.swift */; };
 		92F033F6232304AA00017931 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92F033F5232304AA00017931 /* Assets.xcassets */; };
 		92F033F9232304AA00017931 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92F033F7232304AA00017931 /* LaunchScreen.storyboard */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		92A515FF233EAE1000BE249A /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		92F033EB232304A600017931 /* 99SwiftProblems.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 99SwiftProblems.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92F033EE232304A600017931 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92F033F5232304AA00017931 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -82,6 +84,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		92A51601233EAE1600BE249A /* LogicAndCodes */ = {
+			isa = PBXGroup;
+			children = (
+				92A515FF233EAE1000BE249A /* GlobalFunctions.swift */,
+			);
+			path = LogicAndCodes;
+			sourceTree = "<group>";
+		};
 		92F033E2232304A600017931 = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +157,7 @@
 			children = (
 				92F034202323051600017931 /* LinkedList */,
 				92F03427232856E900017931 /* Arithmetic */,
+				92A51601233EAE1600BE249A /* LogicAndCodes */,
 			);
 			path = Problems;
 			sourceTree = "<group>";
@@ -303,6 +314,7 @@
 				92F033EF232304A600017931 /* AppDelegate.swift in Sources */,
 				92F03426232856DC00017931 /* IntExtension.swift in Sources */,
 				92F0342B23285A3D00017931 /* IntExtensionTester.swift in Sources */,
+				92A51600233EAE1000BE249A /* GlobalFunctions.swift in Sources */,
 				92F0341F2323050C00017931 /* ListClass.swift in Sources */,
 				92F0342423230F8700017931 /* ListTests.swift in Sources */,
 				92F03429232859E800017931 /* MainViewController.swift in Sources */,
