@@ -45,7 +45,7 @@ func xor(a: Bool, b: Bool) -> Bool {
     return true
 }
 
-func impl(a: Bool,-> b: Bool) -> Bool {
+func impl(a: Bool, b: Bool) -> Bool {
     if a != b && b == false {
         return false
     }
@@ -58,3 +58,21 @@ func equ(a: Bool, b: Bool) -> Bool {
     }
     return false
 }
+
+func truthTable(expression: (_ a: Bool, _ b : Bool) -> Bool) -> [[Bool]] {
+    var tableArray: [[Bool]] = []
+    
+    let onOn = expression(true, true)
+    let onOff = expression(true, false)
+    let offOn = expression(false, true)
+    let offOff = expression(false, false)
+    
+    tableArray.append([true, true, onOn])
+    tableArray.append([true, false, onOff])
+    tableArray.append([false, true, offOn])
+    tableArray.append([false, false, offOff])
+    
+    return tableArray
+}
+
+let a = truthTable(expression: { and(a: $0, b: or(a: $0, b: $1)) })
