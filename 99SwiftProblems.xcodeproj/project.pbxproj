@@ -88,6 +88,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9237273D244904B000BAAD5C /* 1st Try */ = {
+			isa = PBXGroup;
+			children = (
+				92F034202323051600017931 /* LinkedList */,
+				92F03427232856E900017931 /* Arithmetic */,
+				92A51601233EAE1600BE249A /* LogicAndCodes */,
+			);
+			path = "1st Try";
+			sourceTree = "<group>";
+		};
 		924D833A2437DA9F00861002 /* Problems2ndTry */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,9 +179,7 @@
 		92F0341D232304DA00017931 /* Problems */ = {
 			isa = PBXGroup;
 			children = (
-				92F034202323051600017931 /* LinkedList */,
-				92F03427232856E900017931 /* Arithmetic */,
-				92A51601233EAE1600BE249A /* LogicAndCodes */,
+				9237273D244904B000BAAD5C /* 1st Try */,
 			);
 			path = Problems;
 			sourceTree = "<group>";
