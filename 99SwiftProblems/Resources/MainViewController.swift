@@ -18,16 +18,8 @@ class MainViewController: UIViewController {
     
 
     @IBAction func testButtonPressed(_ sender: Any) {
-//        IntExtenstensionTester.shared.isPrime()
-//        IntExtenstensionTester.shared.greatestCommonDivisor()
-//        IntExtenstensionTester.shared.isCoPrime()
-//        IntExtenstensionTester.shared.totient()
-//        IntExtenstensionTester.shared.primeFactors()
-//        IntExtenstensionTester.shared.primeFactorMultiplicityDict()
-//        IntExtenstensionTester.shared.goldbachTest()
-//        IntExtenstensionTester.shared.printGoldbachList()
-//        IntExtenstensionTester.shared.printGoldbachListLimited()
-        print(a)
+//        listTest.shared.printLastItemInList()
+        listTest.shared.printPennultimate()
     }
     /*
     // MARK: - Navigation
