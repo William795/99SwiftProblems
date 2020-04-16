@@ -20,7 +20,8 @@ class MainViewController: UIViewController {
     @IBAction func testButtonPressed(_ sender: Any) {
 //        listTest.shared.printLastItemInList()
 //        listTest.shared.printPennultimate()
-        listTest.shared.printKthElement()
+//        listTest.shared.printKthElement()
+        listTest.shared.printListLength()
     }
     /*
     // MARK: - Navigation

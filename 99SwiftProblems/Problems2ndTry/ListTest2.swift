@@ -31,4 +31,9 @@ class listTest {
         print(listOne?[2] as Any)
         print(listTwo?[2] as Any)
     }
+    
+    func printListLength() {
+        print(listOne?.length as Any)
+        print(listTwo?.length as Any)
+    }
 }

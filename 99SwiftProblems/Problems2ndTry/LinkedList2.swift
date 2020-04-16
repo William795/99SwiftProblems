@@ -51,3 +51,9 @@ extension List {
         return index == 0 ? value : next?[index - 1]
     }
 }
+
+extension List {
+    var length: Int {
+        return 1 + (next?.length ?? 0)
+    }
+}
