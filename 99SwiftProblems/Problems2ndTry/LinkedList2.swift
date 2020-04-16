@@ -43,3 +43,11 @@ extension List {
         return next.pennultimate ?? value
     }
 }
+
+//P 03 Find the Kth element of a Linked list
+
+extension List {
+    subscript(index: Int) -> T? {
+        return index == 0 ? value : next?[index - 1]
+    }
+}

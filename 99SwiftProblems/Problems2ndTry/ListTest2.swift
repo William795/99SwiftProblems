@@ -26,4 +26,9 @@ class listTest {
         print(listOne?.pennultimate as Any)
         print(listTwo?.pennultimate as Any)
     }
+    
+    func printKthElement() {
+        print(listOne?[2] as Any)
+        print(listTwo?[2] as Any)
+    }
 }
