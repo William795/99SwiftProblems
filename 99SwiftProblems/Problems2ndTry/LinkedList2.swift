@@ -52,8 +52,33 @@ extension List {
     }
 }
 
+//P 04 Find the number of elements of a Linked List
+
 extension List {
     var length: Int {
         return 1 + (next?.length ?? 0)
+    }
+}
+
+//P 05 Reverse a Linked List
+
+extension List {
+    func reverse() -> List {
+        // Original list to mutate
+        var mutatableList = self
+        // List to return (which already contains the first value of the original List)
+        var reverseList = List(value)
+        
+        while mutatableList.next != nil {
+            // Removing the current value from the list to cycle through the entire list
+            mutatableList = mutatableList.next!
+            // Making a new list to store current mutatable list value
+            let newList = List([mutatableList.value])
+            // Making newList.next = to the reverse list (which pushes everything in the reverseList down one position
+            newList?.next = reverseList
+            // setting reverseList to newList to 'save' what has been done
+            reverseList = newList
+        }
+        return reverseList!
     }
 }

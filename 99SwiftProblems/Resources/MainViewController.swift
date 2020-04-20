@@ -21,7 +21,8 @@ class MainViewController: UIViewController {
 //        listTest.shared.printLastItemInList()
 //        listTest.shared.printPennultimate()
 //        listTest.shared.printKthElement()
-        listTest.shared.printListLength()
+//        listTest.shared.printListLength()
+        listTest.shared.printReverseList()
     }
     /*
     // MARK: - Navigation

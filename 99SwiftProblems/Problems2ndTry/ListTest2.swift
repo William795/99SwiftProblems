@@ -17,23 +17,33 @@ class listTest {
     
     static let shared = listTest()
     
+    //P 01
     func printLastItemInList() {
         print(listOne?.last as Any)
         print(listTwo?.last as Any)
     }
     
+    //P 02
     func printPennultimate() {
         print(listOne?.pennultimate as Any)
         print(listTwo?.pennultimate as Any)
     }
     
+    //P 03
     func printKthElement() {
         print(listOne?[2] as Any)
         print(listTwo?[2] as Any)
     }
     
+    //P 04
     func printListLength() {
         print(listOne?.length as Any)
         print(listTwo?.length as Any)
+    }
+    
+    //P 05
+    func printReverseList() {
+        print(listOne?.reverse().value as Any)
+        print(listTwo?.reverse().value as Any)
     }
 }
