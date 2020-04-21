@@ -46,4 +46,10 @@ class listTest {
         print(listOne?.reverse().value as Any)
         print(listTwo?.reverse().value as Any)
     }
+    
+    //P 06
+    func printPalindromCheck() {
+        print(listOne?.isPalindrome() as Any)
+        print(palendrome?.isPalindrome() as Any)
+    }
 }

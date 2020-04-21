@@ -82,3 +82,25 @@ extension List {
         return reverseList!
     }
 }
+
+//P 06 find if a Linked List is a palindrome
+
+extension List where T:Equatable {
+    func isPalindrome() -> Bool {
+        //creates two lists for comparison
+        var currentList = self
+        var reversedList = self.reverse()
+        
+        while currentList.next != nil {
+            // if statement to return false if the list is not a palindrome
+            if currentList.value != reversedList.value {
+                return false
+            }
+            //stepping to the next value in the list for both Lists to continue the comparison
+            currentList = currentList.next!
+            reversedList = reversedList.next!
+        }
+        //If the while loop above does not return false or crash this funcion will return true
+        return true
+    }
+}
