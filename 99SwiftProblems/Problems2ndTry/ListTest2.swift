@@ -52,4 +52,14 @@ class listTest {
         print(listOne?.isPalindrome() as Any)
         print(palendrome?.isPalindrome() as Any)
     }
+    
+    //P 07
+    func printFlattenNestedLinkedListStructure() {
+        let flatList = nestedList?.flatten()
+        print(flatList?.value as Any)
+        print(flatList?.pennultimate)
+        print(flatList?.next?.value as Any)
+        print(flatList?.length as Any)
+        print(flatList?.last as Any)
+    }
 }

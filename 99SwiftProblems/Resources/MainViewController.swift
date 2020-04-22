@@ -23,7 +23,8 @@ class MainViewController: UIViewController {
 //        listTest.shared.printKthElement()
 //        listTest.shared.printListLength()
 //        listTest.shared.printReverseList()
-        listTest.shared.printPalindromCheck()
+//        listTest.shared.printPalindromCheck()
+        listTest.shared.printFlattenNestedLinkedListStructure()
     }
     /*
     // MARK: - Navigation

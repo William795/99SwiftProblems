@@ -27,7 +27,7 @@ class List<T> {
 }
 
 //P01 Find the last element of a Linked List
-
+// TODO - maybe come up with a different solution - This solution turns every value in the list into the last value - 1, 2, 3, 4 -> 4, 4, 4, 4,
 extension List {
     var last: T? {
         value = next?.last ?? value
@@ -92,15 +92,57 @@ extension List where T:Equatable {
         var reversedList = self.reverse()
         
         while currentList.next != nil {
+            //stepping to the next value in the list for both Lists to continue the comparison (don't need to worry about the first comparison because it is the same as the last)
+            currentList = currentList.next!
+            reversedList = reversedList.next!
             // if statement to return false if the list is not a palindrome
             if currentList.value != reversedList.value {
                 return false
             }
-            //stepping to the next value in the list for both Lists to continue the comparison
-            currentList = currentList.next!
-            reversedList = reversedList.next!
         }
         //If the while loop above does not return false or crash this funcion will return true
         return true
+    }
+}
+
+//P 07 Flatten a nested Linked List structure
+
+extension List {
+    func flatten() -> List {
+        
+        var mutatableList = self
+        var flattenedList = List()
+        var list = List()
+        
+        while mutatableList.value != nil  {
+            print("start of while 1")
+            guard let nestedList = mutatableList.value as? List<Any> else {
+                
+                let newList = List(mutatableList.value)
+                newList?.next = flattenedList
+                flattenedList = newList
+                
+                if mutatableList.next != nil {
+                    mutatableList = mutatableList.next!
+                    continue
+                }
+                return flattenedList!
+            }
+            list = nestedList.flatten() as? List<T>
+//            list = nestedList as! List<T>
+            while list?.value != nil {
+                print("start of while 2")
+                let newList = List(list!.value)
+                newList?.next = flattenedList
+                flattenedList = newList
+                list = list?.next
+            }
+            if mutatableList.next != nil {
+                mutatableList = mutatableList.next!
+                continue
+            }
+            return flattenedList!
+        }
+        return flattenedList!.reverse()
     }
 }
