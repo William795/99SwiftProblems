@@ -30,8 +30,10 @@ class List<T> {
 // TODO - maybe come up with a different solution - This solution turns every value in the list into the last value - 1, 2, 3, 4 -> 4, 4, 4, 4,
 extension List {
     var last: T? {
-        value = next?.last ?? value
-        return value
+        var lastValue = self.value
+        let list = next
+        lastValue = list?.last ?? value
+        return lastValue
     }
 }
 
@@ -108,41 +110,60 @@ extension List where T:Equatable {
 //P 07 Flatten a nested Linked List structure
 
 extension List {
+    //function to take the output of flattenInReverse and reverse it so that the List is in the correct order
     func flatten() -> List {
         
+        let reversedFlattenedList = self.flattenInReverse()
+        return reversedFlattenedList.reverse()
+    }
+    
+    private func flattenInReverse() -> List {
+        //three variables to allow me to manipulate the information...
+        //the current List
         var mutatableList = self
+        //the List I will return
         var flattenedList = List()
-        var list = List()
+        //the/a List within the current List
+        var embeddedList = List()
         
+        //the loop to go through the entire mutatable List
         while mutatableList.value != nil  {
-            print("start of while 1")
+            //check if current value is a List
             guard let nestedList = mutatableList.value as? List<Any> else {
-                
+                //if not add item to flattenedList (however this reverses the List)
                 let newList = List(mutatableList.value)
                 newList?.next = flattenedList
                 flattenedList = newList
                 
+                //if statement to check if there is another value in the mutatable List
+                //(This is skipped in the reverse/isPalindrome functions because they both get around needing the first value in the List (reverse by throwing it into the return value at the start, and palindrome by the fact that the last check is the same as the first))
                 if mutatableList.next != nil {
                     mutatableList = mutatableList.next!
                     continue
                 }
                 return flattenedList!
             }
-            list = nestedList.flatten() as? List<T>
-//            list = nestedList as! List<T>
-            while list?.value != nil {
-                print("start of while 2")
-                let newList = List(list!.value)
+            // if current value is a list use recurssion
+            embeddedList = nestedList.flattenInReverse() as? List<T>
+            // The List comes out backwards so it needs to be reversed
+            embeddedList = embeddedList?.reverse()
+            //same while loop as above, just with the values of a embedded List
+            while embeddedList?.value != nil {
+                let newList = List(embeddedList!.value)
                 newList?.next = flattenedList
                 flattenedList = newList
-                list = list?.next
+                //embeddedList's value can be nil because nothing is requiring a value there so I can use an optional instead of an if statement
+                embeddedList = embeddedList?.next
             }
+            //same as above
             if mutatableList.next != nil {
                 mutatableList = mutatableList.next!
                 continue
             }
             return flattenedList!
         }
-        return flattenedList!.reverse()
+        print("somthing went very wrong in the flatten function")
+        //here to silence red warnings
+        return flattenedList!
     }
 }
