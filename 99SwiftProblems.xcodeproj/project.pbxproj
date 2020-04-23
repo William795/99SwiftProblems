@@ -19,7 +19,7 @@
 		92F0342223230F0C00017931 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92F0342123230F0C00017931 /* Main.storyboard */; };
 		92F0342423230F8700017931 /* ListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F0342323230F8700017931 /* ListTests.swift */; };
 		92F03426232856DC00017931 /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F03425232856DB00017931 /* IntExtension.swift */; };
-		92F03429232859E800017931 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F03428232859E800017931 /* MainViewController.swift */; };
+		92F03429232859E800017931 /* TestButtonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F03428232859E800017931 /* TestButtonVC.swift */; };
 		92F0342B23285A3D00017931 /* IntExtensionTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F0342A23285A3D00017931 /* IntExtensionTester.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,7 +59,7 @@
 		92F0342123230F0C00017931 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		92F0342323230F8700017931 /* ListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTests.swift; sourceTree = "<group>"; };
 		92F03425232856DB00017931 /* IntExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
-		92F03428232859E800017931 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		92F03428232859E800017931 /* TestButtonVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestButtonVC.swift; sourceTree = "<group>"; };
 		92F0342A23285A3D00017931 /* IntExtensionTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtensionTester.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,6 +103,7 @@
 			children = (
 				924D83362437D2F500861002 /* LinkedList2.swift */,
 				924D83382437DA7800861002 /* ListTest2.swift */,
+				92F03428232859E800017931 /* TestButtonVC.swift */,
 			);
 			path = Problems2ndTry;
 			sourceTree = "<group>";
@@ -171,7 +172,6 @@
 				92F033F7232304AA00017931 /* LaunchScreen.storyboard */,
 				92F033FA232304AA00017931 /* Info.plist */,
 				92F0342123230F0C00017931 /* Main.storyboard */,
-				92F03428232859E800017931 /* MainViewController.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -341,7 +341,7 @@
 				92A51600233EAE1000BE249A /* GlobalFunctions.swift in Sources */,
 				92F0341F2323050C00017931 /* ListClass.swift in Sources */,
 				92F0342423230F8700017931 /* ListTests.swift in Sources */,
-				92F03429232859E800017931 /* MainViewController.swift in Sources */,
+				92F03429232859E800017931 /* TestButtonVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

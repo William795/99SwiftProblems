@@ -14,6 +14,7 @@ class listTest {
     var listTwo = List("hi", "how", "are", "you", "?")
     var palendrome = List(1, 2, 3, 3, 2, 1)
     var nestedList = List<Any>(List<Any>(1, 1)!, 2, List<Any>(3, List<Any>(5, 8)!)!)
+    var duplicateList = List("a", "a", "a", "a", "b", "c", "c", "a", "a", "d", "e", "e", "e", "e")
     
     static let shared = listTest()
     
@@ -57,9 +58,15 @@ class listTest {
     func printFlattenNestedLinkedListStructure() {
         let flatList = nestedList?.flatten()
         print(flatList?.value as Any)
-        print(flatList?.pennultimate)
+        print(flatList?.pennultimate as Any)
         print(flatList?.next?.value as Any)
         print(flatList?.length as Any)
         print(flatList?.last as Any)
+    }
+    
+    //P 08
+    func printCompressedList() {
+        print(duplicateList?.compress().length)
+        print(duplicateList?.compress().value)
     }
 }

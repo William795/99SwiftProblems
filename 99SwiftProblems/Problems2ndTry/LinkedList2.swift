@@ -8,8 +8,8 @@
 
 import Foundation
 
-//Coming back and plan to redo everything and come up with solutions to problems that I skipped/looked up
-//as a result this will probably be worse code overall but hopefully it will help me learn somthing
+//Coming back and plan to redo everything and come up with solutions to problems that I skipped/looked up/did poorly.
+//As a result this will probably be worse code is some places but I plan to keep everything to at least under O(n)^2 and hopefully keep things in O(n) or better
 
 class List<T> {
     var value: T
@@ -27,7 +27,7 @@ class List<T> {
 }
 
 //P01 Find the last element of a Linked List
-// TODO - maybe come up with a different solution - This solution turns every value in the list into the last value - 1, 2, 3, 4 -> 4, 4, 4, 4,
+
 extension List {
     var last: T? {
         var lastValue = self.value
@@ -137,6 +137,7 @@ extension List {
                 
                 //if statement to check if there is another value in the mutatable List
                 //(This is skipped in the reverse/isPalindrome functions because they both get around needing the first value in the List (reverse by throwing it into the return value at the start, and palindrome by the fact that the last check is the same as the first))
+                // ToDo - remove the need for this if statement
                 if mutatableList.next != nil {
                     mutatableList = mutatableList.next!
                     continue
@@ -165,5 +166,30 @@ extension List {
         print("somthing went very wrong in the flatten function")
         //here to silence red warnings
         return flattenedList!
+    }
+}
+
+//P 08 Eliminate consecutive duplicates of linked list elements
+
+extension List where T: Equatable {
+    func compress() -> List{
+        //current list and the list to return
+        var mutatableList = self
+        var compressedList = List(value)
+        
+        //while loop to go through the entire list
+        while mutatableList.next != nil {
+            //cycle methood through the list
+            mutatableList = mutatableList.next!
+            //check to see if there is a duplicate
+            if mutatableList.value != compressedList?.value {
+                //adding nonduplicates to the list
+                let newList = List(mutatableList.value)
+                newList?.next = compressedList
+                compressedList = newList
+            }
+        }
+        //returning the reversed compressed list because the methood used to add nonduplicates reverses the placement
+        return compressedList!.reverse()
     }
 }
