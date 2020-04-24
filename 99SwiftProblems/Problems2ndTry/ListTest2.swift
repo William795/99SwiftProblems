@@ -66,7 +66,19 @@ class listTest {
     
     //P 08
     func printCompressedList() {
-        print(duplicateList?.compress().length)
-        print(duplicateList?.compress().value)
+        print(duplicateList?.compress().length as Any)
+        print(duplicateList?.compress().value as Any)
+    }
+    
+    //P 09
+    func printPackedList() {
+        let packedList = duplicateList?.pack()
+        print(packedList?.length as Any)
+        print(packedList?.value.value as Any)
+        print(packedList?.value.length as Any)
+        print(packedList?.next?.value.value as Any)
+        print(packedList?.next?.value.length as Any)
+        print(packedList?.last?.value as Any)
+        print(packedList?.last?.length as Any)
     }
 }

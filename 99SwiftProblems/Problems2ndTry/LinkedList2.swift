@@ -193,3 +193,52 @@ extension List where T: Equatable {
         return compressedList!.reverse()
     }
 }
+
+//P 09 Pack consecutive duplicates of linked list elements into sub linked lists.
+
+//not very familiar with how <>'s work so this is largely a solution found through messy trial and error
+extension List where T: Equatable {
+    func pack() -> List<List<T>> {
+        //current list, list to hold duplicates, and the list to return
+        var mutatableList = self
+        var compressedList = List(value)
+        var packedList: List<List<T>>? = List<List>()
+        
+        //while loop to go through the entire list
+        while mutatableList.next != nil {
+            //cycle methood through the list
+            mutatableList = mutatableList.next!
+            //check to see if there is a duplicate
+            if mutatableList.value == compressedList?.value {
+                //adding duplicates to the list
+                let newList = List(mutatableList.value)
+                newList?.next = compressedList
+                compressedList = newList
+                
+                //if statement here to make sure the last set of duplicates don't get skipped
+                if mutatableList.next == nil {
+                    let tempList: List<List<T>> = List<List>(self)!
+                    tempList.value = compressedList!
+                    tempList.next = packedList
+                    packedList = tempList
+                    compressedList = List()
+                }
+            } else {
+                //self is in the tempList to not crash the app otherwise the same methood of adding items to lists that I have used everywhere else
+                let tempList: List<List<T>> = List<List>(self)!
+                tempList.value = compressedList!
+                tempList.next = packedList
+                packedList = tempList
+                //resetting compressedList's values
+                compressedList = List()
+                
+                //catches nonduplicates in the original List
+                let newList = List(mutatableList.value)
+                newList?.next = compressedList
+                compressedList = newList
+            }
+        }
+        //list gets reversed as I process it so I need to reverse is again before returning it
+        return packedList!.reverse()
+    }
+}
