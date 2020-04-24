@@ -242,3 +242,44 @@ extension List where T: Equatable {
         return packedList!.reverse()
     }
 }
+
+//P 10 Run-length encoding of a linked list
+
+extension List where T: Equatable {
+    func encode() -> List<(Int, T)> {
+        // first value is the result of the pack function above
+        var mutatablePackedList = self.pack()
+        //second value is the template for the returned list values
+        var intValuePair = (1, value)
+        //third value is what this function returns
+        var encodedList: List<(Int, T)>? = List<(Int, T)>.init()
+        //fourth value is part of the messy/poor/lazy way of getting the first value of the packed list
+        var firstValuePairGetter = 0
+        
+        while mutatablePackedList.next != nil {
+            //if statement for getting the first value of the packed list full of copied code of the rest of the while loop minus the cycling of the packedList
+            if firstValuePairGetter == 0 {
+                firstValuePairGetter = 1
+                let numberOfDuplicates = mutatablePackedList.value.length
+                intValuePair.0 = numberOfDuplicates
+                intValuePair.1 = mutatablePackedList.value.value
+                
+                let newList: List<(Int, T)> = List<(Int, T)>.init(intValuePair)!
+                newList.next = encodedList
+                encodedList = newList
+            }
+            //cycle through the packedList
+            mutatablePackedList = mutatablePackedList.next!
+            //fixing values to the intValuePair
+            let numberOfDuplicates = mutatablePackedList.value.length
+            intValuePair.0 = numberOfDuplicates
+            intValuePair.1 = mutatablePackedList.value.value
+            //adding the intValuePair onto the encodedList (in reverse order)
+            let newList: List<(Int, T)> = List<(Int, T)>.init(intValuePair)!
+            newList.next = encodedList
+            encodedList = newList
+        }
+        // returning the encodedList in reverse order to put it back straight
+        return encodedList!.reverse()
+    }
+}

@@ -26,7 +26,8 @@ class MainViewController: UIViewController {
 //        listTest.shared.printPalindromCheck()
 //        listTest.shared.printFlattenNestedLinkedListStructure()
 //        listTest.shared.printCompressedList()
-        listTest.shared.printPackedList()
+//        listTest.shared.printPackedList()
+        listTest.shared.printEncode()
     }
     /*
     // MARK: - Navigation

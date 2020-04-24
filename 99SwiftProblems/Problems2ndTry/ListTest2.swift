@@ -81,4 +81,13 @@ class listTest {
         print(packedList?.last?.value as Any)
         print(packedList?.last?.length as Any)
     }
+    
+    //P 10
+    func printEncode() {
+        let encodedList = duplicateList?.encode()
+        print(encodedList?.length as Any)
+        print(encodedList?.value as Any)
+        print(encodedList?.next?.value as Any)
+        print(encodedList?.last as Any)
+    }
 }
