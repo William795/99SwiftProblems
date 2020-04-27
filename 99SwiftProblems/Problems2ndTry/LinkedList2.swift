@@ -253,33 +253,56 @@ extension List where T: Equatable {
         var intValuePair = (1, value)
         //third value is what this function returns
         var encodedList: List<(Int, T)>? = List<(Int, T)>.init()
-        //fourth value is part of the messy/poor/lazy way of getting the first value of the packed list
-        var firstValuePairGetter = 0
         
-        while mutatablePackedList.next != nil {
-            //if statement for getting the first value of the packed list full of copied code of the rest of the while loop minus the cycling of the packedList
-            if firstValuePairGetter == 0 {
-                firstValuePairGetter = 1
-                let numberOfDuplicates = mutatablePackedList.value.length
-                intValuePair.0 = numberOfDuplicates
-                intValuePair.1 = mutatablePackedList.value.value
-                
-                let newList: List<(Int, T)> = List<(Int, T)>.init(intValuePair)!
-                newList.next = encodedList
-                encodedList = newList
-            }
-            //cycle through the packedList
-            mutatablePackedList = mutatablePackedList.next!
+        while mutatablePackedList.value != nil {
             //fixing values to the intValuePair
             let numberOfDuplicates = mutatablePackedList.value.length
             intValuePair.0 = numberOfDuplicates
             intValuePair.1 = mutatablePackedList.value.value
             //adding the intValuePair onto the encodedList (in reverse order)
-            let newList: List<(Int, T)> = List<(Int, T)>.init(intValuePair)!
-            newList.next = encodedList
+            let newList = List<(Int, T)>(intValuePair)
+            newList?.next = encodedList
             encodedList = newList
+
+            if mutatablePackedList.next != nil {
+                //cycle through the packedList
+                mutatablePackedList = mutatablePackedList.next!
+                continue
+            }
+            break
         }
         // returning the encodedList in reverse order to put it back straight
         return encodedList!.reverse()
+    }
+}
+
+//P 11 Modified run-length encoding
+
+extension List where T: Equatable {
+    func encodeModified() -> List<Any> {
+        
+        var mutatableList = self.encode()
+        var modifiedEncodedList: List<Any>?
+        
+        while mutatableList.value != nil {
+            
+            if mutatableList.value.0 == 1 {
+                let newList: List<Any> = List<Any>(mutatableList.value.1)!
+                newList.next = modifiedEncodedList
+                modifiedEncodedList = newList
+            } else {
+                let newList = List<Any>(mutatableList.value)
+                newList?.next = modifiedEncodedList
+                modifiedEncodedList = newList
+            }
+            
+            if mutatableList.next != nil {
+                mutatableList = mutatableList.next!
+                continue
+            }
+            break
+        }
+        
+        return modifiedEncodedList!.reverse()
     }
 }

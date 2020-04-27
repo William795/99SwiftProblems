@@ -90,4 +90,12 @@ class listTest {
         print(encodedList?.next?.value as Any)
         print(encodedList?.last as Any)
     }
+    
+    func printModifiedEncode() {
+        let modEncodedList = duplicateList?.encodeModified()
+        print(modEncodedList?.length as Any)
+        print(modEncodedList?.value as Any)
+        print(modEncodedList?.next?.value as Any)
+        print(modEncodedList?.last as Any)
+    }
 }
