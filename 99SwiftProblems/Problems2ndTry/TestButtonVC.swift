@@ -28,7 +28,8 @@ class MainViewController: UIViewController {
 //        listTest.shared.printCompressedList()
 //        listTest.shared.printPackedList()
 //        listTest.shared.printEncode()
-        listTest.shared.printModifiedEncode()
+//        listTest.shared.printModifiedEncode()
+        listTest.shared.printDecodedList()
     }
     /*
     // MARK: - Navigation

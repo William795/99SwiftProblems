@@ -280,29 +280,64 @@ extension List where T: Equatable {
 
 extension List where T: Equatable {
     func encodeModified() -> List<Any> {
-        
+        // the list i'm mutating and returning
         var mutatableList = self.encode()
         var modifiedEncodedList: List<Any>?
-        
+        //same while loop as all the others
         while mutatableList.value != nil {
-            
+            // checking if there are no duplicates for the current value
             if mutatableList.value.0 == 1 {
+                //if there are no duplicates I just add the value by itself
                 let newList: List<Any> = List<Any>(mutatableList.value.1)!
                 newList.next = modifiedEncodedList
                 modifiedEncodedList = newList
             } else {
+                //else I add the entire (Int, T) pair to the list
                 let newList = List<Any>(mutatableList.value)
                 newList?.next = modifiedEncodedList
                 modifiedEncodedList = newList
             }
+            //check if the list is at the end
+            if mutatableList.next != nil {
+                //if not move the list down the chain and continue
+                mutatableList = mutatableList.next!
+                continue
+            }
+            //if so break the loop
+            break
+        }
+        // return the list reversed for the same reason as the others
+        return modifiedEncodedList!.reverse()
+    }
+}
+
+//P 12 Decode a run-length encoded linked list.
+//solving for strings only
+//Decoding the 'output' of P 10
+extension List {
+    func decode() -> List<String> {
+        //error message and guard statement in case a non List<(Int, String)> goes through this function
+        let errorList = List<String>("non decodable list entered into decode function")
+        guard var mutatableList: List<(Int, String)> = self as? List<(Int, String)> else { return errorList! }
+        // list that is being returned
+        var decodedList = List<String>()
+        //same while loop as all the others
+        while mutatableList.value != nil {
+            //for loop that adds the string values to the decodedList based on the Int value
+            for _ in 1...mutatableList.value.0 {
+                let newList = List<String>(mutatableList.value.1)
+                newList?.next = decodedList
+                decodedList = newList
+            }
             
+            //same end as the other while loops that can't easily skip the first value of the original List
             if mutatableList.next != nil {
                 mutatableList = mutatableList.next!
                 continue
             }
             break
         }
-        
-        return modifiedEncodedList!.reverse()
+        //adding to the List is backwards so I return the reversed decodedList
+        return decodedList!.reverse()
     }
 }

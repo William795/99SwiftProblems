@@ -15,6 +15,7 @@ class listTest {
     var palendrome = List(1, 2, 3, 3, 2, 1)
     var nestedList = List<Any>(List<Any>(1, 1)!, 2, List<Any>(3, List<Any>(5, 8)!)!)
     var duplicateList = List("a", "a", "a", "a", "b", "c", "c", "a", "a", "d", "e", "e", "e", "e")
+    let encodedList = List((4, "a"), (1, "b"), (2, "c"), (2, "a"), (1, "d"), (4, "e"))
     
     static let shared = listTest()
     
@@ -91,11 +92,24 @@ class listTest {
         print(encodedList?.last as Any)
     }
     
+    //P11
     func printModifiedEncode() {
         let modEncodedList = duplicateList?.encodeModified()
         print(modEncodedList?.length as Any)
         print(modEncodedList?.value as Any)
         print(modEncodedList?.next?.value as Any)
         print(modEncodedList?.last as Any)
+    }
+    
+    //P12
+    func printDecodedList() {
+        print(listOne?.decode().value as Any)
+        let decodedList = encodedList?.decode()
+        print(decodedList?.length as Any)
+        print(decodedList?.value as Any)
+        print(decodedList?.next?.value as Any)
+        print(decodedList?.next?.next?.next?.next?.value as Any)
+        print(decodedList?.last as Any)
+        
     }
 }
