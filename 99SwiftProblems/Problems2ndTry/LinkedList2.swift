@@ -263,7 +263,7 @@ extension List where T: Equatable {
             let newList = List<(Int, T)>(intValuePair)
             newList?.next = encodedList
             encodedList = newList
-
+            
             if mutatablePackedList.next != nil {
                 //cycle through the packedList
                 mutatablePackedList = mutatablePackedList.next!
@@ -403,3 +403,30 @@ extension List {
         return duplicatedList!.reverse()
     }
 }
+
+//P 15 Duplicate the elements of a linked list a given number of times.
+extension List {
+    func duplicate(times: Int) -> List {
+        // original list and list to return
+        var mutatableList = self
+        var duplicatedList = List()
+        //while loop to go through the original list
+        while mutatableList.value != nil {
+            //adding mutatableList's value to the duplicatedList twice
+            for _ in 1...times {
+                let newList = List(mutatableList.value)
+                newList?.next = duplicatedList
+                duplicatedList = newList
+            }
+            // moves the mutatableList forward and breaks the loop in there is no next value
+            if mutatableList.next != nil {
+                mutatableList = mutatableList.next!
+                continue
+            }
+            break
+        }
+        //reversing the reversed order the duplicatedList is in
+        return duplicatedList!.reverse()
+    }
+}
+

@@ -136,4 +136,16 @@ class listTest {
         print(duplicatedList?.next?.next?.next?.value as Any)
         print(duplicatedList?.next?.next?.next?.next?.value as Any)
     }
+    
+    //P15
+    func printDuplicateXTimesList() {
+        let duplicateFourTimesList = listTwo?.duplicate(times: 4)
+        print(duplicateFourTimesList?.length as Any)
+        print(duplicateFourTimesList?.value as Any)
+        print(duplicateFourTimesList?.next?.value as Any)
+        print(duplicateFourTimesList?.last as Any)
+        print(duplicateFourTimesList?.next?.next?.value as Any)
+        print(duplicateFourTimesList?.next?.next?.next?.value as Any)
+        print(duplicateFourTimesList?.next?.next?.next?.next?.value as Any)
+    }
 }
