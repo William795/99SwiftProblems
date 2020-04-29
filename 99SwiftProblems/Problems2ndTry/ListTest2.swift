@@ -148,4 +148,16 @@ class listTest {
         print(duplicateFourTimesList?.next?.next?.next?.value as Any)
         print(duplicateFourTimesList?.next?.next?.next?.next?.value as Any)
     }
+    
+    //P16
+    func printDroppedNthElementList() {
+        let drop3List = duplicateList?.drop(every: 3)
+        print(drop3List?.length as Any)
+        print(drop3List?.value as Any)
+        print(drop3List?.next?.value as Any)
+        print(drop3List?.next?.next?.value as Any)
+        print(drop3List?.next?.next?.next?.value as Any)
+        print(drop3List?.next?.next?.next?.next?.value as Any)
+        print(drop3List?.last as Any)
+    }
 }

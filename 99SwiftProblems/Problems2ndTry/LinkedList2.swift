@@ -412,7 +412,7 @@ extension List {
         var duplicatedList = List()
         //while loop to go through the original list
         while mutatableList.value != nil {
-            //adding mutatableList's value to the duplicatedList twice
+            //adding mutatableList's value to the duplicatedList based on the times variable
             for _ in 1...times {
                 let newList = List(mutatableList.value)
                 newList?.next = duplicatedList
@@ -430,3 +430,36 @@ extension List {
     }
 }
 
+//P 16 Drop every Nth element from a linked list
+extension List {
+    func drop(every: Int) -> List? {
+        // original list and list to return
+        var mutatableList = self
+        var droppedList = List()
+        //var to keep track of when to drop a value
+        var dropCounter = 0
+        //while loop to go through the original list
+        while mutatableList.value != nil {
+            //increment the drop counter
+            dropCounter += 1
+            //if drop not hit yet
+            if dropCounter != every {
+                //add value to list to return
+                let newList = List(mutatableList.value)
+                newList?.next = droppedList
+                droppedList = newList
+            } else {
+                //if drop hit reset drop counter and move on
+                dropCounter = 0
+            }
+            // moves the mutatableList forward and breaks the loop in there is no next value
+            if mutatableList.next != nil {
+                mutatableList = mutatableList.next!
+                continue
+            }
+            break
+        }
+        //reversing the reversed order the droppedList is in
+        return droppedList?.reverse()
+    }
+}

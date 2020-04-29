@@ -32,7 +32,8 @@ class MainViewController: UIViewController {
 //        listTest.shared.printDecodedList()
 //        listTest.shared.printDirectEncodedList()
 //        listTest.shared.printDuplicatedList()
-        listTest.shared.printDuplicateXTimesList()
+//        listTest.shared.printDuplicateXTimesList()
+        listTest.shared.printDroppedNthElementList()
     }
     /*
     // MARK: - Navigation
