@@ -341,3 +341,39 @@ extension List {
         return decodedList!.reverse()
     }
 }
+
+//P 13 Run-length encoding of a linked list (direct solution).
+// basically problems 9 & 10 in one function
+extension List where T: Equatable {
+    func encodeDirect() -> List<(Int, T)> {
+        // 3 variables - the original list / the list to return / my counter of duplicates
+        var mutatableList = self
+        var directEncodedList = List<(Int, T)>()
+        var numberOfDuplicates = 0
+        //while loop to go through the list
+        while mutatableList.value != nil {
+            //increment the duplicate counter
+            numberOfDuplicates += 1
+            //if the next value dose not equal the current (AKA not a duplicate) do this
+            if mutatableList.value != mutatableList.next?.value {
+                // 2 variables - the (Int, T) pair that I need to fill my returning list with / temparary list for adding onto the returning List
+                let IntTPair = (numberOfDuplicates, mutatableList.value)
+                let newList = List<(Int, T)>(IntTPair)
+                //populating the directEncodedList in reverse order
+                newList?.next = directEncodedList
+                directEncodedList = newList
+                //reset the duplicate counter
+                numberOfDuplicates = 0
+            }
+            //
+            if mutatableList.next != nil {
+                mutatableList = mutatableList.next!
+                continue
+            }
+            break
+        }
+        // reversing the list to put it back in proper order
+        return directEncodedList!.reverse()
+    }
+}
+

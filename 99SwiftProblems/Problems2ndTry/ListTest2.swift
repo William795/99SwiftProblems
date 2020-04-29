@@ -112,4 +112,16 @@ class listTest {
         print(decodedList?.last as Any)
         
     }
+    
+    //P13
+    func printDirectEncodedList() {
+        let DirectEncodedList = duplicateList?.encodeDirect()
+        print(DirectEncodedList?.length as Any)
+        print(DirectEncodedList?.value as Any)
+        print(DirectEncodedList?.next?.value as Any)
+        print(DirectEncodedList?.last as Any)
+        print(DirectEncodedList?.next?.next?.value as Any)
+        print(DirectEncodedList?.next?.next?.next?.value as Any)
+        print(DirectEncodedList?.next?.next?.next?.next?.value as Any)
+    }
 }
