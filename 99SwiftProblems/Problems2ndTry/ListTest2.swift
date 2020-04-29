@@ -11,7 +11,7 @@ import Foundation
 class listTest {
     
     var listOne = List(1, 2, 4, 8, 9, 7, 5, 3, 20, 20, 15, 10)
-    var listTwo = List("hi", "how", "are", "you", "?")
+    var listTwo = List("a", "b", "c", "c", "d")
     var palendrome = List(1, 2, 3, 3, 2, 1)
     var nestedList = List<Any>(List<Any>(1, 1)!, 2, List<Any>(3, List<Any>(5, 8)!)!)
     var duplicateList = List("a", "a", "a", "a", "b", "c", "c", "a", "a", "d", "e", "e", "e", "e")
@@ -123,5 +123,17 @@ class listTest {
         print(DirectEncodedList?.next?.next?.value as Any)
         print(DirectEncodedList?.next?.next?.next?.value as Any)
         print(DirectEncodedList?.next?.next?.next?.next?.value as Any)
+    }
+    
+    //P14
+    func printDuplicatedList() {
+        let duplicatedList = listTwo?.duplicate()
+        print(duplicatedList?.length as Any)
+        print(duplicatedList?.value as Any)
+        print(duplicatedList?.next?.value as Any)
+        print(duplicatedList?.last as Any)
+        print(duplicatedList?.next?.next?.value as Any)
+        print(duplicatedList?.next?.next?.next?.value as Any)
+        print(duplicatedList?.next?.next?.next?.next?.value as Any)
     }
 }

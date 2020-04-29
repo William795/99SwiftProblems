@@ -30,7 +30,8 @@ class MainViewController: UIViewController {
 //        listTest.shared.printEncode()
 //        listTest.shared.printModifiedEncode()
 //        listTest.shared.printDecodedList()
-        listTest.shared.printDirectEncodedList()
+//        listTest.shared.printDirectEncodedList()
+        listTest.shared.printDuplicatedList()
     }
     /*
     // MARK: - Navigation
