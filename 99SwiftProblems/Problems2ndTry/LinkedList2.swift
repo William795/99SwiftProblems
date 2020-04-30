@@ -497,3 +497,33 @@ extension List {
     }
 }
 // Note: due to leftside starting with a value calling a split at index of 1 or 0 gives the same result
+
+//P 18 Extract a slice from a linked list.
+extension List {
+    func slice(from: Int, _ to: Int) -> List {
+        //var for self / list to return
+        var mutatableList = self
+        var listSlice = List()
+        //var to keep track of loop count
+        var loopCount = 0
+        //while mutatableList has another value, loop
+        while mutatableList.value != nil {
+            //increment loop count
+            loopCount += 1
+            //if loop count is between specified int values add the values to the return list
+            if from < loopCount && loopCount <= to {
+                let newList = List(mutatableList.value)
+                newList?.next = listSlice
+                listSlice = newList
+            }
+            // moves the mutatableList forward and breaks the loop in there is no next value
+            if mutatableList.next != nil {
+                mutatableList = mutatableList.next!
+                continue
+            }
+            break
+        }
+        //return the list and reverse it to put back in proper order
+        return listSlice!.reverse()
+    }
+}

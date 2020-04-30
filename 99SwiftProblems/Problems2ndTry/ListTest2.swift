@@ -92,7 +92,7 @@ class listTest {
         print(encodedList?.last as Any)
     }
     
-    //P11
+    //P 11
     func printModifiedEncode() {
         let modEncodedList = duplicateList?.encodeModified()
         print(modEncodedList?.length as Any)
@@ -101,7 +101,7 @@ class listTest {
         print(modEncodedList?.last as Any)
     }
     
-    //P12
+    //P 12
     func printDecodedList() {
         print(listOne?.decode().value as Any)
         let decodedList = encodedList?.decode()
@@ -113,7 +113,7 @@ class listTest {
         
     }
     
-    //P13
+    //P 13
     func printDirectEncodedList() {
         let DirectEncodedList = duplicateList?.encodeDirect()
         print(DirectEncodedList?.length as Any)
@@ -125,7 +125,7 @@ class listTest {
         print(DirectEncodedList?.next?.next?.next?.next?.value as Any)
     }
     
-    //P14
+    //P 14
     func printDuplicatedList() {
         let duplicatedList = listTwo?.duplicate()
         print(duplicatedList?.length as Any)
@@ -137,7 +137,7 @@ class listTest {
         print(duplicatedList?.next?.next?.next?.next?.value as Any)
     }
     
-    //P15
+    //P 15
     func printDuplicateXTimesList() {
         let duplicateFourTimesList = listTwo?.duplicate(times: 4)
         print(duplicateFourTimesList?.length as Any)
@@ -149,7 +149,7 @@ class listTest {
         print(duplicateFourTimesList?.next?.next?.next?.next?.value as Any)
     }
     
-    //P16
+    //P 16
     func printDroppedNthElementList() {
         let drop3List = duplicateList?.drop(every: 3)
         print(drop3List?.length as Any)
@@ -161,6 +161,7 @@ class listTest {
         print(drop3List?.last as Any)
     }
     
+    //P 17
     func printSplitList() {
         let splitTuple = listOne?.split(atIndex: 5)
         print(splitTuple?.left.value as Any)
@@ -169,5 +170,14 @@ class listTest {
         print(splitTuple?.right.value as Any)
         print(splitTuple?.right.length as Any)
         print(splitTuple?.right.last as Any)
+    }
+    
+    //P 18
+    func printListSlice() {
+        let slicedList = listOne?.slice(from: 3, 7)
+        print(slicedList?.length as Any)
+        print(slicedList?.value as Any)
+        print(slicedList?.next?.value as Any)
+        print(slicedList?.last as Any)
     }
 }
