@@ -463,3 +463,37 @@ extension List {
         return droppedList?.reverse()
     }
 }
+
+//P 17 Split a linked list into two parts.
+extension List {
+    func split(atIndex: Int) -> (left: List, right: List) {
+        //variables for original list / leftSide / rightSide
+        var mutatableList = self
+        var leftList = List(mutatableList.value)
+        var rightList = List()
+        //loop counter to determine when to split (starts at 1 due to left side starting with a value)
+        var loopCount = 1
+        //while mutatableList has another value, loop
+        while mutatableList.next != nil {
+            //increment to next value
+            mutatableList = mutatableList.next!
+            //increment loop counter
+            loopCount += 1
+            //defines newList before the if statement (to save from writing it twice)
+            let newList = List(mutatableList.value)
+            //if loop counter is below the specified index
+            if loopCount <= atIndex {
+                //add the value to the left list
+                newList?.next = leftList
+                leftList = newList
+            } else {
+                //else add it to the right
+                newList?.next = rightList
+                rightList = newList
+            }
+        }
+        //return the lists reversed (due to how adding values to linkedLists(or at least this one in the manner that I am doing so) reverses the order of said values))
+        return (leftList!.reverse(), rightList!.reverse())
+    }
+}
+// Note: due to leftside starting with a value calling a split at index of 1 or 0 gives the same result

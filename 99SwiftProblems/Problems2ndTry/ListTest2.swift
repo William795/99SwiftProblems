@@ -160,4 +160,14 @@ class listTest {
         print(drop3List?.next?.next?.next?.next?.value as Any)
         print(drop3List?.last as Any)
     }
+    
+    func printSplitList() {
+        let splitTuple = listOne?.split(atIndex: 5)
+        print(splitTuple?.left.value as Any)
+        print(splitTuple?.left.length as Any)
+        print(splitTuple?.left.last as Any)
+        print(splitTuple?.right.value as Any)
+        print(splitTuple?.right.length as Any)
+        print(splitTuple?.right.last as Any)
+    }
 }
