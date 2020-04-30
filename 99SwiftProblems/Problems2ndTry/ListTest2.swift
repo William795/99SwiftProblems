@@ -180,4 +180,14 @@ class listTest {
         print(slicedList?.next?.value as Any)
         print(slicedList?.last as Any)
     }
+    
+    //P 19
+    func printRotatedList() {
+        let rotatedListForward = listOne?.rotate(amount: 4)
+        print("list 1")
+        rotatedListForward?.printList()
+        let rotatedListBack = listOne?.rotate(amount: -4)
+        print("list 2")
+        rotatedListBack?.printList()
+    }
 }

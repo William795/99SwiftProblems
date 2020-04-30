@@ -35,7 +35,9 @@ class MainViewController: UIViewController {
 //        listTest.shared.printDuplicateXTimesList()
 //        listTest.shared.printDroppedNthElementList()
 //        listTest.shared.printSplitList()
-        listTest.shared.printListSlice()
+//        listTest.shared.printListSlice()
+//        listTest.shared.printRotatedList()
+        listTest.shared.printRotatedList()
     }
     /*
     // MARK: - Navigation

@@ -26,6 +26,17 @@ class List<T> {
     }
 }
 
+//My own extension for printing the values of an entire list so I can more easialy fix bugs/troubleshoot
+extension List {
+    func printList() {
+        var mutatableList = self
+        print(mutatableList.value)
+        while mutatableList.next != nil {
+            mutatableList = mutatableList.next!
+            print(mutatableList.value)
+        }
+    }
+}
 //P01 Find the last element of a Linked List
 
 extension List {
@@ -527,3 +538,76 @@ extension List {
         return listSlice!.reverse()
     }
 }
+
+//P 19 Rotate a list N places to the left.
+// (1, 2, 3, 4) -> rotate(1) -> (2, 3, 4, 1) / rotate(-1) -> (4, 1, 2, 3)
+extension List {
+    func rotate(amount: Int) -> List {
+        // 3 list variables : current list / the list being returned / the list to hold the values that I want to add to the list ,i'm returning, at a different point
+        var mutatableList = self
+        var rotatedList = List()
+        var holdingList = List()
+        //modifiedAmount is for negative imput values
+        let modifiedAmount = amount + self.length
+        //counting loops
+        var loopCount = 0
+        //while mutatableList has another value, loop
+        while mutatableList.value != nil {
+            //increment loop count
+            loopCount += 1
+            //declareing newList here instead of in 4 places down below
+            let newList = List(mutatableList.value)
+            //if amount is positive
+            if amount >= 0 {
+                // add the first (amount) values to the holdingList
+                if loopCount <= amount {
+                    newList?.next = holdingList
+                    holdingList = newList
+                } else {
+                    //put the rest in the rotatedList
+                    newList?.next = rotatedList
+                    rotatedList = newList
+                }
+                //if amount is negative
+            } else {
+                // add all but the last (|amount|) of values to the rotatedList
+                if loopCount <= modifiedAmount {
+                    newList?.next = rotatedList
+                    rotatedList = newList
+                } else {
+                    //puts the rest in the holdingList
+                    newList?.next = holdingList
+                    holdingList = newList
+                }
+            }
+            // moves the mutatableList forward and breaks the loop in there is no next value
+            if mutatableList.next != nil {
+                mutatableList = mutatableList.next!
+                continue
+            }
+            //reverse different lists based on whether (amount) is positive or negative
+            if amount >= 0 {
+                holdingList = holdingList?.reverse()
+            } else {
+                rotatedList = rotatedList?.reverse()
+            }
+            //loop through the holdingList to add the values to the rotatedList
+            while holdingList?.value != nil {
+                let newList = List(holdingList!.value)
+                newList?.next = rotatedList
+                rotatedList = newList
+                // moves the holdingList forward and breaks the loop in there is no next value
+                if holdingList?.next != nil {
+                    holdingList = holdingList?.next!
+                    continue
+                }
+                break
+            }
+            break
+        }
+        // determines whether to reverse the rotatedList based on if (amount) is positive or negative
+        return amount >= 0 ? rotatedList!.reverse() : rotatedList!
+    }
+}
+//Oh boy is this a mess I think this is about O(n * 4) which is technically still O(n) but in its current state it is probably my most inefficent function thus far.
+//It also has 7 or so if statments in 50 lines of code, some of which are nested in other if statements, so there is quite abit to improve.
