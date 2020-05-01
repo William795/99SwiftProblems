@@ -197,4 +197,11 @@ class listTest {
         print(removeAt2List?.1)
         removeAt2List?.0?.printList()
     }
+    
+    //P21
+    func printInsertAtList() {
+        let insertAtList = listOne
+        insertAtList?.insertAt(index: 4, 10)
+        insertAtList?.printList()
+    }
 }

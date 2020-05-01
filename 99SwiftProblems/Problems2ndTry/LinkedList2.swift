@@ -615,32 +615,73 @@ extension List {
 //P 20 Remove the Kth element from a linked list. - list.removeAt(1) (1, 2, 3, 4) -> ((1, 3, 4), 2)
 extension List {
     func removeAt(position: Int) -> (rest: List?, removed: T?) {
+        //variables for... list to get information from / list to populate the 'rest'value / tuple to return
         var mutatableList = self
         var theRestList = List()
         var returnTuple: (List<T>?, T?)
+        //loop counter to know how far down the main list I am
         var loopCount = 0
-        
+        //while mutatableList has another value, loop
         while mutatableList.value != nil {
+            //if i'm not at the correct position add the current value to the 'rest' list
             if loopCount != position {
                 let newList = List(mutatableList.value)
                 newList?.next = theRestList
                 theRestList = newList
             } else {
+                //if I am populate the tuple T?
                 returnTuple.1 = mutatableList.value
             }
+            //increment loop count
             loopCount += 1
-            
-            
             // moves the mutatableList forward and breaks the loop in there is no next value
             if mutatableList.next != nil {
                 mutatableList = mutatableList.next!
                 continue
             }
+            //set the tuple List? (also the list is backwards so it needs to be reversed)
             returnTuple.0 = theRestList?.reverse()
             break
         }
-        
-        
         return returnTuple
+    }
+}
+
+//P 21 Insert an element at a given position into a linked list.
+//(1,2,3) -> insert(index: 1, value: 5) -> (1, 5, 2, 3)
+extension List {
+    func insertAt(index: Int, _ value: T) {
+        //variables for... list to get information from / list to set self to
+        var mutatableList = self
+        var insertedList = List()
+        //loop counter to know how far down the main list I am
+        var loopCount = 0
+        //while mutatableList has another value, loop
+        while mutatableList.value != nil {
+            //if at index point
+            if loopCount == index {
+                // add 'value' to insertedList
+                let newList = List(value)
+                newList?.next = insertedList
+                insertedList = newList
+            }
+            //add mutatableList value to insertedList
+            let newList = List(mutatableList.value)
+            newList?.next = insertedList
+            insertedList = newList
+            //increment loop count
+            loopCount += 1
+            // moves the mutatableList forward and breaks the loop in there is no next value
+            if mutatableList.next != nil {
+                mutatableList = mutatableList.next!
+                continue
+            }
+            break
+        }
+        //reverse the backwards insertedList
+        insertedList = insertedList?.reverse()
+        //set self to insertedList
+        self.value = insertedList?.value ?? value
+        self.next = insertedList?.next
     }
 }
