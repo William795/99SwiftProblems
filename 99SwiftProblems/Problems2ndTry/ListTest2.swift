@@ -190,4 +190,11 @@ class listTest {
         print("list 2")
         rotatedListBack?.printList()
     }
+    
+    //P 20
+    func printRemoveKthElementTuple() {
+        let removeAt2List = listOne?.removeAt(position: 1)
+        print(removeAt2List?.1)
+        removeAt2List?.0?.printList()
+    }
 }

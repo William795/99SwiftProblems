@@ -609,5 +609,38 @@ extension List {
         return amount >= 0 ? rotatedList!.reverse() : rotatedList!
     }
 }
-//Oh boy is this a mess I think this is about O(n * 4) which is technically still O(n) but in its current state it is probably my most inefficent function thus far.
-//It also has 7 or so if statments in 50 lines of code, some of which are nested in other if statements, so there is quite abit to improve.
+//Oh boy is this a mess I think this is about O(n * 4) which is technically still O(n) but in its current state it is probably my most inefficent and messy function thus far.
+//definately the hardest problem so far (the last 5 or so were all sub 20min cake walks while this one took about 2 hours)
+
+//P 20 Remove the Kth element from a linked list. - list.removeAt(1) (1, 2, 3, 4) -> ((1, 3, 4), 2)
+extension List {
+    func removeAt(position: Int) -> (rest: List?, removed: T?) {
+        var mutatableList = self
+        var theRestList = List()
+        var returnTuple: (List<T>?, T?)
+        var loopCount = 0
+        
+        while mutatableList.value != nil {
+            if loopCount != position {
+                let newList = List(mutatableList.value)
+                newList?.next = theRestList
+                theRestList = newList
+            } else {
+                returnTuple.1 = mutatableList.value
+            }
+            loopCount += 1
+            
+            
+            // moves the mutatableList forward and breaks the loop in there is no next value
+            if mutatableList.next != nil {
+                mutatableList = mutatableList.next!
+                continue
+            }
+            returnTuple.0 = theRestList?.reverse()
+            break
+        }
+        
+        
+        return returnTuple
+    }
+}
