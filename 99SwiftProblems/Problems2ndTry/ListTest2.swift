@@ -204,4 +204,10 @@ class listTest {
         insertAtList?.insertAt(index: 4, 10)
         insertAtList?.printList()
     }
+    
+    //P 22
+    func printRangeList() {
+        let rangeList = List<Any>.range(from: 2, 10)
+        rangeList.printList()
+    }
 }

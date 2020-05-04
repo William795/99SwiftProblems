@@ -685,3 +685,19 @@ extension List {
         self.next = insertedList?.next
     }
 }
+
+//P 22 Create a linked list containing all integers within a given range.
+extension List {
+    class func range(from: Int, _ to: Int) -> List<Int> {
+        //list to return
+        var rangeList = List<Int>()
+        //add all intergers from the given range to the list
+        for i in from...to {
+            let newList = List<Int>(i)
+            newList?.next = rangeList
+            rangeList = newList
+        }
+        //return the list reversed to proper order
+        return rangeList!.reverse()
+    }
+}

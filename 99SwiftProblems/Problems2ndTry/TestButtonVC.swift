@@ -39,7 +39,8 @@ class MainViewController: UIViewController {
 //        listTest.shared.printRotatedList()
 //        listTest.shared.printRotatedList()
 //        listTest.shared.printRemoveKthElementTuple()
-        listTest.shared.printInsertAtList()
+//        listTest.shared.printInsertAtList()
+        listTest.shared.printRangeList()
     }
     /*
     // MARK: - Navigation
