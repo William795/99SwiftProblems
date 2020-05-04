@@ -40,7 +40,8 @@ class MainViewController: UIViewController {
 //        listTest.shared.printRotatedList()
 //        listTest.shared.printRemoveKthElementTuple()
 //        listTest.shared.printInsertAtList()
-        listTest.shared.printRangeList()
+//        listTest.shared.printRangeList()
+        listTest.shared.extractRandomElements()
     }
     /*
     // MARK: - Navigation

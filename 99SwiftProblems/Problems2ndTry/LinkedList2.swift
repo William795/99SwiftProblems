@@ -701,3 +701,31 @@ extension List {
         return rangeList!.reverse()
     }
 }
+
+//P 23 Extract a given number of randomly selected elements from a linked list.
+extension List {
+    func randomSelect(amount: Int) -> List {
+        //basic starting variables
+        var mutatableList = self
+        var randomList = List()
+        //var to keep track of mutatableList Length
+        var mutatableListLength = mutatableList.length
+        //loop (amount) times
+        for _ in 1...amount {
+            // get a random Int between 0 and mutatableList's length
+            let randomInt = Int.random(in: 0...mutatableListLength - 1)
+            // removing a value based off the random number
+            let tuple = mutatableList.removeAt(position: randomInt)
+            // set mutatableList = to itself minus the element that corrisponds to the random number
+            mutatableList = tuple.0!
+            //deincrement muta's length
+            mutatableListLength -= 1
+            //add the value removed to the list being returned
+            let newList = List(tuple.1!)
+            newList?.next = randomList
+            randomList = newList
+        }
+        //return the list not reversed because the list is already in random order
+        return randomList!
+    }
+}

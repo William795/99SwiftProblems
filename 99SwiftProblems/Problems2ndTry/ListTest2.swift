@@ -210,4 +210,10 @@ class listTest {
         let rangeList = List<Any>.range(from: 2, 10)
         rangeList.printList()
     }
+    
+    //P 23
+    func extractRandomElements() {
+        let randomExtractedElementsList = listOne?.randomSelect(amount: 5)
+        randomExtractedElementsList?.printList()
+    }
 }
