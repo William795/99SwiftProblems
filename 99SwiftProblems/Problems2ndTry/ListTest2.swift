@@ -216,4 +216,10 @@ class listTest {
         let randomExtractedElementsList = listOne?.randomSelect(amount: 5)
         randomExtractedElementsList?.printList()
     }
+    
+    //P 24
+    func printLotto() {
+        let lotto = List<Any>.lotto(numbers: 1, 100)
+        lotto.printList()
+    }
 }

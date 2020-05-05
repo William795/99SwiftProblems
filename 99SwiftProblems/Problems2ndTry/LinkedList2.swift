@@ -729,3 +729,21 @@ extension List {
         return randomList!
     }
 }
+
+//P 24 Lotto: Draw N different random numbers from the set 1..M.
+extension List {
+    class func lotto(numbers: Int, _ maximum: Int) -> List<Int> {
+        //List to return
+        var lottoList = List<Int>()
+        //loop 5 times
+        for _ in 1...5 {
+            //get random Int between the specified Int values
+            let randomInt = Int.random(in: numbers...maximum)
+            //add Int to lottoList
+            let newList = List<Int>(randomInt)
+            newList?.next = lottoList
+            lottoList = newList
+        }
+        return lottoList!
+    }
+}

@@ -41,7 +41,8 @@ class MainViewController: UIViewController {
 //        listTest.shared.printRemoveKthElementTuple()
 //        listTest.shared.printInsertAtList()
 //        listTest.shared.printRangeList()
-        listTest.shared.extractRandomElements()
+//        listTest.shared.extractRandomElements()
+        listTest.shared.printLotto()
     }
     /*
     // MARK: - Navigation
