@@ -222,4 +222,10 @@ class listTest {
         let lotto = List<Any>.lotto(numbers: 1, 100)
         lotto.printList()
     }
+    
+    //P 25
+    func printPermutationList() {
+        let permutationList = palendrome?.randomPermute()
+        permutationList?.printList()
+    }
 }

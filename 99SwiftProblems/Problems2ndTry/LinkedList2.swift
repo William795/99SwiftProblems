@@ -716,14 +716,17 @@ extension List {
             let randomInt = Int.random(in: 0...mutatableListLength - 1)
             // removing a value based off the random number
             let tuple = mutatableList.removeAt(position: randomInt)
-            // set mutatableList = to itself minus the element that corrisponds to the random number
-            mutatableList = tuple.0!
             //deincrement muta's length
             mutatableListLength -= 1
             //add the value removed to the list being returned
             let newList = List(tuple.1!)
             newList?.next = randomList
             randomList = newList
+            //if statement to not crash if amount is set higher than list length
+            if tuple.0 != nil {
+                // set mutatableList = to itself minus the element that corrisponds to the random number
+                mutatableList = tuple.0!
+            }
         }
         //return the list not reversed because the list is already in random order
         return randomList!
@@ -747,3 +750,15 @@ extension List {
         return lottoList!
     }
 }
+
+//P 25 Generate a random permutation of the elements of a linked list.
+// (1, 2, 3, 4, 5) -> (3, 1, 5, 2, 4) or somthing
+extension List {
+    //just running P23 solution with amount = list length
+    func randomPermute() -> List {
+        let listLength = self.length
+        let permutedList = self.randomSelect(amount: listLength)
+        return permutedList
+    }
+}
+//very easy, tho I did need to rework P 23 a little
