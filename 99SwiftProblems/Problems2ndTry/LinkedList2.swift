@@ -762,3 +762,41 @@ extension List {
     }
 }
 //very easy, tho I did need to rework P 23 a little
+
+//P 26 Generate the combinations of K distinct objects chosen from the N elements of a linked list.
+extension List {
+    func combinations(group: Int) -> List<List<T>> {
+        var mutatableList = self
+        var combinationsList = List<List<T>>()
+         
+        while mutatableList.next != nil {
+            let listLength = mutatableList.length
+            var mutatableNext = mutatableList.next
+            for _ in 1...listLength {
+                
+                var combinationList = List(mutatableList.value)
+                for _ in 1...group - 1 {
+                    if mutatableNext?.value == nil {
+                        continue
+                    }
+                    let newList = List(mutatableNext!.value)
+                    newList?.next = combinationList
+                    combinationList = newList
+                    
+                    if combinationList?.length == group {
+                        let newList = List<List<T>>(combinationList!.reverse())
+                        newList?.next = combinationsList
+                        combinationsList = newList
+                    } else {
+                        mutatableNext = mutatableNext?.next
+                    }
+                }
+            }
+            mutatableList = mutatableList.next!
+        }
+        return combinationsList!.reverse()
+    }
+}
+// got a solution to work with groups of 2 but broke with anything higher so started messing with things to not much success
+//the way i'm trying to do it wouldent work anyway, in a list of 1,2,3,4,5 it would miss 1,3,5
+//

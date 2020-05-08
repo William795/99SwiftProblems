@@ -16,6 +16,7 @@ class listTest {
     var nestedList = List<Any>(List<Any>(1, 1)!, 2, List<Any>(3, List<Any>(5, 8)!)!)
     var duplicateList = List("a", "a", "a", "a", "b", "c", "c", "a", "a", "d", "e", "e", "e", "e")
     let encodedList = List((4, "a"), (1, "b"), (2, "c"), (2, "a"), (1, "d"), (4, "e"))
+    let smallList = List(1, 2, 3, 4)
     
     static let shared = listTest()
     
@@ -227,5 +228,20 @@ class listTest {
     func printPermutationList() {
         let permutationList = palendrome?.randomPermute()
         permutationList?.printList()
+    }
+    
+    //P 26
+    func printCombinationList() {
+        let combinationList = smallList?.combinations(group: 3)
+        print(combinationList?.length as Any)
+        print(combinationList?.value.length as Any)
+        print(combinationList?.value.value as Any)
+        print(combinationList?.value.next?.value as Any)
+        print(combinationList?.next?.value.length as Any)
+        print(combinationList?.next?.value.value as Any)
+        print(combinationList?.next?.value.next?.value as Any)
+        print(combinationList?.next?.next?.value.length as Any)
+        print(combinationList?.next?.next?.value.value as Any)
+        print(combinationList?.next?.next?.value.next?.value as Any)
     }
 }

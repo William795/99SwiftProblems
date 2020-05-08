@@ -103,8 +103,8 @@
 		924D833A2437DA9F00861002 /* Problems2ndTry */ = {
 			isa = PBXGroup;
 			children = (
-				924D83362437D2F500861002 /* LinkedList2.swift */,
 				929E44602464D07C00719782 /* IntExtension2.swift */,
+				924D83362437D2F500861002 /* LinkedList2.swift */,
 				924D83382437DA7800861002 /* ListTest2.swift */,
 				92F03428232859E800017931 /* TestButtonVC.swift */,
 			);
