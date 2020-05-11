@@ -768,35 +768,73 @@ extension List {
     func combinations(group: Int) -> List<List<T>> {
         var mutatableList = self
         var combinationsList = List<List<T>>()
-         
+        let baseListlength = self.length
+        //what do I need?
+        //loop through muta list
         while mutatableList.next != nil {
-            let listLength = mutatableList.length
             var mutatableNext = mutatableList.next
-            for _ in 1...listLength {
-                
-                var combinationList = List(mutatableList.value)
-                for _ in 1...group - 1 {
-                    if mutatableNext?.value == nil {
-                        continue
-                    }
-                    let newList = List(mutatableNext!.value)
-                    newList?.next = combinationList
-                    combinationList = newList
-                    
-                    if combinationList?.length == group {
-                        let newList = List<List<T>>(combinationList!.reverse())
-                        newList?.next = combinationsList
-                        combinationsList = newList
-                    } else {
-                        mutatableNext = mutatableNext?.next
-                    }
+            var testList = List(mutatableList.value)
+
+            var combineHelpList = combineHelper(staticList: testList!, loopingList: mutatableNext!)
+            for _ in (1...combineHelpList.length) {
+                let newList = List<List<T>>(combineHelpList.value)
+                newList?.next = combinationsList
+                combinationsList = newList
+                if combineHelpList.next != nil {
+                    combineHelpList = combineHelpList.next!
+                } else {
+                    break
                 }
             }
-            mutatableList = mutatableList.next!
+            
+            
+            
+            // loop other two based on group size
+            //loop to the end of list
+//            for _ in (1...baseListlength) {
+//            }
+            // for making a list (group) size
+//            for _ in (1...group) {
+//            }
+            //make groups
+            //- need to grab the first (group) values
+            //- cycle through the list keeping the first (group - 1) values
+            //add groups to com list
+            //repeat for (group - 2)... (group - group)
+            //end loop
+            
+            
+            
+            
+            
+            if mutatableList.next != nil {
+                mutatableList = mutatableList.next!
+                continue
+            }
+            break
         }
         return combinationsList!.reverse()
     }
+    // should make a bunch of lists which contain (staticList + single loopingList value) and returns them all in a List of Lists
+    private func combineHelper(staticList: List, loopingList: List) -> List<List<T>> {
+        var mutatableList = loopingList
+        var returnList = List<List<T>>()
+        
+        while mutatableList.value != nil {
+            
+            let mutaStaticList = List(mutatableList.value)
+            mutaStaticList?.next = staticList.reverse()
+            
+            let listList = List<List<T>>(mutaStaticList!.reverse())
+            listList?.next = returnList
+            returnList = listList
+            
+            if mutatableList.next != nil {
+                mutatableList = mutatableList.next!
+                continue
+            }
+            break
+        }
+        return returnList!.reverse()
+    }
 }
-// got a solution to work with groups of 2 but broke with anything higher so started messing with things to not much success
-//the way i'm trying to do it wouldent work anyway, in a list of 1,2,3,4,5 it would miss 1,3,5
-//

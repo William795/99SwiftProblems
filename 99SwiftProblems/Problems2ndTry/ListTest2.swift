@@ -232,7 +232,7 @@ class listTest {
     
     //P 26
     func printCombinationList() {
-        let combinationList = smallList?.combinations(group: 3)
+        let combinationList = smallList?.combinations(group: 2)
         print(combinationList?.length as Any)
         print(combinationList?.value.length as Any)
         print(combinationList?.value.value as Any)
@@ -243,5 +243,7 @@ class listTest {
         print(combinationList?.next?.next?.value.length as Any)
         print(combinationList?.next?.next?.value.value as Any)
         print(combinationList?.next?.next?.value.next?.value as Any)
+        print(combinationList?.next?.next?.next?.value.value as Any)
+        print(combinationList?.next?.next?.next?.value.next?.value as Any)
     }
 }
