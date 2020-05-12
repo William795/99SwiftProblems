@@ -769,10 +769,12 @@ extension List {
         var mutatableList = self
         var combinationsList = List<List<T>>()
         let baseListlength = self.length
+        var mutatableGroup = group
         //what do I need?
         //loop through muta list
         while mutatableList.next != nil {
             var mutatableNext = mutatableList.next
+            
             var testList = List(mutatableList.value)
 
             var combineHelpList = combineHelper(staticList: testList!, loopingList: mutatableNext!)
@@ -787,7 +789,21 @@ extension List {
                 }
             }
             
-            
+            //The block below outputs, from (1, 2, 3, 4, 5, 6) (group of 3), -> (1,2,3)(2,3,4)(3,4,5)(4,5,6) (in theory)
+            //run this then the above to get ((1,2),3|4|5|6) ((2,3),4|5|6) but I miss (1,3),4|5|6... ect
+            var newList = List()
+            for _ in (1...group) {
+                mutatableGroup -= 1
+                let t = grabLengthSubOneElement(length: mutatableGroup, list: mutatableList)
+                let anotherList = List(t)
+                anotherList?.next = newList
+                newList = anotherList
+            }
+            mutatableGroup = group
+            let newCombinationList = List<List<T>>(newList!)
+            newCombinationList?.next = combinationsList
+            combinationsList = newCombinationList
+            //what if I looped some code group times dropped group number by 1 each time
             
             // loop other two based on group size
             //loop to the end of list
@@ -816,6 +832,8 @@ extension List {
         return combinationsList!.reverse()
     }
     // should make a bunch of lists which contain (staticList + single loopingList value) and returns them all in a List of Lists
+    
+    //if I made a few changes here, say take in an Int for group size, and then call itself, changing what position its static list is based on the looping list and group Int
     private func combineHelper(staticList: List, loopingList: List) -> List<List<T>> {
         var mutatableList = loopingList
         var returnList = List<List<T>>()
@@ -835,6 +853,16 @@ extension List {
             }
             break
         }
+        //maybe an if groupInt > 2 or something and if it is call the func again???
         return returnList!.reverse()
     }
+    
+    // 2nd attempt at for helper func
+    private func grabLengthSubOneElement(length: Int, list: List) -> T {
+        
+        let value = list[length - 1]
+        
+        return value!
+    }
+    
 }
