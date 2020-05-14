@@ -26,7 +26,7 @@ class List<T> {
     }
 }
 
-//My own extension for printing the values of an entire list so I can more easialy fix bugs/troubleshoot
+//My own extensions for printing the values of an entire list so I can more easialy fix bugs/troubleshoot
 extension List {
     func printList() {
         var mutatableList = self
@@ -34,6 +34,26 @@ extension List {
         while mutatableList.next != nil {
             mutatableList = mutatableList.next!
             print(mutatableList.value)
+        }
+    }
+}
+extension List {
+    func printEmbeddedList() {
+        var mutatableList = self
+        while mutatableList.value != nil {
+            //change the List type based on what list it will be recieving
+            var nestedList = mutatableList.value as? List<Int>
+            print(nestedList?.value as Any)
+            while nestedList?.next != nil {
+                nestedList = nestedList?.next!
+                print(nestedList?.value as Any)
+            }
+            print("list end")
+            if mutatableList.next != nil {
+                mutatableList = mutatableList.next!
+                continue
+            }
+            break
         }
     }
 }
@@ -766,76 +786,61 @@ extension List {
 //P 26 Generate the combinations of K distinct objects chosen from the N elements of a linked list.
 extension List {
     func combinations(group: Int) -> List<List<T>> {
-        var mutatableList = self
-        var combinationsList = List<List<T>>()
-        let baseListlength = self.length
-        var mutatableGroup = group
-        //what do I need?
-        //loop through muta list
-        while mutatableList.next != nil {
-            var mutatableNext = mutatableList.next
-            
-            var testList = List(mutatableList.value)
-
-            var combineHelpList = combineHelper(staticList: testList!, loopingList: mutatableNext!)
-            for _ in (1...combineHelpList.length) {
-                let newList = List<List<T>>(combineHelpList.value)
-                newList?.next = combinationsList
-                combinationsList = newList
-                if combineHelpList.next != nil {
-                    combineHelpList = combineHelpList.next!
-                } else {
-                    break
-                }
-            }
-            
-            //The block below outputs, from (1, 2, 3, 4, 5, 6) (group of 3), -> (1,2,3)(2,3,4)(3,4,5)(4,5,6) (in theory)
-            //run this then the above to get ((1,2),3|4|5|6) ((2,3),4|5|6) but I miss (1,3),4|5|6... ect
-            var newList = List()
-            for _ in (1...group) {
-                mutatableGroup -= 1
-                let t = grabLengthSubOneElement(length: mutatableGroup, list: mutatableList)
-                let anotherList = List(t)
-                anotherList?.next = newList
-                newList = anotherList
-            }
-            mutatableGroup = group
-            let newCombinationList = List<List<T>>(newList!)
-            newCombinationList?.next = combinationsList
-            combinationsList = newCombinationList
-            //what if I looped some code group times dropped group number by 1 each time
-            
-            // loop other two based on group size
-            //loop to the end of list
-//            for _ in (1...baseListlength) {
+//        var mutatableList = self
+//        var combinationsList = List<List<T>>()
+//        let baseListlength = self.length
+//        var mutatableGroup = group
+//        //what do I need?
+//        //loop through muta list
+//        while mutatableList.next != nil {
+//
+//            if mutatableList.next != nil {
+//                mutatableList = mutatableList.next!
+//                continue
 //            }
-            // for making a list (group) size
-//            for _ in (1...group) {
-//            }
-            //make groups
-            //- need to grab the first (group) values
-            //- cycle through the list keeping the first (group - 1) values
-            //add groups to com list
-            //repeat for (group - 2)... (group - group)
-            //end loop
-            
-            
-            
-            
-            
-            if mutatableList.next != nil {
-                mutatableList = mutatableList.next!
-                continue
-            }
-            break
-        }
-        return combinationsList!.reverse()
+//            break
+//        }
+//        return combinationsList!.reverse()
+        return combineHelper(originalList: self, groupSize: group)
     }
     // should make a bunch of lists which contain (staticList + single loopingList value) and returns them all in a List of Lists
     
     //if I made a few changes here, say take in an Int for group size, and then call itself, changing what position its static list is based on the looping list and group Int
-    private func combineHelper(staticList: List, loopingList: List) -> List<List<T>> {
-        var mutatableList = loopingList
+    private func combineHelper(originalList: List, groupSize: Int) -> List<List<T>> {
+        var mutatableList: List<T> = originalList
+        var returnList = List<List<T>>()
+        var mutatableGroup = groupSize
+        
+        // drop (groupsize) element from looping list can manage to hit (1,3),4|5|6 (1,4),5|6... ect
+//        while mutatableGroup > 1 {
+            //throuw this in a function? this bit handles 2 size groups
+            for _ in (1...mutatableList.length - groupSize + 1) {
+                let staticList = grabLengthElementsFromList(length: groupSize, list: mutatableList)
+                let loopingList = mutatableList.split(atIndex: groupSize - 1).right
+                var baseLevelCombine = baseLevelCombining(staticList: staticList, loopingList: loopingList)
+                
+                for _ in (1...baseLevelCombine.length) {
+                    let newList = List<List<T>>(baseLevelCombine.value)
+                    newList?.next = returnList
+                    returnList = newList
+                    if baseLevelCombine.next != nil {
+                        baseLevelCombine = baseLevelCombine.next!
+                    }
+                }
+                mutatableList = mutatableList.next!
+            }
+            // so what I need is to use the below code to remove specific members of the list and then run the above again with the new list
+//            mutatableList = mutatableList.removeAt(position: mutatableGroup - 1).0!
+            
+            mutatableList = originalList
+            mutatableGroup -= 1
+//        }
+        //maybe an if groupInt > 2 or something and if it is call the func again???
+        return returnList!.reverse()
+    }
+    
+    private func baseLevelCombining(staticList: List, loopingList: List) -> List<List<T>> {
+        var mutatableList: List<T> = loopingList
         var returnList = List<List<T>>()
         
         while mutatableList.value != nil {
@@ -853,16 +858,20 @@ extension List {
             }
             break
         }
-        //maybe an if groupInt > 2 or something and if it is call the func again???
         return returnList!.reverse()
     }
     
-    // 2nd attempt at for helper func
-    private func grabLengthSubOneElement(length: Int, list: List) -> T {
+    private func grabLengthElementsFromList(length: Int, list: List) -> List {
         
-        let value = list[length - 1]
+        var mutatableList = list
+        var groupElements = List()
         
-        return value!
+        for _ in (1...length - 1) {
+            let newList = List(mutatableList.value)
+            newList?.next = groupElements
+            groupElements = newList
+            mutatableList = mutatableList.next!
+        }
+        return groupElements!.reverse()
     }
-    
 }
