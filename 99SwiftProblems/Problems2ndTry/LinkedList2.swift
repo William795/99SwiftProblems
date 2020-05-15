@@ -784,59 +784,65 @@ extension List {
 //very easy, tho I did need to rework P 23 a little
 
 //P 26 Generate the combinations of K distinct objects chosen from the N elements of a linked list.
+//This is sooooooooooooo close it does lists of 2 and 3, but in a 1-6 list of 4, it misses 1,3,5,6
+//with just a few small changes it will work (says the slightly optimistic programmer who has felt this way for the last 5 hours of work)
 extension List {
     func combinations(group: Int) -> List<List<T>> {
-//        var mutatableList = self
-//        var combinationsList = List<List<T>>()
-//        let baseListlength = self.length
-//        var mutatableGroup = group
-//        //what do I need?
-//        //loop through muta list
-//        while mutatableList.next != nil {
-//
-//            if mutatableList.next != nil {
-//                mutatableList = mutatableList.next!
-//                continue
-//            }
-//            break
-//        }
-//        return combinationsList!.reverse()
-        return combineHelper(originalList: self, groupSize: group)
+        return FinalSolutionProbably(originalList: self, groupSize: group, intToRemove: group).reverse()
     }
-    // should make a bunch of lists which contain (staticList + single loopingList value) and returns them all in a List of Lists
     
-    //if I made a few changes here, say take in an Int for group size, and then call itself, changing what position its static list is based on the looping list and group Int
-    private func combineHelper(originalList: List, groupSize: Int) -> List<List<T>> {
+    private func FinalSolutionProbably(originalList: List, groupSize: Int, intToRemove: Int) -> List<List<T>> {
         var mutatableList: List<T> = originalList
         var returnList = List<List<T>>()
-        var mutatableGroup = groupSize
+        var someRandomList = originalList.next
         
-        // drop (groupsize) element from looping list can manage to hit (1,3),4|5|6 (1,4),5|6... ect
-//        while mutatableGroup > 1 {
-            //throuw this in a function? this bit handles 2 size groups
-            for _ in (1...mutatableList.length - groupSize + 1) {
-                let staticList = grabLengthElementsFromList(length: groupSize, list: mutatableList)
-                let loopingList = mutatableList.split(atIndex: groupSize - 1).right
-                var baseLevelCombine = baseLevelCombining(staticList: staticList, loopingList: loopingList)
-                
-                for _ in (1...baseLevelCombine.length) {
-                    let newList = List<List<T>>(baseLevelCombine.value)
-                    newList?.next = returnList
-                    returnList = newList
-                    if baseLevelCombine.next != nil {
-                        baseLevelCombine = baseLevelCombine.next!
-                    }
-                }
-                mutatableList = mutatableList.next!
-            }
-            // so what I need is to use the below code to remove specific members of the list and then run the above again with the new list
-//            mutatableList = mutatableList.removeAt(position: mutatableGroup - 1).0!
+        while mutatableList.next != nil {
             
-            mutatableList = originalList
-            mutatableGroup -= 1
-//        }
-        //maybe an if groupInt > 2 or something and if it is call the func again???
-        return returnList!.reverse()
+            if intToRemove > 2 {
+                mutatableList = mutatableList.removeAt(position: intToRemove - 2).0!
+            }
+            let staticList = grabLengthElementsFromList(length: groupSize, list: mutatableList)
+            let loopingList = mutatableList.split(atIndex: groupSize - 1).right
+            var baseLevelCombine = baseLevelCombining(staticList: staticList, loopingList: loopingList)
+            for _ in (1...baseLevelCombine.length) {
+                
+                let newList = List<List<T>>(baseLevelCombine.value)
+                newList?.next = returnList
+                returnList = newList
+                if baseLevelCombine.next != nil {
+                    baseLevelCombine = baseLevelCombine.next!
+                }
+            }
+            if intToRemove <= 2 {
+                if mutatableList.length == groupSize {
+                    break
+                } else {
+                    mutatableList = mutatableList.next!
+                    continue
+                }
+            }
+            if mutatableList.length == groupSize {
+                if someRandomList?.length == groupSize {
+                    print("loop broke")
+                    break
+                } else {
+                    mutatableList = someRandomList!
+                    someRandomList = someRandomList?.next!
+                }
+            }
+        }
+        if intToRemove > 2 {
+            var moreList = FinalSolutionProbably(originalList: originalList, groupSize: groupSize, intToRemove: intToRemove - 1).reverse()
+            for _ in (1...moreList.length) {
+                let newList = List<List<T>>(moreList.value)
+                newList?.next = returnList
+                returnList = newList
+                if moreList.next != nil {
+                    moreList = moreList.next!
+                }
+            }
+        }
+        return returnList!
     }
     
     private func baseLevelCombining(staticList: List, loopingList: List) -> List<List<T>> {
@@ -844,10 +850,8 @@ extension List {
         var returnList = List<List<T>>()
         
         while mutatableList.value != nil {
-            
             let mutaStaticList = List(mutatableList.value)
             mutaStaticList?.next = staticList.reverse()
-            
             let listList = List<List<T>>(mutaStaticList!.reverse())
             listList?.next = returnList
             returnList = listList
@@ -865,7 +869,6 @@ extension List {
         
         var mutatableList = list
         var groupElements = List()
-        
         for _ in (1...length - 1) {
             let newList = List(mutatableList.value)
             newList?.next = groupElements

@@ -7,32 +7,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7E0F92FC-7899-4A07-A07C-E7AFCB6213BD"
+            uuid = "503FE90B-B02D-4A84-BFB2-68F1B7718479"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "99SwiftProblems/Problems2ndTry/LinkedList2.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "822"
-            endingLineNumber = "822"
-            landmarkName = "combineHelper(originalList:groupSize:)"
+            startingLineNumber = "860"
+            endingLineNumber = "860"
+            landmarkName = "FinalSolutionProbably(originalList:groupSize:intToRemove:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B69A2CA4-B669-427E-B117-3DFC5B631A04"
+            uuid = "E20B7CF6-49A6-4379-B7F0-9A0E790DE401"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "99SwiftProblems/Problems2ndTry/LinkedList2.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "848"
-            endingLineNumber = "848"
-            landmarkName = "baseLevelCombining(staticList:loopingList:)"
+            startingLineNumber = "887"
+            endingLineNumber = "887"
+            landmarkName = "FinalSolutionProbably(originalList:groupSize:intToRemove:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
