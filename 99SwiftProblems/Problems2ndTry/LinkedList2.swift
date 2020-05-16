@@ -790,6 +790,14 @@ extension List {
     func combinations(group: Int) -> List<List<T>> {
         return FinalSolutionProbably(originalList: self, groupSize: group, intToRemove: group).reverse()
     }
+    //could I make a funtion that just moves down the list 1 by 1 and call itself group size times and just add the values as the function moves on?
+    // func test(group: Int) -> List {
+    // let list = List()
+    // if group > 1 {
+    // list = test(group - 1)
+    // }
+    // self = self.next
+    // }
     
     private func FinalSolutionProbably(originalList: List, groupSize: Int, intToRemove: Int) -> List<List<T>> {
         var mutatableList: List<T> = originalList
@@ -801,18 +809,10 @@ extension List {
             if intToRemove > 2 {
                 mutatableList = mutatableList.removeAt(position: intToRemove - 2).0!
             }
-            let staticList = grabLengthElementsFromList(length: groupSize, list: mutatableList)
-            let loopingList = mutatableList.split(atIndex: groupSize - 1).right
-            var baseLevelCombine = baseLevelCombining(staticList: staticList, loopingList: loopingList)
-            for _ in (1...baseLevelCombine.length) {
-                
-                let newList = List<List<T>>(baseLevelCombine.value)
-                newList?.next = returnList
-                returnList = newList
-                if baseLevelCombine.next != nil {
-                    baseLevelCombine = baseLevelCombine.next!
-                }
-            }
+            
+            let baseLevelList = baseLevelCombineSetup(groupSize: groupSize, listToSetup: mutatableList)
+            returnList = combineListsOfLists(listOne: returnList, listTwo: baseLevelList)
+            
             if intToRemove <= 2 {
                 if mutatableList.length == groupSize {
                     break
@@ -830,6 +830,11 @@ extension List {
                     someRandomList = someRandomList?.next!
                 }
             }
+            if intToRemove < groupSize {
+                let test = FinalSolutionProbably(originalList: mutatableList, groupSize: groupSize, intToRemove: intToRemove + 1)
+                returnList = combineListsOfLists(listOne: returnList, listTwo: test)
+                
+            }
         }
         if intToRemove > 2 {
             var moreList = FinalSolutionProbably(originalList: originalList, groupSize: groupSize, intToRemove: intToRemove - 1).reverse()
@@ -840,6 +845,38 @@ extension List {
                 if moreList.next != nil {
                     moreList = moreList.next!
                 }
+            }
+        }
+        return returnList!
+    }
+    
+//    private func test(intToRemove: Int, list: List, groupSize: Int) -> List<List<T>> {
+//        var mutatableList = list
+//        if intToRemove > 2 {
+//            mutatableList = mutatableList.removeAt(position: intToRemove - 2).0!
+//        }
+//        return baseLevelCombineSetup(groupSize: groupSize, listToSetup: mutatableList)
+//    }
+    
+    private func baseLevelCombineSetup(groupSize: Int, listToSetup: List) -> List<List<T>> {
+        var returnList = List<List<T>>()
+        let staticList = grabLengthElementsFromList(length: groupSize, list: listToSetup)
+        let loopingList = listToSetup.split(atIndex: groupSize - 1).right
+        let baseLevelCombine = baseLevelCombining(staticList: staticList, loopingList: loopingList)
+        
+        returnList = combineListsOfLists(listOne: returnList, listTwo: baseLevelCombine)
+        return returnList!.reverse()
+    }
+    
+    private func combineListsOfLists(listOne: List<List<T>>?, listTwo: List<List<T>>) ->List<List<T>> {
+        var returnList = listOne
+        var mutatableListTwo = listTwo
+        for _ in (1...mutatableListTwo.length) {
+            let newList = List<List<T>>(mutatableListTwo.value)
+            newList?.next = returnList
+            returnList = newList!
+            if mutatableListTwo.next != nil {
+                mutatableListTwo = mutatableListTwo.next!
             }
         }
         return returnList!

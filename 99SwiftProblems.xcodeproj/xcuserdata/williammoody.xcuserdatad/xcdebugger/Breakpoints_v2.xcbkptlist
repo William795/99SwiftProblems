@@ -7,31 +7,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "503FE90B-B02D-4A84-BFB2-68F1B7718479"
+            uuid = "CEBDBBF6-EEBC-4B7B-A731-64D35D152D4A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "99SwiftProblems/Problems2ndTry/LinkedList2.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "860"
-            endingLineNumber = "860"
-            landmarkName = "FinalSolutionProbably(originalList:groupSize:intToRemove:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E20B7CF6-49A6-4379-B7F0-9A0E790DE401"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "99SwiftProblems/Problems2ndTry/LinkedList2.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "887"
-            endingLineNumber = "887"
+            startingLineNumber = "819"
+            endingLineNumber = "819"
             landmarkName = "FinalSolutionProbably(originalList:groupSize:intToRemove:)"
             landmarkType = "7">
          </BreakpointContent>
