@@ -678,6 +678,12 @@ extension List {
         var loopCount = 0
         //while mutatableList has another value, loop
         while mutatableList.value != nil {
+            //add mutatableList value to insertedList
+            let newList = List(mutatableList.value)
+            newList?.next = insertedList
+            insertedList = newList
+            //increment loop count
+            loopCount += 1
             //if at index point
             if loopCount == index {
                 // add 'value' to insertedList
@@ -685,12 +691,6 @@ extension List {
                 newList?.next = insertedList
                 insertedList = newList
             }
-            //add mutatableList value to insertedList
-            let newList = List(mutatableList.value)
-            newList?.next = insertedList
-            insertedList = newList
-            //increment loop count
-            loopCount += 1
             // moves the mutatableList forward and breaks the loop in there is no next value
             if mutatableList.next != nil {
                 mutatableList = mutatableList.next!
@@ -788,7 +788,9 @@ extension List {
 //with just a few small changes it will work (says the slightly optimistic programmer who has felt this way for the last 5 hours of work)
 extension List {
     func combinations(group: Int) -> List<List<T>> {
-        return FinalSolutionProbably(originalList: self, groupSize: group, intToRemove: group).reverse()
+        
+        return okReallyTheFinalSolution(list: self, groupSize: group, loopLevel: group, staticValueList: nil )!.reverse()
+//        return FinalSolutionProbably(originalList: self, groupSize: group, intToRemove: group).reverse()
     }
     //could I make a funtion that just moves down the list 1 by 1 and call itself group size times and just add the values as the function moves on?
     // func test(group: Int) -> List {
@@ -914,4 +916,49 @@ extension List {
         }
         return groupElements!.reverse()
     }
+    
+    private func okReallyTheFinalSolution(list: List, groupSize: Int, loopLevel: Int, staticValueList: List?) -> List<List<T>>? {
+        var mutatableList = list
+        var returnList = List<List<T>>()
+        
+        var staticList = staticValueList
+        var loopCount = 1
+        for _ in 1...list.length {
+            
+            if loopLevel == groupSize {
+                staticList = List(mutatableList.value)!
+            } else if loopLevel > 1 {
+                staticList = staticValueList
+                staticList!.insertAt(index: staticList!.length, mutatableList.value)
+            }
+            
+            if loopLevel > 1 {
+                if mutatableList.next == nil {
+                    break
+                }
+                let listOfLists = okReallyTheFinalSolution(list: mutatableList.next!, groupSize: groupSize, loopLevel: loopLevel - 1, staticValueList: staticList!)
+                if listOfLists?.value != nil {
+                    returnList = combineListsOfLists(listOne: returnList, listTwo: listOfLists!)
+                }
+            } else {
+                let newList = List(mutatableList.value)
+                newList?.next = staticList
+                let newListOfLists = List<List<T>>(newList!.reverse())
+                newListOfLists?.next = returnList
+                returnList = newListOfLists
+            }
+            if mutatableList.next != nil {
+                mutatableList = mutatableList.next!
+                continue
+            }
+            break
+        }
+        
+        
+        return returnList
+    }
 }
+//take list and grab first value
+//call func again and grab second value
+//above will repeat untill group size has been met
+//bottom list increments to the end of list
