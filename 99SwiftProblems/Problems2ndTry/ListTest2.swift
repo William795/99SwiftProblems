@@ -16,7 +16,7 @@ class listTest {
     var nestedList = List<Any>(List<Any>(1, 1)!, 2, List<Any>(3, List<Any>(5, 8)!)!)
     var duplicateList = List("a", "a", "a", "a", "b", "c", "c", "a", "a", "d", "e", "e", "e", "e")
     let encodedList = List((4, "a"), (1, "b"), (2, "c"), (2, "a"), (1, "d"), (4, "e"))
-    let smallList = List(1, 2, 3, 4, 5, 6)
+    let listThree = List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
     
     static let shared = listTest()
     
@@ -232,17 +232,21 @@ class listTest {
     
     //P 26
     func printCombinationList() {
-        print("list 1")
-        let combinationList = smallList?.combinations(group: 2)
+        print("list 1*****************")
+        let combinationList = listThree?.combinations(group: 2)
         print(combinationList?.length as Any)
         combinationList?.printEmbeddedList()
-        print("list2")
-        let combinationList2 = smallList?.combinations(group: 3)
+        print("list2******************")
+        let combinationList2 = listThree?.combinations(group: 3)
         print(combinationList2?.length as Any)
         combinationList2?.printEmbeddedList()
-        print("list3")
-        let combinationList3 = smallList?.combinations(group: 4)
+        print("list3 ****************")
+        let combinationList3 = listThree?.combinations(group: 4)
         print(combinationList3?.length as Any)
         combinationList3?.printEmbeddedList()
+        print("list4 ****************")
+        let combinationList4 = listThree?.combinations(group: 5)
+        print(combinationList4?.length as Any)
+        combinationList4?.printEmbeddedList()
     }
 }

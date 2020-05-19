@@ -784,92 +784,72 @@ extension List {
 //very easy, tho I did need to rework P 23 a little
 
 //P 26 Generate the combinations of K distinct objects chosen from the N elements of a linked list.
-//This is sooooooooooooo close it does lists of 2 and 3, but in a 1-6 list of 4, it misses 1,3,5,6
-//with just a few small changes it will work (says the slightly optimistic programmer who has felt this way for the last 5 hours of work)
+//  List("a", "b", "c").combinations(2) -> List(List("a", "b"), List("a", "c"), List("b", "c"))
 extension List {
     func combinations(group: Int) -> List<List<T>> {
-        
-        return okReallyTheFinalSolution(list: self, groupSize: group, loopLevel: group, staticValueList: nil )!.reverse()
-//        return FinalSolutionProbably(originalList: self, groupSize: group, intToRemove: group).reverse()
+        // built all funtionallity in a seperate private function
+        // Also reversed to get it in the proper order
+        return generateBinomialCoeffecient(list: self, groupSize: group, loopLevel: group, staticValueList: nil )!.reverse()
     }
-    //could I make a funtion that just moves down the list 1 by 1 and call itself group size times and just add the values as the function moves on?
-    // func test(group: Int) -> List {
-    // let list = List()
-    // if group > 1 {
-    // list = test(group - 1)
-    // }
-    // self = self.next
-    // }
-    
-    private func FinalSolutionProbably(originalList: List, groupSize: Int, intToRemove: Int) -> List<List<T>> {
-        var mutatableList: List<T> = originalList
+    // seperate function for ease of information manipulation
+    private func generateBinomialCoeffecient(list: List, groupSize: Int, loopLevel: Int, staticValueList: List?) -> List<List<T>>? {
+        // variables for
+        // mutatableList (main list i'm working with)
+        var mutatableList = list
+        // returnList (list that i'm returning)
         var returnList = List<List<T>>()
-        var someRandomList = originalList.next
-        
-        while mutatableList.next != nil {
-            
-            if intToRemove > 2 {
-                mutatableList = mutatableList.removeAt(position: intToRemove - 2).0!
+        // staticList (list that holds the 'static' variables gathered from recusion )
+        var staticList = staticValueList
+        // loop through the main list length to ensure every value goes through the process
+        for _ in 1...list.length {
+            // check to see if it is the first iteration of the function
+            if loopLevel == groupSize {
+                // setting staticList to a list holding the current mutatableList.value
+                staticList = List(mutatableList.value)!
+                // check for wether the current function iteration is not the first or last
+            } else if loopLevel > 1 {
+                //reset staticList
+                staticList = staticValueList?.reverse()
+                // set staticList's last value to mutatableList.value
+                let newList = List(mutatableList.value)
+                newList?.next = staticList
+                staticList = newList?.reverse()
             }
-            
-            let baseLevelList = baseLevelCombineSetup(groupSize: groupSize, listToSetup: mutatableList)
-            returnList = combineListsOfLists(listOne: returnList, listTwo: baseLevelList)
-            
-            if intToRemove <= 2 {
-                if mutatableList.length == groupSize {
+            // check to make sure the current function iteration is not the last
+            if loopLevel > 1 {
+                // safety for crashing
+                if mutatableList.next == nil {
                     break
-                } else {
-                    mutatableList = mutatableList.next!
-                    continue
                 }
-            }
-            if mutatableList.length == groupSize {
-                if someRandomList?.length == groupSize {
-                    print("loop broke")
-                    break
-                } else {
-                    mutatableList = someRandomList!
-                    someRandomList = someRandomList?.next!
+                // call function again with an updated list, loopLevel, and staticList
+                let listOfLists = generateBinomialCoeffecient(list: mutatableList.next!, groupSize: groupSize, loopLevel: loopLevel - 1, staticValueList: staticList!)?.reverse()
+                // check for weather the above call returned somthing
+                if listOfLists?.value != nil {
+                    // if so add the new items to the returnList
+                    returnList = combineListsOfLists(listOne: returnList, listTwo: listOfLists!)
                 }
+            } else {
+                // if the current function iteration is the last one...
+                // make a list from mutatableList.value and the staticList
+                let newList = List(mutatableList.value)
+                newList?.next = staticList?.reverse()
+                // make a list of lists from newList list and add it to the returnList
+                let newListOfLists = List<List<T>>(newList!.reverse())
+                newListOfLists?.next = returnList
+                returnList = newListOfLists
             }
-            if intToRemove < groupSize {
-                let test = FinalSolutionProbably(originalList: mutatableList, groupSize: groupSize, intToRemove: intToRemove + 1)
-                returnList = combineListsOfLists(listOne: returnList, listTwo: test)
-                
+            // increment the mutatableList forward 1
+            if mutatableList.next != nil {
+                mutatableList = mutatableList.next!
+                continue
             }
+            break
         }
-        if intToRemove > 2 {
-            var moreList = FinalSolutionProbably(originalList: originalList, groupSize: groupSize, intToRemove: intToRemove - 1).reverse()
-            for _ in (1...moreList.length) {
-                let newList = List<List<T>>(moreList.value)
-                newList?.next = returnList
-                returnList = newList
-                if moreList.next != nil {
-                    moreList = moreList.next!
-                }
-            }
-        }
-        return returnList!
+        return returnList
     }
     
-//    private func test(intToRemove: Int, list: List, groupSize: Int) -> List<List<T>> {
-//        var mutatableList = list
-//        if intToRemove > 2 {
-//            mutatableList = mutatableList.removeAt(position: intToRemove - 2).0!
-//        }
-//        return baseLevelCombineSetup(groupSize: groupSize, listToSetup: mutatableList)
-//    }
-    
-    private func baseLevelCombineSetup(groupSize: Int, listToSetup: List) -> List<List<T>> {
-        var returnList = List<List<T>>()
-        let staticList = grabLengthElementsFromList(length: groupSize, list: listToSetup)
-        let loopingList = listToSetup.split(atIndex: groupSize - 1).right
-        let baseLevelCombine = baseLevelCombining(staticList: staticList, loopingList: loopingList)
-        
-        returnList = combineListsOfLists(listOne: returnList, listTwo: baseLevelCombine)
-        return returnList!.reverse()
-    }
-    
+    // a function made when I was combining Lists of Lists in like 4+ places. Just keeping it because i'm using it once in the above funtion
+    // function that does what it's name implies
     private func combineListsOfLists(listOne: List<List<T>>?, listTwo: List<List<T>>) ->List<List<T>> {
         var returnList = listOne
         var mutatableListTwo = listTwo
@@ -883,82 +863,12 @@ extension List {
         }
         return returnList!
     }
-    
-    private func baseLevelCombining(staticList: List, loopingList: List) -> List<List<T>> {
-        var mutatableList: List<T> = loopingList
-        var returnList = List<List<T>>()
-        
-        while mutatableList.value != nil {
-            let mutaStaticList = List(mutatableList.value)
-            mutaStaticList?.next = staticList.reverse()
-            let listList = List<List<T>>(mutaStaticList!.reverse())
-            listList?.next = returnList
-            returnList = listList
-            
-            if mutatableList.next != nil {
-                mutatableList = mutatableList.next!
-                continue
-            }
-            break
-        }
-        return returnList!.reverse()
-    }
-    
-    private func grabLengthElementsFromList(length: Int, list: List) -> List {
-        
-        var mutatableList = list
-        var groupElements = List()
-        for _ in (1...length - 1) {
-            let newList = List(mutatableList.value)
-            newList?.next = groupElements
-            groupElements = newList
-            mutatableList = mutatableList.next!
-        }
-        return groupElements!.reverse()
-    }
-    
-    private func okReallyTheFinalSolution(list: List, groupSize: Int, loopLevel: Int, staticValueList: List?) -> List<List<T>>? {
-        var mutatableList = list
-        var returnList = List<List<T>>()
-        
-        var staticList = staticValueList
-        var loopCount = 1
-        for _ in 1...list.length {
-            
-            if loopLevel == groupSize {
-                staticList = List(mutatableList.value)!
-            } else if loopLevel > 1 {
-                staticList = staticValueList
-                staticList!.insertAt(index: staticList!.length, mutatableList.value)
-            }
-            
-            if loopLevel > 1 {
-                if mutatableList.next == nil {
-                    break
-                }
-                let listOfLists = okReallyTheFinalSolution(list: mutatableList.next!, groupSize: groupSize, loopLevel: loopLevel - 1, staticValueList: staticList!)
-                if listOfLists?.value != nil {
-                    returnList = combineListsOfLists(listOne: returnList, listTwo: listOfLists!)
-                }
-            } else {
-                let newList = List(mutatableList.value)
-                newList?.next = staticList
-                let newListOfLists = List<List<T>>(newList!.reverse())
-                newListOfLists?.next = returnList
-                returnList = newListOfLists
-            }
-            if mutatableList.next != nil {
-                mutatableList = mutatableList.next!
-                continue
-            }
-            break
-        }
-        
-        
-        return returnList
-    }
 }
-//take list and grab first value
-//call func again and grab second value
-//above will repeat untill group size has been met
-//bottom list increments to the end of list
+// OHHH Boy this problem was a doozy of a problem
+// Took 7 days of coding for 2-3 hours each to solve for a total of somewhere around 15+ hours in total
+// This solution was the cullmination of 4-5 different failed functions, 3 different complete rewrites, deciding to scrap almost everything, a new helper function (printEmbeddedList), and more than 200 lines of deleted code.
+// The main thing that was giving me issues was figuring our how to properly go through the list.
+// I quickly put together a solution that would solve groups of 2, but I did it with basic loops and in order to do a group of 3 I would need to throw everything I had into another loop but then I would need another loop for groups of 4 and so on...
+// I quickly came to the realization that I needed to loop things based off of the group number and threw together another solution that could solve 2's and 3's but would miss a few things in 4's onwords
+// For example in a list of 1,2,3,4,5,6 I would get everything except 1,3,5,6.
+//So then I decided to go for recursion (which I really should have done from the start but I didn't because I don't have much experiance with recursion in general and feel much more comfortable with loops and stuff) and came to the solution you see above over 2 1/2 days
