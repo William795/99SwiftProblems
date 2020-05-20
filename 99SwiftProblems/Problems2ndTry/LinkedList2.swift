@@ -872,3 +872,87 @@ extension List {
 // I quickly came to the realization that I needed to loop things based off of the group number and threw together another solution that could solve 2's and 3's but would miss a few things in 4's onwords
 // For example in a list of 1,2,3,4,5,6 I would get everything except 1,3,5,6.
 //So then I decided to go for recursion (which I really should have done from the start but I didn't because I don't have much experiance with recursion in general and feel much more comfortable with loops and stuff) and came to the solution you see above over 2 1/2 days
+
+//P 26B Generate the permutations of K distinct objects chosen from the N elements of a linked list.
+// List("a", "b", "c").permutations(2) -> List(List("a", "b"), List("a", "c"), List("b", "a"), List("b", "c"), List("c", "a"), List("c", "b"))
+extension List {
+    func permutations(group: Int) -> List<List<T>> {
+        
+        return generateAllPermutationsOf(list: self, groupSize: group, loopLevel: group, staticValueList: nil)!.reverse()
+    }
+    
+    private func generateAllPermutationsOf(list: List, groupSize: Int, loopLevel: Int, staticValueList: List?) -> List<List<T>>? {
+           // variables for
+           // mutatableList (main list i'm working with)
+           var mutatableList = list
+           // returnList (list that i'm returning)
+           var returnList = List<List<T>>()
+           // staticList (list that holds the 'static' variables gathered from recusion )
+           var staticList = staticValueList
+           // loop through the main list length to ensure every value goes through the process
+           for _ in 1...list.length {
+               // check to see if it is the first iteration of the function
+               if loopLevel == groupSize {
+                   // setting staticList to a list holding the current mutatableList.value
+                   staticList = List(mutatableList.value)!
+                   // check for wether the current function iteration is not the first or last
+               } else if loopLevel > 1 {
+                   //reset staticList
+                   staticList = staticValueList?.reverse()
+                   // set staticList's last value to mutatableList.value
+                   let newList = List(mutatableList.value)
+                   newList?.next = staticList
+                   staticList = newList?.reverse()
+               }
+               // check to make sure the current function iteration is not the last
+               if loopLevel > 1 {
+                   // safety for crashing
+                   if mutatableList.next == nil {
+                       break
+                   }
+                   // call function again with an updated list, loopLevel, and staticList
+                   let listOfLists = generateAllPermutationsOf(list: mutatableList.next!, groupSize: groupSize, loopLevel: loopLevel - 1, staticValueList: staticList!)?.reverse()
+                   // check for weather the above call returned somthing
+                   if listOfLists?.value != nil {
+                       // if so add the new items to the returnList
+                       returnList = combineListsOfLists2(listOne: returnList, listTwo: listOfLists!)
+                   }
+               } else {
+                   // if the current function iteration is the last one...
+                   // make a list from mutatableList.value and the staticList
+                   let newList = List(mutatableList.value)
+                   newList?.next = staticList?.reverse()
+                   // make a list of lists from newList list and add it to the returnList
+                   let newListOfLists = List<List<T>>(newList!.reverse())
+                   newListOfLists?.next = returnList
+                   returnList = newListOfLists
+               }
+               // rotate the mutatableList forward 1
+               if mutatableList.next != nil {
+                mutatableList = mutatableList.rotate(amount: 1)
+                   continue
+               }
+               break
+           }
+           return returnList
+       }
+       
+       private func combineListsOfLists2(listOne: List<List<T>>?, listTwo: List<List<T>>) ->List<List<T>> {
+           var returnList = listOne
+           var mutatableListTwo = listTwo
+           for _ in (1...mutatableListTwo.length) {
+               let newList = List<List<T>>(mutatableListTwo.value)
+               newList?.next = returnList
+               returnList = newList!
+               if mutatableListTwo.next != nil {
+                   mutatableListTwo = mutatableListTwo.next!
+               }
+           }
+           return returnList!
+       }
+}
+// This solution is almost entirely copy/pasted from P26 the only thing I changed was how I was incrementing my way through the list,
+// In P26 I didn't want the same values to end up in the same list twice e.g.(getting 1,2,3 and 2,1,3) so I just threw mutatableList = mutatableList.next
+// In P26B that is exactly what I want so I just replaced the mutatableList = mutatableList.next with mutatableList = mutatableList.rotate(amount: 1) (.rotate from P19 (rotate a list X placesto the right))
+// The website says P(12,3) = 660 but a calculator online (and the solution above) gets 1320 so i'm thinking that the guy who made these problems just got his math wrong and am sticking with the above solution
+// Due to being able to copy/paste most(just about all) the the solution made this one quite simple and quick, which is a nice break from the brick wall I was banging my head into most of last week

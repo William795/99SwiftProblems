@@ -17,6 +17,7 @@ class listTest {
     var duplicateList = List("a", "a", "a", "a", "b", "c", "c", "a", "a", "d", "e", "e", "e", "e")
     let encodedList = List((4, "a"), (1, "b"), (2, "c"), (2, "a"), (1, "d"), (4, "e"))
     let listThree = List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+    let listFour = List(1, 2, 3, 4, 5)
     
     static let shared = listTest()
     
@@ -249,4 +250,27 @@ class listTest {
         print(combinationList4?.length as Any)
         combinationList4?.printEmbeddedList()
     }
+    
+    // P 26B
+    func printPermutations(){
+        print("list 1*****************")
+        let combinationList = listThree?.permutations(group: 2)
+        print(combinationList?.length as Any)
+//        combinationList?.printEmbeddedList()
+        print("list2******************")
+        let combinationList2 = listThree?.permutations(group: 3)
+        print(combinationList2?.length as Any)
+//        combinationList2?.printEmbeddedList()
+        print("list3******************")
+        let combinationList3 = listThree?.permutations(group: 4)
+        print(combinationList3?.length as Any)
+//        combinationList3?.printEmbeddedList()
+        print("list4******************")
+        let combinationList4 = listThree?.permutations(group: 5)
+        print(combinationList4?.length as Any)
+//        combinationList4?.printEmbeddedList()
+        
+    }
 }
+
+

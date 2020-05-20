@@ -44,7 +44,8 @@ class MainViewController: UIViewController {
 //        listTest.shared.extractRandomElements()
 //        listTest.shared.printLotto()
 //        listTest.shared.printPermutationList()
-        listTest.shared.printCombinationList()
+//        listTest.shared.printCombinationList()
+        listTest.shared.printPermutations()
     }
     /*
     // MARK: - Navigation
