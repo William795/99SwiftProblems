@@ -956,3 +956,27 @@ extension List {
 // In P26B that is exactly what I want so I just replaced the mutatableList = mutatableList.next with mutatableList = mutatableList.rotate(amount: 1) (.rotate from P19 (rotate a list X placesto the right))
 // The website says P(12,3) = 660 but a calculator online (and the solution above) gets 1320 so i'm thinking that the guy who made these problems just got his math wrong and am sticking with the above solution
 // Due to being able to copy/paste most(just about all) the the solution made this one quite simple and quick, which is a nice break from the brick wall I was banging my head into most of last week
+
+// P 27 Group the elements of a set into disjoint subsets.
+// group 9 people to work in 3 disjoint subgroups of 2, 3 and 4 persons
+// no permutations of group members so (Aldo, Beat) == (Beat, Aldo) but ((Aldo, Beat), (Carla, David)...) != ((Carla, David), (Aldo, Beat)...)
+extension List {
+    func group3() -> List<List<List<T>>> {
+        let returnList = List<List<List<T>>>()
+        
+        // need to group them in 2,3,4 pairs
+        // Essentially I need to make every permutaion of the full list
+        // the main problem I can think of is
+        // 1: repeat pairs - looping through as I did in P26B and just seperating the list out in 2,3,4 segments will result in having both (1,2)(3,4,5)(6,7,8,9) and (2,1)(3,4,5)(6,7,8,9), which is the same end list
+        
+        //if I essentially do a combinations(2), save the other 7 digits do a Combinations(3), and save the last 4 digits would it work?
+        //conbinations(group) moves forward through the list so I wouldn't get any (1,2)/ (2,1) or (1,2,3)/(3,1,2) situations, and it would loop through the full list (in theory) giving every combination of 2,3,4
+        
+        //to accomplish this I need
+        // code to combination(2) (maybe in its own function)
+        // code to combination(3) (probably in its own function) and return the list of 3 and remaining list of 4
+        // figure out how to put it all together
+        
+        return returnList!
+    }
+}
