@@ -960,23 +960,120 @@ extension List {
 // P 27 Group the elements of a set into disjoint subsets.
 // group 9 people to work in 3 disjoint subgroups of 2, 3 and 4 persons
 // no permutations of group members so (Aldo, Beat) == (Beat, Aldo) but ((Aldo, Beat), (Carla, David)...) != ((Carla, David), (Aldo, Beat)...)
+// MARK: - TODO make this at least look a little nicer
+// could probably remove more than 5 variables just due to redundancy in the overall code
+// Also making a function to do the looping with recursion instead of a bajillion for in loops
 extension List {
     func group3() -> List<List<List<T>>> {
-        let returnList = List<List<List<T>>>()
-        
-        // need to group them in 2,3,4 pairs
-        // Essentially I need to make every permutaion of the full list
-        // the main problem I can think of is
-        // 1: repeat pairs - looping through as I did in P26B and just seperating the list out in 2,3,4 segments will result in having both (1,2)(3,4,5)(6,7,8,9) and (2,1)(3,4,5)(6,7,8,9), which is the same end list
-        
-        //if I essentially do a combinations(2), save the other 7 digits do a Combinations(3), and save the last 4 digits would it work?
-        //conbinations(group) moves forward through the list so I wouldn't get any (1,2)/ (2,1) or (1,2,3)/(3,1,2) situations, and it would loop through the full list (in theory) giving every combination of 2,3,4
-        
-        //to accomplish this I need
-        // code to combination(2) (maybe in its own function)
-        // code to combination(3) (probably in its own function) and return the list of 3 and remaining list of 4
-        // figure out how to put it all together
-        
-        return returnList!
+
+        var returnList = List<List<List<T>>>()
+        var mutatableList = self
+        // loop counter for keeping track of where I am in the main list
+        var loopCount = 0
+        // loop for getting the first value of group 2
+        for _ in 1...self.length {
+            //using List.removeAt(position) to seperate the values that I am putting into the 2 and 3 groups while keeping the rest of the list intact for making my group of 4
+            let removedTouple = self.removeAt(position: loopCount)
+            // the part of the list im saving
+            let removedToupleList = removedTouple.0
+            //mostly just a timer for how long to keep the loop going (tho I am using this value to make group 2)
+            var secondMutatableList = mutatableList.next
+            //setting aside the first part of Group 2
+            let firstTwoValuesList = List(removedTouple.1!)
+            // loop counter for keeping track of where I am in the subList
+            var loopCount2 = 0
+            // loop for getting the second value of group 2 (and calls the function that does the rest)
+            for _ in 1...self.length {
+                // same touple as above (add the loop counts together to ensure no permutations ie. 1,2 and 2,1)
+                let removedTouple2 = removedToupleList?.removeAt(position: loopCount2 + loopCount)
+                //setting aside the second value of group 2
+                let secondValue = List(secondMutatableList!.value)
+                // completing group 2
+                firstTwoValuesList?.next = secondValue
+                // calls the helper function that does the rest of the work and out puts all the group 3's and group 4's that can go with the current group 2 pair
+                var listOfListOfList = setUpSubGroups(subGroupTwo: firstTwoValuesList!, restOfGroup: (removedTouple2?.0)!)
+                //adds all group 2,3,4 lists to the return list
+                for _ in 1...listOfListOfList.length {
+                    let newList = List<List<List<T>>>(listOfListOfList.value)
+                    newList?.next = returnList
+                    returnList = newList
+                    if listOfListOfList.next != nil {
+                        listOfListOfList = listOfListOfList.next!
+                    }
+                }
+                //loop break for when secondMutatableList is empty
+                if secondMutatableList?.next != nil {
+                    secondMutatableList = secondMutatableList?.next
+                    loopCount2 += 1
+                    continue
+                }
+                break
+            }
+            //loop break for when mutatableList is empty
+            if mutatableList.next?.next != nil {
+                loopCount += 1
+                mutatableList = mutatableList.next!
+                continue
+            }
+            break
+        }
+        return returnList!.reverse()
+    }
+    
+    private func setUpSubGroups(subGroupTwo: List, restOfGroup: List) -> List<List<List<T>>> {
+        // all the loops and variables are mostly the same from the above bit with group 2 just with an extra loop to get group 3
+        var returnList = List<List<List<T>>>()
+        var loopCounter1 = 0
+        var mutatableList = restOfGroup
+        for _ in 1...restOfGroup.length {
+            var secondMutatableList = mutatableList.next
+            let removeAtTouple = restOfGroup.removeAt(position: loopCounter1)
+            let removeToupleList = removeAtTouple.0
+            let firstValue = removeAtTouple.1
+            var loopCounter2 = 0
+            
+            for _ in 1...removeToupleList!.length {
+                var thirdMutatableList = secondMutatableList?.next
+                let removedAtTouple2 = removeToupleList?.removeAt(position: loopCounter2 + loopCounter1)
+                let removeToupleList2 = removedAtTouple2?.0
+                let secondValue = secondMutatableList!.value
+                var loopCounter3 = 0
+                
+                for _ in 1...removeToupleList2!.length {
+                    let removedAtTouple3 = removeToupleList2?.removeAt(position: loopCounter3 + loopCounter1 + loopCounter2)
+                    let groupOfFour = removedAtTouple3?.0
+                    let thirdValue = thirdMutatableList!.value
+                    let groupOfThree = List(firstValue!, secondValue, thirdValue)
+                    //set up the group 2,3,4 list for the current iteration
+                    let returnListValue = List<List<T>>(subGroupTwo, groupOfThree!, groupOfFour!)
+                    //add it to the return list
+                    let returnListSetUp = List<List<List<T>>>(returnListValue!)
+                    returnListSetUp?.next = returnList
+                    returnList = returnListSetUp
+                    if thirdMutatableList?.next != nil {
+                        loopCounter3 += 1
+                        thirdMutatableList = thirdMutatableList?.next
+                        continue
+                    }
+                    break
+                }
+                if secondMutatableList?.next?.next != nil {
+                    secondMutatableList = secondMutatableList?.next
+                    loopCounter2 += 1
+                    continue
+                }
+                break
+            }
+            if mutatableList.next?.next?.next != nil {
+                mutatableList = mutatableList.next!
+                loopCounter1 += 1
+                continue
+            }
+            break
+        }
+        return returnList!.reverse()
     }
 }
+//Overall its not very pretty or efficent, if I come back to this problem I would like to solve it in such a way that it could take in a specified number of subgroups (and their size) and output a list containing the possibillities.
+// I would at least remove like 4 for in loops and see about getting rid of all those if statements
+// there is alot of copy/pasted code here that can be cleaned up, but this problem only took 1 1/2 days instead of more than a week so i'm fairly happy

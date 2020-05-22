@@ -18,6 +18,8 @@ class listTest {
     let encodedList = List((4, "a"), (1, "b"), (2, "c"), (2, "a"), (1, "d"), (4, "e"))
     let listThree = List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
     let listFour = List(1, 2, 3, 4, 5)
+    let listOfNames = List("Aldo", "Beat", "Carla", "David", "Evi", "Flip", "Gary", "Hugo", "Ida")
+
     
     static let shared = listTest()
     
@@ -270,6 +272,12 @@ class listTest {
         print(combinationList4?.length as Any)
 //        combinationList4?.printEmbeddedList()
         
+    }
+    
+    func printGroup3() {
+        let group3 = listOfNames?.group3()
+        print(group3?.length as Any)
+        group3?.value.printEmbeddedList()
     }
 }
 
