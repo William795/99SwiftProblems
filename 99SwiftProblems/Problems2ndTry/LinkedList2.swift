@@ -1077,3 +1077,4 @@ extension List {
 //Overall its not very pretty or efficent, if I come back to this problem I would like to solve it in such a way that it could take in a specified number of subgroups (and their size) and output a list containing the possibillities.
 // I would at least remove like 4 for in loops and see about getting rid of all those if statements
 // there is alot of copy/pasted code here that can be cleaned up, but this problem only took 1 1/2 days instead of more than a week so i'm fairly happy
+// test commit
