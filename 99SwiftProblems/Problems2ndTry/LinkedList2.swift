@@ -960,9 +960,9 @@ extension List {
 // P 27 Group the elements of a set into disjoint subsets.
 // group 9 people to work in 3 disjoint subgroups of 2, 3 and 4 persons
 // no permutations of group members so (Aldo, Beat) == (Beat, Aldo) but ((Aldo, Beat), (Carla, David)...) != ((Carla, David), (Aldo, Beat)...)
-// MARK: - TODO make this at least look a little nicer
-// could probably remove more than 5 variables just due to redundancy in the overall code
-// Also making a function to do the looping with recursion instead of a bajillion for in loops
+
+// TODO make this at least look a little nicer
+
 extension List {
     func group3() -> List<List<List<T>>> {
 
@@ -1074,7 +1074,24 @@ extension List {
         return returnList!.reverse()
     }
 }
-//Overall its not very pretty or efficent, if I come back to this problem I would like to solve it in such a way that it could take in a specified number of subgroups (and their size) and output a list containing the possibillities.
-// I would at least remove like 4 for in loops and see about getting rid of all those if statements
+//Overall its not very pretty or efficent
 // there is alot of copy/pasted code here that can be cleaned up, but this problem only took 1 1/2 days instead of more than a week so i'm fairly happy
-// test commit
+
+// P27B Group the elements of a set into disjoint subsets - Part 2
+// allow the ability to specify the group sizes
+// list.group(List(2, 2, 5))
+// List(List(List("Aldo", "Beat"), List("Carla", "David"), List("Evi", "Flip", "Gary", "Hugo", "Ida")), ...)
+
+extension List {
+    func group(groups: List<Int>) -> List<List<List<T>>> {
+        var returnList = List<List<List<T>>>()
+        
+        // To solve this I'm thinking that a modified version of P 26 should work
+        // just add some functionallity to keep the entire list as I go through and it should be done (really should have done that in P27)
+        // make a func based on Combinations
+        // call said func with groups based on the groups list
+        //throw the results together and it should be done
+        
+        return returnList!
+    }
+}
