@@ -7,16 +7,128 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F5F64773-A080-4E68-9E13-071D55142CED"
+            uuid = "63E2F5EE-E722-4904-9820-275DBEB34DDF"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "99SwiftProblems/Problems2ndTry/LinkedList2.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "818"
-            endingLineNumber = "818"
-            landmarkName = "generateBinomialCoeffecient(list:groupSize:loopLevel:staticValueList:)"
+            startingLineNumber = "1121"
+            endingLineNumber = "1121"
+            landmarkName = "generateBinomielCoeffecientOfSubSet(group:loopLevel:list:staticValueList:groupSubSetList:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D8399F74-A8D1-40D2-A80B-B0AE09DA9AEB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "99SwiftProblems/Problems2ndTry/LinkedList2.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1140"
+            endingLineNumber = "1140"
+            landmarkName = "generateBinomielCoeffecientOfSubSet(group:loopLevel:list:staticValueList:groupSubSetList:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "51619300-71B0-4F62-B581-7DC668D3F90F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "99SwiftProblems/Problems2ndTry/LinkedList2.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1155"
+            endingLineNumber = "1155"
+            landmarkName = "generateBinomielCoeffecientOfSubSet(group:loopLevel:list:staticValueList:groupSubSetList:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "86BE584E-495D-4F77-B746-CA792CCC07A5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "99SwiftProblems/Problems2ndTry/LinkedList2.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1162"
+            endingLineNumber = "1162"
+            landmarkName = "generateBinomielCoeffecientOfSubSet(group:loopLevel:list:staticValueList:groupSubSetList:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "86BE584E-495D-4F77-B746-CA792CCC07A5 - f077ece70452662f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "_9SwiftProblems.List.(generateBinomielCoeffecientOfSubSet in _3B8C033A1A879015B7CF11CE8B0B03FA)(group: _9SwiftProblems.List&lt;Swift.Int&gt;, loopLevel: Swift.Int, list: _9SwiftProblems.List&lt;A&gt;, staticValueList: Swift.Optional&lt;_9SwiftProblems.List&lt;A&gt;&gt;, groupSubSetList: Swift.Optional&lt;_9SwiftProblems.List&lt;_9SwiftProblems.List&lt;A&gt;&gt;&gt;) -&gt; Swift.Optional&lt;_9SwiftProblems.List&lt;_9SwiftProblems.List&lt;_9SwiftProblems.List&lt;A&gt;&gt;&gt;&gt;"
+                  moduleName = "99SwiftProblems"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/williammoody/Desktop/Programming%20Projects/Apps/Solo%20projects/99SwiftProblems/99SwiftProblems/Problems2ndTry/LinkedList2.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1163"
+                  endingLineNumber = "1163"
+                  offsetFromSymbolStart = "7619">
+               </Location>
+               <Location
+                  uuid = "86BE584E-495D-4F77-B746-CA792CCC07A5 - f077ece70452662f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "_9SwiftProblems.List.(generateBinomielCoeffecientOfSubSet in _3B8C033A1A879015B7CF11CE8B0B03FA)(group: _9SwiftProblems.List&lt;Swift.Int&gt;, loopLevel: Swift.Int, list: _9SwiftProblems.List&lt;A&gt;, staticValueList: Swift.Optional&lt;_9SwiftProblems.List&lt;A&gt;&gt;, groupSubSetList: Swift.Optional&lt;_9SwiftProblems.List&lt;_9SwiftProblems.List&lt;A&gt;&gt;&gt;) -&gt; Swift.Optional&lt;_9SwiftProblems.List&lt;_9SwiftProblems.List&lt;_9SwiftProblems.List&lt;A&gt;&gt;&gt;&gt;"
+                  moduleName = "99SwiftProblems"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/williammoody/Desktop/Programming%20Projects/Apps/Solo%20projects/99SwiftProblems/99SwiftProblems/Problems2ndTry/LinkedList2.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1163"
+                  endingLineNumber = "1163"
+                  offsetFromSymbolStart = "9123">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2E64BA75-1A28-494E-ACD0-1F8602114FC2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "99SwiftProblems/Problems2ndTry/LinkedList2.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1130"
+            endingLineNumber = "1130"
+            landmarkName = "generateBinomielCoeffecientOfSubSet(group:loopLevel:list:staticValueList:groupSubSetList:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "32FB48C1-B297-49C8-B93B-75D2BB8D3A80"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "99SwiftProblems/Problems2ndTry/LinkedList2.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1146"
+            endingLineNumber = "1146"
+            landmarkName = "generateBinomielCoeffecientOfSubSet(group:loopLevel:list:staticValueList:groupSubSetList:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

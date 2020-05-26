@@ -1082,9 +1082,23 @@ extension List {
 // list.group(List(2, 2, 5))
 // List(List(List("Aldo", "Beat"), List("Carla", "David"), List("Evi", "Flip", "Gary", "Hugo", "Ida")), ...)
 
+// This solution will focus on groups that equal 9
+// I may do a 27C at some point which will be able to incorperate groups of any size and length
 extension List {
-    func group(groups: List<Int>) -> List<List<List<T>>> {
+    func group(groups: List<Int>) -> List<List<List<T>>>? {
         var returnList = List<List<List<T>>>()
+        var mutatableGroups = groups
+        var groupValue = groups.value
+        // first off I need to make sure the Ints in groups add up to 9
+        while mutatableGroups.next != nil {
+            mutatableGroups = mutatableGroups.next!
+            groupValue += mutatableGroups.value
+        }
+        if groupValue != 9 {
+            return nil
+        }
+        
+        returnList = generateBinomielCoeffecientOfSubSet(group: groups, loopLevel: groups.value, list: self, staticValueList: nil, groupSubSetList: nil)
         
         // To solve this I'm thinking that a modified version of P 26 should work
         // just add some functionallity to keep the entire list as I go through and it should be done (really should have done that in P27)
@@ -1094,4 +1108,74 @@ extension List {
         
         return returnList!
     }
+    
+    private func generateBinomielCoeffecientOfSubSet(group: List<Int>, loopLevel: Int, list: List, staticValueList: List?, groupSubSetList: List<List<T>>?) -> List<List<List<T>>>? {
+        var mutatableList = list
+        var returnList = List<List<List<T>>>()
+        var loopCounter = 0
+        
+        var staticList = staticValueList
+        // loop through the main list length to ensure every value goes through the process
+        for _ in 1...list.length {
+            let mutatableListTouple = mutatableList.removeAt(position: 0)
+            // check to see if it is the first iteration of the function
+            
+            if loopLevel == group.value {
+                // setting staticList to a list holding the current mutatableList.value
+                staticList = List(mutatableListTouple.1!)
+                // check for wether the current function iteration is not the first or last
+            } else if loopLevel > 1 {
+                //reset staticList
+                staticList = staticValueList?.reverse()
+                // set staticList's last value to mutatableList.value
+                let newList = List(mutatableListTouple.1!)
+                newList?.next = staticList
+                staticList = newList?.reverse()
+            }
+            // check to make sure the current function iteration is not the last
+            if loopLevel > 1 {
+                // safety for crashing
+//                if mutatableList.next == nil {
+//                    break
+//                }
+                // call function again with an updated list, loopLevel, and staticList
+                let listOfListsOfLists = generateBinomielCoeffecientOfSubSet(group: group, loopLevel: loopLevel - 1, list: mutatableListTouple.0!, staticValueList: staticList, groupSubSetList: groupSubSetList)
+                listOfListsOfLists?.next = returnList
+                returnList = listOfListsOfLists
+            } else {
+                // newlist = to value taken from removeAt()
+                let newList = List(mutatableListTouple.1!)
+                // append staticList to newList
+                newList?.next = staticList?.reverse()
+                // setting up groupSubSetList for recursion
+                let newListOfLists = List<List<T>>(newList!.reverse())
+                newListOfLists?.next = groupSubSetList
+                // check to see if i'm at the last 2 values of the original group list
+                if group.length > 2 {
+                    // if not then increment group forward and set groupSubSetList to all group values before ie... in a group list of 2,3,4 this calls the function again holding the (1,2) and parsing through the (3...9) with a group of 3 this time
+                    let newListOfListOfLists = generateBinomielCoeffecientOfSubSet(group: group.next!, loopLevel: group.next!.value, list: mutatableListTouple.0!, staticValueList: nil, groupSubSetList: newListOfLists)
+                    newListOfListOfLists?.next = returnList
+                    returnList = newListOfListOfLists
+                } else {
+                    print("\(group.value) \(loopLevel)")
+                    let toupleList = List<List<T>>(mutatableListTouple.0!)
+                    toupleList?.next = newListOfLists
+                    
+                    let newListOfListOfLists = List<List<List<T>>>((toupleList?.reverse())!)
+                    newListOfListOfLists?.next = returnList
+                    returnList = newListOfListOfLists
+                }
+            }
+            // increment the mutatableList forward1
+            if mutatableList.next != nil {
+                mutatableList = mutatableList.next!
+                loopCounter += 1
+                continue
+            }
+            break
+        }
+        return returnList
+    }
 }
+// Calling it after 3 1/2 hours,
+// lots of problems coming from trying to mesh the loopy solution of P27 with the recursion solution of P26, will probably delete most of what I have done thus far and start from mostly scratch

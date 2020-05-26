@@ -16,7 +16,7 @@ class listTest {
     var nestedList = List<Any>(List<Any>(1, 1)!, 2, List<Any>(3, List<Any>(5, 8)!)!)
     var duplicateList = List("a", "a", "a", "a", "b", "c", "c", "a", "a", "d", "e", "e", "e", "e")
     let encodedList = List((4, "a"), (1, "b"), (2, "c"), (2, "a"), (1, "d"), (4, "e"))
-    let listThree = List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+    let listThree = List(1, 2, 3, 4, 5, 6, 7, 8, 9)
     let listFour = List(1, 2, 3, 4, 5)
     let listOfNames = List("Aldo", "Beat", "Carla", "David", "Evi", "Flip", "Gary", "Hugo", "Ida")
 
@@ -274,10 +274,18 @@ class listTest {
         
     }
     
+    // P 27
     func printGroup3() {
         let group3 = listOfNames?.group3()
         print(group3?.length as Any)
         group3?.value.printEmbeddedList()
+    }
+    
+    // P 27B
+    func printGroupX() {
+        let groupX = listThree?.group(groups: List<Int>(2,3,4)!)
+        print(groupX?.length as Any)
+
     }
 }
 
