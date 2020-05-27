@@ -35,6 +35,7 @@ extension List {
             mutatableList = mutatableList.next!
             print(mutatableList.value)
         }
+        print("end list")
     }
 }
 extension List {
@@ -42,7 +43,7 @@ extension List {
         var mutatableList = self
         while mutatableList.value != nil {
             //change the List type based on what list it will be recieving
-            var nestedList = mutatableList.value as? List<Int>
+            var nestedList = mutatableList.value as? List<String>
             print(nestedList?.value as Any)
             while nestedList?.next != nil {
                 nestedList = nestedList?.next!
@@ -1098,7 +1099,7 @@ extension List {
             return nil
         }
         
-        returnList = generateBinomielCoeffecientOfSubSet(group: groups, loopLevel: groups.value, list: self, staticValueList: nil, groupSubSetList: nil)
+        returnList = generateGroupFromSubSets(groupList: groups, remainingValueList: self, recursionLevelTracker: groups.value, staticValueList: nil, groupSubSetList: nil, loopCountModifier: 0)
         
         // To solve this I'm thinking that a modified version of P 26 should work
         // just add some functionallity to keep the entire list as I go through and it should be done (really should have done that in P27)
@@ -1107,6 +1108,86 @@ extension List {
         //throw the results together and it should be done
         
         return returnList!
+    }
+    
+    private func generateGroupFromSubSets(groupList: List<Int>, remainingValueList: List, recursionLevelTracker: Int, staticValueList: List?, groupSubSetList: List<List<T>>?, loopCountModifier: Int) -> List<List<List<T>>>? {
+        var returnList = List<List<List<T>>>()
+        var loopCount = 0
+        var staticList = staticValueList
+        
+        for _ in 1...remainingValueList.length {
+            // seperates desired value from rest of List
+            let removeAtTouple = remainingValueList.removeAt(position: loopCount + loopCountModifier)
+            if removeAtTouple.1 == nil {
+                return returnList
+            }
+            // if statement to set up staticList
+            //check if its the first function iteration for the group
+            if recursionLevelTracker == groupList.value {
+                //give staticList a value
+                staticList = List(removeAtTouple.1!)
+                //check for if its not the last required iteration for the current group
+            } else {
+                staticList = staticValueList?.reverse()
+                let tempList = List(removeAtTouple.1!)
+                tempList?.next = staticList
+                staticList = tempList?.reverse()
+            }
+            // check to see if I need to go down another recursion level
+            if recursionLevelTracker > 1 {
+                // loop through the next value
+                var listOfListsOfLists = generateGroupFromSubSets(groupList: groupList, remainingValueList: removeAtTouple.0!, recursionLevelTracker: recursionLevelTracker - 1, staticValueList: staticList, groupSubSetList: groupSubSetList, loopCountModifier: loopCount + loopCountModifier)
+                if listOfListsOfLists != nil {
+                    for _ in 1...(listOfListsOfLists?.length ?? 1) {
+                        let tempAppendList = List<List<List<T>>>(listOfListsOfLists!.value)
+                        tempAppendList?.next = returnList
+                        returnList = tempAppendList
+                        if listOfListsOfLists?.next != nil {
+                            listOfListsOfLists = listOfListsOfLists?.next
+                            continue
+                        }
+                        break
+                    }
+                }
+                // if not...
+            } else {
+                //check to see if it is the second to last group value
+                if groupList.next?.next == nil {
+                    // check to see if all 3 locations are properly filled
+                    if staticList?.length == groupList.value && groupSubSetList != nil {
+                        // if all is good then I need to put it all together and return it (number examples from first iteration)
+                        // list of list made from removeAtTouple (6,7,8,9) and staticList (3,4,5)
+                        let tempAppendingList = List<List<T>>(removeAtTouple.0!, staticList!)
+                        // then grap groupSubSetList (1,2)
+                        tempAppendingList?.next = groupSubSetList?.reverse()
+                        // put them all together in a list of list of list
+                        let fullGroupSubSetList = List<List<List<T>>>(tempAppendingList!.reverse())
+                        // send it up
+                        fullGroupSubSetList?.next = returnList
+                        returnList = fullGroupSubSetList
+                    }
+                } else {
+                    // call func again (moving forward the groupList, reseting the recursion tracker, making it loop through the remainder form the touple, and setting the groupSubSetList to the surrent static list )
+//                    print("\(groupList.value)")
+                    var listOfListsOfLists = generateGroupFromSubSets(groupList: groupList.next!, remainingValueList: removeAtTouple.0!, recursionLevelTracker: groupList.next!.value, staticValueList: nil, groupSubSetList: List<List<T>>(staticList!), loopCountModifier: 0)
+                    if listOfListsOfLists != nil {
+                        for _ in 1...(listOfListsOfLists?.length ?? 1) {
+                            let tempAppendList = List<List<List<T>>>(listOfListsOfLists!.value)
+                            tempAppendList?.next = returnList
+                            returnList = tempAppendList
+                            if listOfListsOfLists?.next != nil {
+                                listOfListsOfLists = listOfListsOfLists?.next
+                                continue
+                            }
+                            break
+                        }
+                    }
+                    
+                }
+            }
+            loopCount += 1
+        }
+        return returnList
     }
     
     private func generateBinomielCoeffecientOfSubSet(group: List<Int>, loopLevel: Int, list: List, staticValueList: List?, groupSubSetList: List<List<T>>?) -> List<List<List<T>>>? {

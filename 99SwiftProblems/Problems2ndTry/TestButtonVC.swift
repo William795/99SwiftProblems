@@ -46,7 +46,7 @@ class MainViewController: UIViewController {
 //        listTest.shared.printPermutationList()
 //        listTest.shared.printCombinationList()
 //        listTest.shared.printPermutations()
-//        listTest.shared.printGroup3()
+        listTest.shared.printGroup3()
         listTest.shared.printGroupX()
     }
     /*

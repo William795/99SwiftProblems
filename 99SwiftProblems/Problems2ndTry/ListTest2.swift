@@ -278,13 +278,14 @@ class listTest {
     func printGroup3() {
         let group3 = listOfNames?.group3()
         print(group3?.length as Any)
-        group3?.value.printEmbeddedList()
+//        group3?.value.printEmbeddedList()
     }
     
     // P 27B
     func printGroupX() {
         let groupX = listThree?.group(groups: List<Int>(2,3,4)!)
         print(groupX?.length as Any)
+        print(groupX?.value.length as Any)
 
     }
 }
