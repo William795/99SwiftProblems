@@ -1189,74 +1189,60 @@ extension List {
         }
         return returnList
     }
-    
-    private func generateBinomielCoeffecientOfSubSet(group: List<Int>, loopLevel: Int, list: List, staticValueList: List?, groupSubSetList: List<List<T>>?) -> List<List<List<T>>>? {
-        var mutatableList = list
-        var returnList = List<List<List<T>>>()
-        var loopCounter = 0
+}
+// Finished after 6-7 hours
+// Wasted about 3-4 hours trying to smash the solutions to P 27 and P 26 together, to no sucess, and finally got it after scrapping everything I had done thus far and going back to the start and carefully mapping out exactly how I wanted to do it. (Still took another 3+ hours to get it working tho)
+
+
+// P 28 Sorting a linked list of linked lists according to length of sublists.
+extension List {
+    func lsort() -> List {
+        var mutatableList: List<List<String>> = self as! List<List<String>>
+        var returnList = List<List<String>>(mutatableList.value)
         
-        var staticList = staticValueList
-        // loop through the main list length to ensure every value goes through the process
-        for _ in 1...list.length {
-            let mutatableListTouple = mutatableList.removeAt(position: 0)
-            // check to see if it is the first iteration of the function
-            
-            if loopLevel == group.value {
-                // setting staticList to a list holding the current mutatableList.value
-                staticList = List(mutatableListTouple.1!)
-                // check for wether the current function iteration is not the first or last
-            } else if loopLevel > 1 {
-                //reset staticList
-                staticList = staticValueList?.reverse()
-                // set staticList's last value to mutatableList.value
-                let newList = List(mutatableListTouple.1!)
-                newList?.next = staticList
-                staticList = newList?.reverse()
-            }
-            // check to make sure the current function iteration is not the last
-            if loopLevel > 1 {
-                // safety for crashing
-//                if mutatableList.next == nil {
-//                    break
-//                }
-                // call function again with an updated list, loopLevel, and staticList
-                let listOfListsOfLists = generateBinomielCoeffecientOfSubSet(group: group, loopLevel: loopLevel - 1, list: mutatableListTouple.0!, staticValueList: staticList, groupSubSetList: groupSubSetList)
-                listOfListsOfLists?.next = returnList
-                returnList = listOfListsOfLists
-            } else {
-                // newlist = to value taken from removeAt()
-                let newList = List(mutatableListTouple.1!)
-                // append staticList to newList
-                newList?.next = staticList?.reverse()
-                // setting up groupSubSetList for recursion
-                let newListOfLists = List<List<T>>(newList!.reverse())
-                newListOfLists?.next = groupSubSetList
-                // check to see if i'm at the last 2 values of the original group list
-                if group.length > 2 {
-                    // if not then increment group forward and set groupSubSetList to all group values before ie... in a group list of 2,3,4 this calls the function again holding the (1,2) and parsing through the (3...9) with a group of 3 this time
-                    let newListOfListOfLists = generateBinomielCoeffecientOfSubSet(group: group.next!, loopLevel: group.next!.value, list: mutatableListTouple.0!, staticValueList: nil, groupSubSetList: newListOfLists)
-                    newListOfListOfLists?.next = returnList
-                    returnList = newListOfListOfLists
+        
+        while mutatableList.next != nil {
+            mutatableList = mutatableList.next!
+            // setting up values for the loop below
+            // main value i'm comparing against
+            let mutatableValueLength = mutatableList.value.length
+            //list to sort the returnList into
+            var tempListOfList = List<List<String>>()
+            // values to control when the current mutatableList.value goes into the returnList
+            var previousReturnListValue = 0
+            // makes sure duplicates arent put in
+            var repeatStopper = 0
+            for _ in 1...returnList!.length {
+                // if statement to place mutaList.value if the length is less than or equal to any of the current values.length in returnList
+                if  previousReturnListValue <= mutatableValueLength && mutatableValueLength <= returnList!.value.length && repeatStopper == 0{
+                    let tempList = List<List<String>>(mutatableList.value)
+                    tempList?.next = tempListOfList
+                    tempListOfList = tempList
+                    repeatStopper = 1
+                }
+                // setting new benchmark for minimum value
+                previousReturnListValue = (returnList?.value.length)!
+                let tempList = List<List<String>>(returnList!.value)
+                tempList?.next = tempListOfList
+                tempListOfList = tempList
+                
+                if returnList?.next != nil {
+                    returnList = returnList?.next
                 } else {
-                    print("\(group.value) \(loopLevel)")
-                    let toupleList = List<List<T>>(mutatableListTouple.0!)
-                    toupleList?.next = newListOfLists
-                    
-                    let newListOfListOfLists = List<List<List<T>>>((toupleList?.reverse())!)
-                    newListOfListOfLists?.next = returnList
-                    returnList = newListOfListOfLists
+                    // if the mutaList.vale has not been added to the temp list then put it at the end
+                    if repeatStopper == 0 {
+                        let tempList = List<List<String>>(mutatableList.value)
+                        tempList?.next = tempListOfList
+                        tempListOfList = tempList
+                        repeatStopper = 1
+                    }
                 }
             }
-            // increment the mutatableList forward1
-            if mutatableList.next != nil {
-                mutatableList = mutatableList.next!
-                loopCounter += 1
-                continue
-            }
-            break
+            returnList = tempListOfList?.reverse()
         }
-        return returnList
+        return returnList as! List<T>
     }
 }
-// Calling it after 3 1/2 hours,
-// lots of problems coming from trying to mesh the loopy solution of P27 with the recursion solution of P26, will probably delete most of what I have done thus far and start from mostly scratch
+// Overall pretty simple. Took about 2 1/2 hours, but had a hard time focusing on this one for some reason so it took much longer than it should have
+// I had the basic logic down in less than half an hour, the main problems I ran into were just getting duplicates and figuring out how to properly add new values to the current returnList.
+

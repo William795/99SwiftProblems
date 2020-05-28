@@ -19,6 +19,8 @@ class listTest {
     let listThree = List(1, 2, 3, 4, 5, 6, 7, 8, 9)
     let listFour = List(1, 2, 3, 4, 5)
     let listOfNames = List("Aldo", "Beat", "Carla", "David", "Evi", "Flip", "Gary", "Hugo", "Ida")
+    let listOfLists: List<List<String>> = List(List("a", "b", "c")!, List("d", "e")!, List("f", "g", "h")!, List("d", "e")!, List("i", "j", "k", "l")!, List("m", "n")!, List("o")!)!
+
 
     
     static let shared = listTest()
@@ -287,6 +289,18 @@ class listTest {
         print(groupX?.length as Any)
         print(groupX?.value.length as Any)
 
+    }
+    
+    // P 28
+    func printLSort() {
+        var lSort = listOfLists.lsort()
+        print(lSort.length as Any)
+        for _ in 1...lSort.length {
+            lSort.value.printList()
+            if lSort.next != nil {
+                lSort = lSort.next!
+            }
+        }
     }
 }
 
