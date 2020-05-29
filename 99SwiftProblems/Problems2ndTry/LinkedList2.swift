@@ -1246,3 +1246,63 @@ extension List {
 // Overall pretty simple. Took about 2 1/2 hours, but had a hard time focusing on this one for some reason so it took much longer than it should have
 // I had the basic logic down in less than half an hour, the main problems I ran into were just getting duplicates and figuring out how to properly add new values to the current returnList.
 
+// P 28B Sorting a linked list of linked lists according to their length frequency.
+extension List {
+    func lsortFreq() -> List {
+        var mutatableList = self.lsort() as! List<List<String>>
+        var returnList = List<List<String>>(mutatableList.value)
+        var listLengthFrequencyCounter = 0
+        var mutatableListGroupHolder = List<List<String>>(mutatableList.value)
+        // now loop through muta list
+        while mutatableList.next != nil {
+            let mutatableCurrent = mutatableList
+            var returnListHolder = List<List<String>>()
+            mutatableList = mutatableList.next!
+            if mutatableCurrent.value.length == mutatableList.value.length {
+                let tempList = List<List<String>>(mutatableList.value)
+                tempList?.next = mutatableListGroupHolder
+                mutatableListGroupHolder = tempList
+                listLengthFrequencyCounter += 1
+            } else {
+                // when a new value length is detected
+                // loop through the return list and count length's untill it hits the right spot
+                let previousReturnListValueLength = 0
+                var duplicateStopper = 0
+                for _ in 1...returnList!.length {
+                    if previousReturnListValueLength <= listLengthFrequencyCounter && listLengthFrequencyCounter <= returnList!.value.length && duplicateStopper == 0{
+                        for _ in 1...mutatableListGroupHolder!.length {
+                            // add mutaListGroupHolder to returnListHoler
+                            let tempList = List<List<String>>(mutatableListGroupHolder!.value)
+                            tempList?.next = returnListHolder
+                            returnListHolder = tempList
+                        }
+                        duplicateStopper = 1
+                    }
+                    let tempList = List<List<String>>(returnList!.value)
+                    tempList?.next = returnListHolder
+                    returnListHolder = tempList
+                    
+                    if returnList?.next != nil {
+                        returnList = returnList!.next
+                    } else {
+                        if duplicateStopper == 0 {
+                            for _ in 1...mutatableListGroupHolder!.length {
+                                // add mutaListGroupHolder to returnListHoler
+                                let tempList = List<List<String>>(mutatableListGroupHolder!.value)
+                                tempList?.next = returnListHolder
+                                returnListHolder = tempList
+                            }
+                        }
+                    }
+                }
+                returnList = returnListHolder?.reverse()
+            }
+            listLengthFrequencyCounter = 0
+        }
+        
+        return returnList as! List<T>
+    }
+}
+// the above function is just a mess. didn't plan it out properly at all and dosn't work in the slightest
+// I will probably scrap the entire thing and try again on monday (with an actual plan)
+

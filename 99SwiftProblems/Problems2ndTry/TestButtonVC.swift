@@ -48,7 +48,8 @@ class MainViewController: UIViewController {
 //        listTest.shared.printPermutations()
 //        listTest.shared.printGroup3()
 //        listTest.shared.printGroupX()
-        listTest.shared.printLSort()
+//        listTest.shared.printLSort()
+        listTest.shared.printLSortFreq()
     }
     /*
     // MARK: - Navigation

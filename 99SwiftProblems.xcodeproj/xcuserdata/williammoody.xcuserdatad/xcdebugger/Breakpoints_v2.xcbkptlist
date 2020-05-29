@@ -7,32 +7,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1AC09C38-7B4E-42B8-946B-60F26E94F6A4"
+            uuid = "3A6F6C5A-6DD9-428D-BAAC-8F57497AD3D5"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "99SwiftProblems/Problems2ndTry/LinkedList2.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1207"
-            endingLineNumber = "1207"
-            landmarkName = "lsort()"
+            startingLineNumber = "1259"
+            endingLineNumber = "1259"
+            landmarkName = "lsortFreq()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "68022584-0079-404B-BF9B-DA68F3E61608"
+            uuid = "1BDD7849-18A5-4AC2-8EAA-53AB4394549E"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "99SwiftProblems/Problems2ndTry/LinkedList2.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1214"
-            endingLineNumber = "1214"
-            landmarkName = "lsort()"
+            startingLineNumber = "1266"
+            endingLineNumber = "1266"
+            landmarkName = "lsortFreq()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0461C9B1-44C8-48CB-B48B-3416F04F3D94"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "99SwiftProblems/Problems2ndTry/LinkedList2.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1279"
+            endingLineNumber = "1279"
+            landmarkName = "lsortFreq()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "731F95B6-5BCB-43DC-82A3-044B103DAB34"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "99SwiftProblems/Problems2ndTry/LinkedList2.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1294"
+            endingLineNumber = "1294"
+            landmarkName = "lsortFreq()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

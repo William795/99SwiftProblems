@@ -302,6 +302,18 @@ class listTest {
             }
         }
     }
+    
+    // P 28B
+    func printLSortFreq() {
+        var lSortFreq = listOfLists.lsortFreq()
+        print(lSortFreq.length as Any)
+        for _ in 1...lSortFreq.length {
+            lSortFreq.value.printList()
+            if lSortFreq.next != nil {
+                lSortFreq = lSortFreq.next!
+            }
+        }
+    }
 }
 
 
