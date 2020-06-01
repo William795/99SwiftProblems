@@ -883,74 +883,74 @@ extension List {
     }
     
     private func generateAllPermutationsOf(list: List, groupSize: Int, loopLevel: Int, staticValueList: List?) -> List<List<T>>? {
-           // variables for
-           // mutatableList (main list i'm working with)
-           var mutatableList = list
-           // returnList (list that i'm returning)
-           var returnList = List<List<T>>()
-           // staticList (list that holds the 'static' variables gathered from recusion )
-           var staticList = staticValueList
-           // loop through the main list length to ensure every value goes through the process
-           for _ in 1...list.length {
-               // check to see if it is the first iteration of the function
-               if loopLevel == groupSize {
-                   // setting staticList to a list holding the current mutatableList.value
-                   staticList = List(mutatableList.value)!
-                   // check for wether the current function iteration is not the first or last
-               } else if loopLevel > 1 {
-                   //reset staticList
-                   staticList = staticValueList?.reverse()
-                   // set staticList's last value to mutatableList.value
-                   let newList = List(mutatableList.value)
-                   newList?.next = staticList
-                   staticList = newList?.reverse()
-               }
-               // check to make sure the current function iteration is not the last
-               if loopLevel > 1 {
-                   // safety for crashing
-                   if mutatableList.next == nil {
-                       break
-                   }
-                   // call function again with an updated list, loopLevel, and staticList
-                   let listOfLists = generateAllPermutationsOf(list: mutatableList.next!, groupSize: groupSize, loopLevel: loopLevel - 1, staticValueList: staticList!)?.reverse()
-                   // check for weather the above call returned somthing
-                   if listOfLists?.value != nil {
-                       // if so add the new items to the returnList
-                       returnList = combineListsOfLists2(listOne: returnList, listTwo: listOfLists!)
-                   }
-               } else {
-                   // if the current function iteration is the last one...
-                   // make a list from mutatableList.value and the staticList
-                   let newList = List(mutatableList.value)
-                   newList?.next = staticList?.reverse()
-                   // make a list of lists from newList list and add it to the returnList
-                   let newListOfLists = List<List<T>>(newList!.reverse())
-                   newListOfLists?.next = returnList
-                   returnList = newListOfLists
-               }
-               // rotate the mutatableList forward 1
-               if mutatableList.next != nil {
+        // variables for
+        // mutatableList (main list i'm working with)
+        var mutatableList = list
+        // returnList (list that i'm returning)
+        var returnList = List<List<T>>()
+        // staticList (list that holds the 'static' variables gathered from recusion )
+        var staticList = staticValueList
+        // loop through the main list length to ensure every value goes through the process
+        for _ in 1...list.length {
+            // check to see if it is the first iteration of the function
+            if loopLevel == groupSize {
+                // setting staticList to a list holding the current mutatableList.value
+                staticList = List(mutatableList.value)!
+                // check for wether the current function iteration is not the first or last
+            } else if loopLevel > 1 {
+                //reset staticList
+                staticList = staticValueList?.reverse()
+                // set staticList's last value to mutatableList.value
+                let newList = List(mutatableList.value)
+                newList?.next = staticList
+                staticList = newList?.reverse()
+            }
+            // check to make sure the current function iteration is not the last
+            if loopLevel > 1 {
+                // safety for crashing
+                if mutatableList.next == nil {
+                    break
+                }
+                // call function again with an updated list, loopLevel, and staticList
+                let listOfLists = generateAllPermutationsOf(list: mutatableList.next!, groupSize: groupSize, loopLevel: loopLevel - 1, staticValueList: staticList!)?.reverse()
+                // check for weather the above call returned somthing
+                if listOfLists?.value != nil {
+                    // if so add the new items to the returnList
+                    returnList = combineListsOfLists2(listOne: returnList, listTwo: listOfLists!)
+                }
+            } else {
+                // if the current function iteration is the last one...
+                // make a list from mutatableList.value and the staticList
+                let newList = List(mutatableList.value)
+                newList?.next = staticList?.reverse()
+                // make a list of lists from newList list and add it to the returnList
+                let newListOfLists = List<List<T>>(newList!.reverse())
+                newListOfLists?.next = returnList
+                returnList = newListOfLists
+            }
+            // rotate the mutatableList forward 1
+            if mutatableList.next != nil {
                 mutatableList = mutatableList.rotate(amount: 1)
-                   continue
-               }
-               break
-           }
-           return returnList
-       }
-       
-       private func combineListsOfLists2(listOne: List<List<T>>?, listTwo: List<List<T>>) ->List<List<T>> {
-           var returnList = listOne
-           var mutatableListTwo = listTwo
-           for _ in (1...mutatableListTwo.length) {
-               let newList = List<List<T>>(mutatableListTwo.value)
-               newList?.next = returnList
-               returnList = newList!
-               if mutatableListTwo.next != nil {
-                   mutatableListTwo = mutatableListTwo.next!
-               }
-           }
-           return returnList!
-       }
+                continue
+            }
+            break
+        }
+        return returnList
+    }
+    
+    private func combineListsOfLists2(listOne: List<List<T>>?, listTwo: List<List<T>>) ->List<List<T>> {
+        var returnList = listOne
+        var mutatableListTwo = listTwo
+        for _ in (1...mutatableListTwo.length) {
+            let newList = List<List<T>>(mutatableListTwo.value)
+            newList?.next = returnList
+            returnList = newList!
+            if mutatableListTwo.next != nil {
+                mutatableListTwo = mutatableListTwo.next!
+            }
+        }
+        return returnList!
+    }
 }
 // This solution is almost entirely copy/pasted from P26 the only thing I changed was how I was incrementing my way through the list,
 // In P26 I didn't want the same values to end up in the same list twice e.g.(getting 1,2,3 and 2,1,3) so I just threw mutatableList = mutatableList.next
@@ -966,7 +966,7 @@ extension List {
 
 extension List {
     func group3() -> List<List<List<T>>> {
-
+        
         var returnList = List<List<List<T>>>()
         var mutatableList = self
         // loop counter for keeping track of where I am in the main list
@@ -1168,7 +1168,7 @@ extension List {
                     }
                 } else {
                     // call func again (moving forward the groupList, reseting the recursion tracker, making it loop through the remainder form the touple, and setting the groupSubSetList to the surrent static list )
-//                    print("\(groupList.value)")
+                    //                    print("\(groupList.value)")
                     var listOfListsOfLists = generateGroupFromSubSets(groupList: groupList.next!, remainingValueList: removeAtTouple.0!, recursionLevelTracker: groupList.next!.value, staticValueList: nil, groupSubSetList: List<List<T>>(staticList!), loopCountModifier: 0)
                     if listOfListsOfLists != nil {
                         for _ in 1...(listOfListsOfLists?.length ?? 1) {
@@ -1245,64 +1245,112 @@ extension List {
 }
 // Overall pretty simple. Took about 2 1/2 hours, but had a hard time focusing on this one for some reason so it took much longer than it should have
 // I had the basic logic down in less than half an hour, the main problems I ran into were just getting duplicates and figuring out how to properly add new values to the current returnList.
+// Also everything is force cast to <List<List<String>> because when left as <List<List<T>> It would crash for some reason I couldn't figure out, so this is not a very robust solution but it does sort List<List<String>> at the very least
 
 // P 28B Sorting a linked list of linked lists according to their length frequency.
 extension List {
     func lsortFreq() -> List {
-        var mutatableList = self.lsort() as! List<List<String>>
-        var returnList = List<List<String>>(mutatableList.value)
-        var listLengthFrequencyCounter = 0
-        var mutatableListGroupHolder = List<List<String>>(mutatableList.value)
-        // now loop through muta list
-        while mutatableList.next != nil {
-            let mutatableCurrent = mutatableList
-            var returnListHolder = List<List<String>>()
-            mutatableList = mutatableList.next!
-            if mutatableCurrent.value.length == mutatableList.value.length {
-                let tempList = List<List<String>>(mutatableList.value)
-                tempList?.next = mutatableListGroupHolder
-                mutatableListGroupHolder = tempList
-                listLengthFrequencyCounter += 1
-            } else {
-                // when a new value length is detected
-                // loop through the return list and count length's untill it hits the right spot
-                let previousReturnListValueLength = 0
-                var duplicateStopper = 0
-                for _ in 1...returnList!.length {
-                    if previousReturnListValueLength <= listLengthFrequencyCounter && listLengthFrequencyCounter <= returnList!.value.length && duplicateStopper == 0{
-                        for _ in 1...mutatableListGroupHolder!.length {
-                            // add mutaListGroupHolder to returnListHoler
-                            let tempList = List<List<String>>(mutatableListGroupHolder!.value)
-                            tempList?.next = returnListHolder
-                            returnListHolder = tempList
+        // main List which is a lSort version of self
+        var mutatableList: List<List<String>> = self.lsort() as! List<List<String>>
+        // helper variable to hold the groupings of same listLength in main list
+        var mutatableGroupHolder = List<List<String>>()
+        // basic Int to save on some list.length calls
+        var mutatableGroupHolderLengthCounter = 0
+        // list I am returning
+        var returnList = List<List<String>>()
+        // helper list to hold the groupings of same listLength in the returnList
+        var returnListGroupHolder = List<List<String>>()
+        // loop to run through the main list
+        for _ in 1...mutatableList.length {
+            // list to throw the returnList values into while I loop through the returnList
+            var tempListOfList = List<List<String>>()
+            // code to populate mutatableGroupHolder
+            let tempMutatableList = List<List<String>>(mutatableList.value)
+            tempMutatableList?.next = mutatableGroupHolder
+            mutatableGroupHolder = tempMutatableList
+            mutatableGroupHolderLengthCounter += 1
+            // check for more values of main list with same length as current value
+            if mutatableList.value.length == mutatableList.next?.value.length {
+                mutatableList = mutatableList.next!
+                continue
+            }
+            // values to keep track of and compare value lengths
+            var previousReturnListLength = 0
+            var currentReturnListLength = 0
+            // makes sure duplicates arent put in
+            var repeatStopper = 0
+            // loop to determine where the mutatableGroupHolder values get added to
+            for _ in 1...(returnList?.length ?? 1){
+                // check to see if its the first run through
+                if returnList?.length == nil {
+                    tempListOfList = mutatableGroupHolder
+                    continue
+                }
+                // same bit of code as above just for the returnList instead of mutatableList
+                let GroupTempList = List<List<String>>(returnList!.value)
+                GroupTempList?.next = returnListGroupHolder
+                returnListGroupHolder = GroupTempList
+                if returnList?.value.length == returnList?.next?.value.length {
+                    returnList = returnList?.next
+                    currentReturnListLength += 1
+                    continue
+                }
+                // a bit of logic to insert mutatableGroupHolder at the correct place
+                if  previousReturnListLength <= mutatableGroupHolderLengthCounter && mutatableGroupHolderLengthCounter <= returnList!.value.length && repeatStopper == 0{
+                    // adding mutatableGroupHolder to tempListOfLists
+                    for _ in 1...mutatableGroupHolder!.length {
+                        let tempList = List<List<String>>(mutatableGroupHolder!.value)
+                        tempList?.next = tempListOfList
+                        tempListOfList = tempList
+                        if mutatableGroupHolder?.next != nil {
+                            mutatableGroupHolder = mutatableGroupHolder?.next
                         }
-                        duplicateStopper = 1
                     }
-                    let tempList = List<List<String>>(returnList!.value)
-                    tempList?.next = returnListHolder
-                    returnListHolder = tempList
-                    
-                    if returnList?.next != nil {
-                        returnList = returnList!.next
-                    } else {
-                        if duplicateStopper == 0 {
-                            for _ in 1...mutatableListGroupHolder!.length {
-                                // add mutaListGroupHolder to returnListHoler
-                                let tempList = List<List<String>>(mutatableListGroupHolder!.value)
-                                tempList?.next = returnListHolder
-                                returnListHolder = tempList
+                    repeatStopper = 1
+                }
+                // adding returnListGroupHolder to temoListOfLists
+                for _ in 1...returnListGroupHolder!.length {
+                    let tempList = List<List<String>>(returnListGroupHolder!.value)
+                    tempList?.next = tempListOfList
+                    tempListOfList = tempList
+                    if returnListGroupHolder?.next != nil {
+                        returnListGroupHolder = returnListGroupHolder?.next
+                    }
+                }
+                // if returnList has more values run it all again while resetting some things
+                if returnList?.next != nil {
+                    previousReturnListLength = currentReturnListLength
+                    currentReturnListLength = 0
+                    returnList = returnList?.next
+                } else {
+                    // if the mutatableGroupHolder has not been added to the temp list then put it at the end
+                    if repeatStopper == 0 {
+                        for _ in 1...mutatableGroupHolder!.length {
+                            let tempList = List<List<String>>(mutatableGroupHolder!.value)
+                            tempList?.next = tempListOfList
+                            tempListOfList = tempList
+                            if mutatableGroupHolder?.next != nil {
+                                mutatableGroupHolder = mutatableGroupHolder?.next
                             }
                         }
                     }
                 }
-                returnList = returnListHolder?.reverse()
+                // reset to empty list
+                returnListGroupHolder = List<List<String>>()
             }
-            listLengthFrequencyCounter = 0
+            // populate returnList with tempListOfList
+            returnList = tempListOfList?.reverse()
+            // some extra crash protection and resets of variables
+            if mutatableList.next != nil {
+                mutatableList = mutatableList.next!
+            }
+            mutatableGroupHolder = List<List<String>>()
+            mutatableGroupHolderLengthCounter = 0
         }
-        
         return returnList as! List<T>
     }
 }
-// the above function is just a mess. didn't plan it out properly at all and dosn't work in the slightest
-// I will probably scrap the entire thing and try again on monday (with an actual plan)
+// My first attempt was a mess that i scrapped on day 2 of working. No real plan generally turns out bad
+// I ended up copy/pasting P 28's solution and tweaking(rewriting most of it section by section) it to get the above result.
+// Overall took about 5 hours, 2 on my first attempt and 3 on my second working attempt
 
