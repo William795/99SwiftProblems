@@ -58,6 +58,7 @@ class MainViewController: UIViewController {
     }
     
     func ArithmeticTestButtons() {
-        intExtensionTester.shared.primeTest()
+//        intExtensionTester.shared.primeTest()
+        intExtensionTester.shared.GCDTest()
     }
 }

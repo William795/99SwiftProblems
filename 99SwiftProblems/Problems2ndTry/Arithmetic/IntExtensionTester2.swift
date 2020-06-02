@@ -18,4 +18,10 @@ class intExtensionTester {
         print(49.isPrime())
         print(47.isPrime())
     }
+    
+    func GCDTest() {
+        print(Int.gcd(first: 36, 63))
+        print(Int.gcd(first: 10, 55))
+        print(Int.gcd(first: 173982, 928456))
+    }
 }
