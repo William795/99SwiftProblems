@@ -43,5 +43,63 @@ extension Int {
     }
 }
 // Solution based on Elucid's algorithm and works by dividing the number into eachother and taking the remainder untill the remainder is 0 in which you have the GCD
-// copied from my first attempt, mainly due to the fact that I don't really see a way to improve upon it in any real way
-// just by how Elucid's algorithm works the above solution is already doing O(log) time and its hard to beat that
+// copied from my first attempt, mainly due to the fact that I don't really see a way to improve upon it in any real way, just by how Elucid's algorithm works. The above solution is already doing something in the vein of O(log) time and its hard to beat that
+
+//P33 Determine whether two positive integer numbers are coprime.
+extension Int {
+    func isCoprimeTo(other: Int) -> Bool {
+        if Int.gcd(first: self, other) == 1 {
+            return true
+        }
+        return false
+    }
+}
+// My first solution just copied and pasted P 22's solution and replaced the returning numbers with true/false with a check to see is there was a 1.
+// I'm glad to see that I have improved somewhat since the last time I tried my hand at these
+
+// P34 Calculate Euler’s totient function phi(m).
+extension Int {
+    var totient: Int {
+        var totientAmount = self
+        let primeFactors = self.primeFactors
+        var previousPrimeFactor = 0
+        for primeFactor in primeFactors {
+            if previousPrimeFactor != primeFactor {
+                if totientAmount == primeFactor {
+                    totientAmount = totientAmount - 1
+                } else if primeFactor != 1 {
+                    let amountToRemove = totientAmount / primeFactor
+                    totientAmount = totientAmount - amountToRemove
+                }
+            }
+            previousPrimeFactor = primeFactor
+        }
+        return totientAmount
+    }
+}
+// Kinda cheated by using P35's solution but when I saw that you can calulate totient's by using primefactors quite easily. I figured that doing it this was would be better than my previous 'loop through all numbers between 1 and self running .isCoPrime for each one' methood
+
+
+// P35 Determine the prime factors of a given positive integer.
+extension Int {
+    var primeFactors: [Int] {
+        var mutatableSelf = self
+        var primeCheck = 2
+        var primeArray: [Int] = []
+        if mutatableSelf.isPrime() {
+            return [1, mutatableSelf]
+        }
+
+        while mutatableSelf >= primeCheck {
+            if mutatableSelf % primeCheck == 0 {
+                mutatableSelf = mutatableSelf / primeCheck
+                primeArray.append(primeCheck)
+                primeCheck = 1
+            }
+            primeCheck += 1
+        }
+        return primeArray
+    }
+}
+// Copied from my last go due to it alrady being fairly efficent
+
