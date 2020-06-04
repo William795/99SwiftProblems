@@ -131,3 +131,27 @@ extension Int {
 }
 // Removed the very pointless loop-inside-loop at the end of my first solution and just had the function add to the dictionary as the while-loop is going
 // another example of no knowing in the slightest what my past self was thinking
+
+// P37 Calculate Euler’s totient function phi(m) (improved).
+// using phi(m) = (p1-1)*p1(m1-1) * (p2-1)*p2(m2-1) * (p3-1)*p3(m3-1) * …
+extension Int {
+    var totientImproved: Int {
+        var totient = 1
+        let primeFactorDict = self.primeFactorMultiplicityDict
+        let primeFactorDictKeys = primeFactorDict.keys
+        for key in primeFactorDictKeys {
+            let multiplicity = primeFactorDict[key]!
+            var exponantEndValue = 1
+            // if and loop statements for simluating an exponant because Swift dosn't have exponants for Ints
+            if multiplicity - 1 > 0 {
+                for _ in 1...multiplicity - 1 {
+                    exponantEndValue = exponantEndValue * key
+                }
+            }
+            totient = (key - 1) * exponantEndValue * totient
+        }
+        return totient
+    }
+}
+// not really sure if this is actually better than my other solution (tho it is much much better than my first solution)
+// When tested using the measure function in XCTest it was generally a wash for which performed better

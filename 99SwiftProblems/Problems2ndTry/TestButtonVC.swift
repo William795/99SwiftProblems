@@ -61,8 +61,9 @@ class MainViewController: UIViewController {
 //        intExtensionTester.shared.primeTest()
 //        intExtensionTester.shared.GCDTest()
 //        intExtensionTester.shared.coPrimeTest()
-//        intExtensionTester.shared.totientTest()
+        intExtensionTester.shared.totientTest()
 //        intExtensionTester.shared.primeFactorsTest()
         intExtensionTester.shared.primeFactorMultiplicityTest()
+        intExtensionTester.shared.totientTestImproved()
     }
 }

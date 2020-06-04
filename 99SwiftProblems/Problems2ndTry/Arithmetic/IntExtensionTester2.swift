@@ -37,10 +37,10 @@ class intExtensionTester {
     
     // P 34
     func totientTest() {
-        print(9.totient)
-        print(10.totient)
-        print(11.totient)
-        print(36.totient)
+        print(29.totient)
+        print(100.totient)
+        print(1156.totient)
+        print(36357468568760.totient)
     }
     
     // P 35
@@ -53,5 +53,13 @@ class intExtensionTester {
     func primeFactorMultiplicityTest() {
         print(10.primeFactorMultiplicityDict)
         print(100.primeFactorMultiplicityDict)
+    }
+    
+    // P 37
+    func totientTestImproved() {
+        print(29.totientImproved)
+        print(100.totientImproved)
+        print(1156.totientImproved)
+        print(36357468568760.totientImproved)
     }
 }
