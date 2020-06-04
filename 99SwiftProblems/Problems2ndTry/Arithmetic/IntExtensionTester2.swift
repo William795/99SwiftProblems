@@ -42,4 +42,16 @@ class intExtensionTester {
         print(11.totient)
         print(36.totient)
     }
+    
+    // P 35
+    func primeFactorsTest() {
+        print(10.primeFactors)
+        print(100.primeFactors)
+    }
+    
+    // P 36
+    func primeFactorMultiplicityTest() {
+        print(10.primeFactorMultiplicityDict)
+        print(100.primeFactorMultiplicityDict)
+    }
 }

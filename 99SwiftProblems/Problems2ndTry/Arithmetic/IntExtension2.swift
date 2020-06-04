@@ -103,3 +103,31 @@ extension Int {
 }
 // Copied from my last go due to it alrady being fairly efficent
 
+//P36 Determine the prime factors of a given positive integer - Part 2.
+extension Int {
+    var primeFactorMultiplicityDict: Dictionary<Int, Int> {
+        var mutatableSelf = self
+        var primeCheck = 2
+        var primeDict: [Int: Int] = [:]
+
+        if mutatableSelf.isPrime() {
+            return [mutatableSelf: 1]
+        }
+
+        while mutatableSelf >= primeCheck {
+            if mutatableSelf % primeCheck == 0 {
+                mutatableSelf = mutatableSelf / primeCheck
+                if primeDict[primeCheck] != nil {
+                    primeDict[primeCheck]! += 1
+                } else {
+                    primeDict[primeCheck] = 1
+                }
+                primeCheck = 1
+            }
+            primeCheck += 1
+        }
+        return primeDict
+    }
+}
+// Removed the very pointless loop-inside-loop at the end of my first solution and just had the function add to the dictionary as the while-loop is going
+// another example of no knowing in the slightest what my past self was thinking
