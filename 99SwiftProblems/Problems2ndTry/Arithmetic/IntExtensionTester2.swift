@@ -62,4 +62,10 @@ class intExtensionTester {
         print(1156.totientImproved)
         print(36357468568760.totientImproved)
     }
+    
+    // P 39
+    func listPrimesInRangeTest() {
+        let range = Range(uncheckedBounds: (lower: 7, upper: 31))
+        print(Int.listPrimesInRange(range: range))
+    }
 }

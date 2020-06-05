@@ -155,3 +155,41 @@ extension Int {
 }
 // not really sure if this is actually better than my other solution (tho it is much much better than my first solution)
 // When tested using the measure function in XCTest it was generally a wash for which performed better
+
+// P 38 is a comparison of my solutions to P 34 and P 37, which I have already done.
+
+// P 39 A linked list of prime numbers
+extension Int {
+    static func listPrimesInRange(range: Range<Int>) -> [Int] {
+        var allPrimeNumbers = [2]
+        var returningPrimeNumbers: [Int] = []
+        if range.lowerBound > 2 {
+            allPrimeNumbers = listPrimesInRange(range: 1..<range.lowerBound)
+            allPrimeNumbers.insert(2, at: 0)
+        }
+        for number in range{
+            
+            var numberOfMultiples = 0
+            for i in 0...allPrimeNumbers.count - 1 {
+                let Prime = allPrimeNumbers[i]
+                if number <= 1{
+                    numberOfMultiples += 1
+                    break
+                }else if number <= 2{
+                    numberOfMultiples += 1
+                    break
+                }else if number % Prime == 0 {
+                    numberOfMultiples += 1
+                    break
+                }
+            }
+            if numberOfMultiples == 0{
+                allPrimeNumbers.append(number)
+                returningPrimeNumbers.append(number)
+            }
+        }
+        return returningPrimeNumbers
+    }
+}
+// This is a modified solution that I came up with about a year ago, due to this there are quite a few if statements there for just one ot two specific things so it generally look fairly messy.
+// That said, I didn't really change the core idea, (compare each number to an array of prime numbers) just tweaked some things to make it more efficent
