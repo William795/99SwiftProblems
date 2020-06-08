@@ -68,4 +68,11 @@ class intExtensionTester {
         let range = Range(uncheckedBounds: (lower: 7, upper: 31))
         print(Int.listPrimesInRange(range: range))
     }
+    
+    // P 40
+    func goldbachTest() {
+        print(28.goldbach())
+        print(56.goldbach())
+        print(68.goldbach())
+    }
 }

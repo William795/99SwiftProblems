@@ -193,3 +193,24 @@ extension Int {
 }
 // This is a modified solution that I came up with about a year ago, due to this there are quite a few if statements there for just one ot two specific things so it generally look fairly messy.
 // That said, I didn't really change the core idea, (compare each number to an array of prime numbers) just tweaked some things to make it more efficent
+
+
+extension Int {
+    //P40 (**) Goldbach’s conjecture.
+    func goldbach() -> (Int, Int) {
+        if self % 2 != 0 {
+            return (0,0)
+        }
+        let primeArray = Int.listPrimesInRange(range: 1..<self)
+        for i in primeArray {
+            for p in primeArray {
+                if i + p == self {
+                    return (i, p)
+                }
+            }
+        }
+        return (0,0)
+    }
+}
+// took my first solution and replaced the loop to get the prime array with the previous problem's solution
+// I'm not a fan of looping the primeArray within the prime array but i'm not sure how else to solve it

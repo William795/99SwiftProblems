@@ -138,7 +138,7 @@
 //}
 ////P37 (**) Calculate Euler’s totient function phi(m) (improved).  Don't really understand how to implement the given equation
 ////P38 (*) Compare the two methods of calculating Euler’s totient function.  - just comparing run times of 37 and 34
-////P39 (*) A linked list of prime numbers.  - a problem ive solve mutiple times that I cant be bothered with right now
+////P39 (*) A linked list of prime numbers.  - a problem ive solve mutiple times 
 //
 //extension Int {
 //    //P40 (**) Goldbach’s conjecture.
