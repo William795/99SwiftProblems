@@ -28,7 +28,7 @@ extension Int {
     static func gcd(first: Int, _ second: Int) -> Int {
         var mutatableFirst = first
         var mutatableSecond = second
-
+        
         while mutatableFirst % mutatableSecond != 0 || mutatableSecond % mutatableFirst != 0 {
             if mutatableFirst > mutatableSecond {
                 mutatableFirst = mutatableFirst % mutatableSecond
@@ -89,7 +89,7 @@ extension Int {
         if mutatableSelf.isPrime() {
             return [1, mutatableSelf]
         }
-
+        
         while mutatableSelf >= primeCheck {
             if mutatableSelf % primeCheck == 0 {
                 mutatableSelf = mutatableSelf / primeCheck
@@ -109,11 +109,11 @@ extension Int {
         var mutatableSelf = self
         var primeCheck = 2
         var primeDict: [Int: Int] = [:]
-
+        
         if mutatableSelf.isPrime() {
             return [mutatableSelf: 1]
         }
-
+        
         while mutatableSelf >= primeCheck {
             if mutatableSelf % primeCheck == 0 {
                 mutatableSelf = mutatableSelf / primeCheck
@@ -195,8 +195,8 @@ extension Int {
 // That said, I didn't really change the core idea, (compare each number to an array of prime numbers) just tweaked some things to make it more efficent
 
 
+//P40 (**) Goldbach’s conjecture.
 extension Int {
-    //P40 (**) Goldbach’s conjecture.
     func goldbach() -> (Int, Int) {
         if self % 2 != 0 {
             return (0,0)
@@ -214,3 +214,19 @@ extension Int {
 }
 // took my first solution and replaced the loop to get the prime array with the previous problem's solution
 // I'm not a fan of looping the primeArray within the prime array but i'm not sure how else to solve it
+
+// P 41 A list of Goldbach compositions.
+extension Int {
+    static func printGoldbachList(range: Range<Int>) {
+        for i in range {
+            let primeArray = i.goldbach()
+            let firstInt = primeArray.0
+            let secondInt = primeArray.1
+            if firstInt != 0 {
+                print("\(i) = \(firstInt) + \(secondInt)")
+                
+            }
+        }
+    }
+}
+// pretty simple to just loop through the given range and run each value through the goldbach func

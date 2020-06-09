@@ -75,4 +75,9 @@ class intExtensionTester {
         print(56.goldbach())
         print(68.goldbach())
     }
+    
+    // P 41
+    func goldbachListTest() {
+        Int.printGoldbachList(range: 10..<30)
+    }
 }
