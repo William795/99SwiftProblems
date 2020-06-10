@@ -202,10 +202,15 @@ extension Int {
             return (0,0)
         }
         let primeArray = Int.listPrimesInRange(range: 1..<self)
-        for i in primeArray {
-            for p in primeArray {
-                if i + p == self {
-                    return (i, p)
+        for prime in primeArray {
+            // making a value = to the primeArray reversed due tot he fact that most goldbach's are ((small number), (large number)) ect... (3, 31) for 34
+            let primeArrayReversed = primeArray.reversed()
+            for reversedPrime in primeArrayReversed {
+                if prime + reversedPrime == self {
+                    return (prime, reversedPrime)
+                } else if prime + reversedPrime < self {
+                    // if this runs, then the primeArrayReversed has gone past all possible values for the current primeArray value
+                    break
                 }
             }
         }
@@ -218,15 +223,70 @@ extension Int {
 // P 41 A list of Goldbach compositions.
 extension Int {
     static func printGoldbachList(range: Range<Int>) {
-        for i in range {
-            let primeArray = i.goldbach()
-            let firstInt = primeArray.0
-            let secondInt = primeArray.1
-            if firstInt != 0 {
-                print("\(i) = \(firstInt) + \(secondInt)")
-                
+        var primeArray: [Int] = []
+        var goldbachCheck = false
+        var secondPrimeValue = 0
+        for rangeValue in range {
+            if primeArray == [] {
+                primeArray = Int.listPrimesInRange(range: 1..<range.endIndex)
+            }
+            for prime in primeArray {
+                for primeTwo in primeArray {
+                    if prime + primeTwo == rangeValue {
+                        secondPrimeValue = primeTwo
+                        goldbachCheck = true
+                        break
+                    } else if prime + primeTwo > rangeValue {
+                        // if this runs, then the primeArrayReversed has gone past all possible values for the current primeArray value
+                        break
+                    }
+                }
+                if goldbachCheck {
+                    goldbachCheck = false
+                    print("\(rangeValue) = \(prime) + \(secondPrimeValue)")
+                    break
+                }
             }
         }
     }
 }
-// pretty simple to just loop through the given range and run each value through the goldbach func
+// After finishing P 41B I realized I could copy/paste it over here with just a small tweak
+// my previous solution had me calling goldbach() for every value in the range, and considering how goldbach() was also calling P 39's solution, it got quite slow when hitting larger values
+// this solution, while still not being great and has problems, is much faster than my previous (a range of 2000 with my previous solution would take about 15 seconds while this on takes about 5)
+
+// P 41B A list of Goldbach compositions (limited)
+// only prime the golbach in a list if both number exceed a specified value
+extension Int {
+    static func printGoldbachListLimited(range: Range<Int>, intLimit: Int) {
+        var primeArray: [Int] = []
+        var goldbachCheck = false
+        var secondPrimeValue = 0
+        for rangeValue in range {
+            if primeArray == [] {
+                primeArray = Int.listPrimesInRange(range: 1..<range.endIndex)
+            }
+            for prime in primeArray {
+                for primeTwo in primeArray {
+                    if prime + primeTwo == rangeValue {
+                        secondPrimeValue = primeTwo
+                        goldbachCheck = true
+                        break
+                    } else if prime + primeTwo > rangeValue {
+                        // if this runs, then the primeArrayReversed has gone past all possible values for the current primeArray value
+                        break
+                    }
+                }
+                if goldbachCheck && prime >= intLimit && secondPrimeValue >= intLimit{
+                    print("\(rangeValue) = \(prime) + \(secondPrimeValue)")
+                }
+                if goldbachCheck {
+                    goldbachCheck = false
+                    break
+                }
+            }
+        }
+        print("goldbach limited test finished")
+    }
+}
+// an alright solution overall, works for ranges under 1000 fine but when it goes up past that it starts to take a few seconds to finish (a range of 2000 takes about 5 seconds)
+// the main thing I can think of to improve this is to see if I can find a way to not find every single goldbach in the range

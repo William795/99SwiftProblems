@@ -68,5 +68,6 @@ class MainViewController: UIViewController {
 //        intExtensionTester.shared.listPrimesInRangeTest()
 //        intExtensionTester.shared.goldbachTest()
         intExtensionTester.shared.goldbachListTest()
+//        intExtensionTester.shared.goldbachLimitedTest()
     }
 }
