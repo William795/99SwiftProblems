@@ -18,8 +18,9 @@ class MainViewController: UIViewController {
     
 
     @IBAction func testButtonPressed(_ sender: Any) {
-        linkedListTestButtons()
-        ArithmeticTestButtons()
+//        linkedListTestButtons()
+//        ArithmeticTestButtons()
+        logicAndCodesTest()
     }
 
     func linkedListTestButtons() {
@@ -67,7 +68,12 @@ class MainViewController: UIViewController {
 //        intExtensionTester.shared.totientTestImproved()
 //        intExtensionTester.shared.listPrimesInRangeTest()
 //        intExtensionTester.shared.goldbachTest()
-        intExtensionTester.shared.goldbachListTest()
+//        intExtensionTester.shared.goldbachListTest()
 //        intExtensionTester.shared.goldbachLimitedTest()
+    }
+    
+    func logicAndCodesTest() {
+        print(table(expression: { and($0, or($0, $1)) }))
+        print(table(expression: { and(or($0, $1), nand($0, $1)) }))
     }
 }

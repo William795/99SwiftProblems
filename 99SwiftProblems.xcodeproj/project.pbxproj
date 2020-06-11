@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		920FD4982492D67700695A2A /* GlobalLogicFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920FD4972492D67700695A2A /* GlobalLogicFunctions.swift */; };
 		924D83372437D2F500861002 /* LinkedList2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924D83362437D2F500861002 /* LinkedList2.swift */; };
 		924D83392437DA7800861002 /* ListTest2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924D83382437DA7800861002 /* ListTest2.swift */; };
 		925532AF2486E94A008617CD /* IntExtensionTester2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925532AE2486E94A008617CD /* IntExtensionTester2.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		920FD4972492D67700695A2A /* GlobalLogicFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalLogicFunctions.swift; sourceTree = "<group>"; };
 		924D83362437D2F500861002 /* LinkedList2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList2.swift; sourceTree = "<group>"; };
 		924D83382437DA7800861002 /* ListTest2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTest2.swift; sourceTree = "<group>"; };
 		925532AE2486E94A008617CD /* IntExtensionTester2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtensionTester2.swift; sourceTree = "<group>"; };
@@ -95,6 +97,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		920FD4992492D68400695A2A /* Logic and Codes */ = {
+			isa = PBXGroup;
+			children = (
+				920FD4972492D67700695A2A /* GlobalLogicFunctions.swift */,
+			);
+			path = "Logic and Codes";
+			sourceTree = "<group>";
+		};
 		9237273D244904B000BAAD5C /* 1st Try */ = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +121,7 @@
 				925532AD2486E92D008617CD /* Arithmetic */,
 				925532AC2486E7CF008617CD /* Working With Linked Lists */,
 				92F03428232859E800017931 /* TestButtonVC.swift */,
+				920FD4992492D68400695A2A /* Logic and Codes */,
 			);
 			path = Problems2ndTry;
 			sourceTree = "<group>";
@@ -376,6 +387,7 @@
 				925532AF2486E94A008617CD /* IntExtensionTester2.swift in Sources */,
 				92A51600233EAE1000BE249A /* GlobalFunctions.swift in Sources */,
 				92F0341F2323050C00017931 /* ListClass.swift in Sources */,
+				920FD4982492D67700695A2A /* GlobalLogicFunctions.swift in Sources */,
 				92F0342423230F8700017931 /* ListTests.swift in Sources */,
 				92F03429232859E800017931 /* TestButtonVC.swift in Sources */,
 			);

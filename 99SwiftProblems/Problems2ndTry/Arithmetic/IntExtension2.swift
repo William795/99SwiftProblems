@@ -290,3 +290,5 @@ extension Int {
 }
 // an alright solution overall, works for ranges under 1000 fine but when it goes up past that it starts to take a few seconds to finish (a range of 2000 takes about 5 seconds)
 // the main thing I can think of to improve this is to see if I can find a way to not find every single goldbach in the range
+
+//Thats it for Arithmetic next up is Logic and Codes
