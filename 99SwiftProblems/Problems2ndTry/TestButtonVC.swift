@@ -73,7 +73,9 @@ class MainViewController: UIViewController {
     }
     
     func logicAndCodesTest() {
-        print(table(expression: { and($0, or($0, $1)) }))
-        print(table(expression: { and(or($0, $1), nand($0, $1)) }))
+//        print(table(expression: { and($0, or($0, $1)) }))
+//        print(table(expression: { and(or($0, $1), nand($0, $1)) }))
+        print(table(expression: { $0 ∧ ($0 ∨ $1) }))
+        print(table(expression: { ($0 ∨ $1) ∧ ($0 ⊼ $1)}))
     }
 }

@@ -50,3 +50,64 @@ func table(expression: (_ a: Bool, _ b: Bool) -> Bool) -> [[Bool]] {
 // I got all the logic expressions down to 1 line each, which is nice improvement over the 4 or so lines previously.
 // my table function needs work tho. Its more of a brute force solution, and is not scalable in the slightest (throwing in 1 more value in the expression would require twice as many lines of code)
 // Hopefully I can come back to this when I understand closures and expressions better and make a proper scaling solution.
+// Or do that for P 48
+
+// P 47 Truth tables for logical expressions - Part 2.
+// redefine and, or, etc. as infix operators with left associativity and the corresponding precedence.
+precedencegroup andPrecedence {
+    associativity: right
+}
+infix operator ∧ : andPrecedence
+func ∧ (_ a: Bool, _ b: Bool) -> Bool{
+    return a && b ? true : false
+}
+
+precedencegroup orPrecedence {
+    associativity: right
+}
+infix operator ∨ : orPrecedence
+func ∨ (_ a: Bool, _ b: Bool) -> Bool{
+    return a || b ? true : false
+}
+
+precedencegroup nandPrecedence {
+    associativity: right
+}
+infix operator ⊼ : nandPrecedence
+func ⊼ (_ a: Bool, _ b: Bool) -> Bool{
+    return a && b ? false : true
+}
+
+precedencegroup norPrecedence {
+    associativity: right
+}
+infix operator ⊽ : norPrecedence
+func ⊽ (_ a: Bool, _ b: Bool) -> Bool{
+    return a || b ? false : true
+}
+
+precedencegroup xorPrecedence {
+    associativity: right
+}
+infix operator ⊕ : xorPrecedence
+func ⊕ (_ a: Bool, _ b: Bool) -> Bool{
+    return a == b ? false : true
+}
+
+precedencegroup implPrecedence {
+    associativity: right
+}
+infix operator → : implPrecedence
+func → (_ a: Bool, _ b: Bool) -> Bool{
+    return a && b == false ? false : true
+}
+
+precedencegroup equPrecedence {
+    associativity: right
+}
+infix operator ≡ : equPrecedence
+func ≡ (_ a: Bool, _ b: Bool) -> Bool{
+    return a == b ? true : false
+}
+// not sure if i'm missing something important, but it currently works.
+// it dose feel a bit cluttered and I could remove all but 1 precedencegroup, but having them seperate allows me to change any one of them as I want (not that i'm likely to do so).
